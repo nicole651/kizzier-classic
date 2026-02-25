@@ -4,6 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The 6th Annual Kizzier Classic — Memorial Charity Golf Tournament</title>
+    <meta name="description" content="Join the 6th Annual Kizzier Classic — a charity golf tournament in memory of Ryan Kizzier. June 27, 2026 at Hidden Valley Golf Club, Lincoln, NE. Register now!">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="The 6th Annual Kizzier Classic — Charity Golf Tournament">
+    <meta property="og:description" content="Join the 6th Annual Kizzier Classic — a charity golf tournament in memory of Ryan Kizzier. June 27, 2026 at Hidden Valley Golf Club, Lincoln, NE. Register now!">
+    <meta property="og:image" content="https://nicole651.github.io/kizzier-classic/img/ryan-golf.jpg">
+    <meta property="og:url" content="https://nicole651.github.io/kizzier-classic/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The 6th Annual Kizzier Classic — Charity Golf Tournament">
+    <meta name="twitter:description" content="Join the 6th Annual Kizzier Classic — a charity golf tournament in memory of Ryan Kizzier. June 27, 2026 at Hidden Valley Golf Club, Lincoln, NE. Register now!">
+    <meta name="twitter:image" content="https://nicole651.github.io/kizzier-classic/img/ryan-golf.jpg">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -122,6 +141,18 @@
         .nav-cta:hover {
             background: var(--gold-light);
             transform: translateY(-1px);
+        }
+
+        .nav-donate {
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 10px 20px;
+            border-radius: 4px;
+            transition: all 0.3s !important;
+        }
+
+        .nav-donate:hover {
+            border-color: var(--gold) !important;
+            color: var(--gold) !important;
         }
 
         .mobile-toggle {
@@ -249,6 +280,34 @@
             font-size: 1.1rem;
             color: var(--white);
             font-weight: 400;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-unit {
+            text-align: center;
+        }
+
+        .countdown-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .countdown-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.5);
+            margin-top: 4px;
         }
 
         .hero-buttons {
@@ -786,6 +845,52 @@
             }
         }
 
+        /* ========== LIGHTBOX ========== */
+        .lightbox-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.9);
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .lightbox-overlay.active {
+            display: flex;
+        }
+
+        .lightbox-overlay img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 4px;
+            cursor: default;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 24px;
+            right: 32px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
         /* ========== CONTACT / FOOTER ========== */
         .footer {
             background: #4A6E5D;
@@ -906,6 +1011,7 @@
                 <li><a href="#gallery">Ryan</a></li>
                 <li><a href="#schedule">Schedule</a></li>
                 <li><a href="#sponsorship">Sponsors</a></li>
+                <li><a href="#register" class="nav-donate">Donate</a></li>
                 <li><a href="#register" class="nav-cta">Register</a></li>
             </ul>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
@@ -934,6 +1040,21 @@
                 <div class="hero-detail">
                     <div class="hero-detail-label">Format</div>
                     <div class="hero-detail-value">18-Hole Scramble</div>
+                </div>
+            </div>
+
+            <div class="countdown" id="countdown">
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="countDays">--</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="countHours">--</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-unit">
+                    <div class="countdown-number" id="countMinutes">--</div>
+                    <div class="countdown-label">Minutes</div>
                 </div>
             </div>
 
@@ -993,37 +1114,37 @@
 
             <div class="gallery-grid">
                 <div class="gallery-item wide">
-                    <img src="img/ryan-nicole-beach.jpg" alt="Ryan and Nicole at the beach">
+                    <img src="img/ryan-nicole-beach.jpg" alt="Ryan and Nicole at the beach" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="img/ryan-son-nebraska.jpg" alt="Ryan and son at Nebraska game">
+                    <img src="img/ryan-son-nebraska.jpg" alt="Ryan and son at Nebraska game" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="img/ryan-cowboy.jpg" alt="Ryan driving with cowboy hat">
+                    <img src="img/ryan-cowboy.jpg" alt="Ryan driving with cowboy hat" loading="lazy">
                 </div>
                 <div class="gallery-item tall">
-                    <img src="img/ryan-nicole-hilltop.jpg" alt="Ryan and Nicole on a hilltop">
+                    <img src="img/ryan-nicole-hilltop.jpg" alt="Ryan and Nicole on a hilltop" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="img/ryan-kids-beach.jpg" alt="Ryan with kids on the beach">
+                    <img src="img/ryan-kids-beach.jpg" alt="Ryan with kids on the beach" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="img/ryan-lake.jpg" alt="Ryan and son on the lake">
+                    <img src="img/ryan-lake.jpg" alt="Ryan and son on the lake" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="img/ryan-nicole-snow.jpg" alt="Ryan and Nicole snow tubing">
+                    <img src="img/ryan-nicole-snow.jpg" alt="Ryan and Nicole snow tubing" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="img/ryan-kids-silly.jpg" alt="Ryan with kids being silly">
+                    <img src="img/ryan-kids-silly.jpg" alt="Ryan with kids being silly" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="img/ryan-color-run.jpg" alt="Ryan and son at a color run">
+                    <img src="img/ryan-color-run.jpg" alt="Ryan and son at a color run" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="img/ryan-nicole-cheers.jpg" alt="Ryan and Nicole cheers">
+                    <img src="img/ryan-nicole-cheers.jpg" alt="Ryan and Nicole cheers" loading="lazy">
                 </div>
                 <div class="gallery-item wide">
-                    <img src="img/ryan-disney.jpg" alt="Ryan and kids at Disney">
+                    <img src="img/ryan-disney.jpg" alt="Ryan and kids at Disney" loading="lazy">
                 </div>
             </div>
         </div>
@@ -1086,7 +1207,7 @@
                 </p>
             </div>
 
-            <div class="sponsor-grid" style="grid-template-columns: repeat(3, 1fr); max-width: 1000px; margin-left: auto; margin-right: auto; margin-top: 64px;">
+            <div class="sponsor-grid" style="max-width: 1000px; margin-left: auto; margin-right: auto; margin-top: 64px;">
                 <!-- Hole Sponsor -->
                 <div class="sponsor-card">
                     <div class="sponsor-tier">Hole Sponsor</div>
@@ -1144,7 +1265,7 @@
 
                     <ul class="reg-includes">
                         <li><span class="check">✓</span> 18 holes of golf with cart</li>
-                        <li><span class="check">✓</span> Breakfast & post-round BBQ lunch</li>
+                        <li><span class="check">✓</span> Lunch & post-round dinner</li>
                         <li><span class="check">✓</span> Beverages on the course</li>
                         <li><span class="check">✓</span> Tournament gift bag</li>
                         <li><span class="check">✓</span> Raffle entry</li>
@@ -1185,7 +1306,22 @@
                                 <option value="sponsor-hole">Hole Sponsor — $175</option>
                                 <option value="sponsor-lunch">Lunch Sponsor — $200</option>
                                 <option value="sponsor-beverage">Beverage Cart Sponsor — $500</option>
+                                <option value="donation">Donate — Any Amount</option>
                             </select>
+                        </div>
+                        <div id="foursomeFields" style="display: none;">
+                            <div class="form-group">
+                                <label>Player 2 Name</label>
+                                <input type="text" name="player2" placeholder="First and Last Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Player 3 Name</label>
+                                <input type="text" name="player3" placeholder="First and Last Name">
+                            </div>
+                            <div class="form-group">
+                                <label>Player 4 Name</label>
+                                <input type="text" name="player4" placeholder="First and Last Name">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label>Additional Notes (Team Names, Dietary Needs, etc.)</label>
@@ -1216,8 +1352,10 @@
                 </div>
                 <div class="footer-col">
                     <h4>Contact</h4>
-                    <div class="footer-contact-item">kizzierclassic@gmail.com</div>
+                    <div class="footer-contact-item"><a href="mailto:kizzierclassic@gmail.com">kizzierclassic@gmail.com</a></div>
                     <div class="footer-contact-item">Lincoln, NE</div>
+                    <div class="footer-contact-item"><a href="https://venmo.com/Kizzier-Classic" target="_blank">Venmo @Kizzier-Classic</a></div>
+                    <div class="footer-contact-item"><a href="#" target="_blank">Facebook</a></div>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -1247,6 +1385,32 @@
             link.addEventListener('click', () => navLinks.classList.remove('open'));
         });
 
+        // Show/hide foursome player fields
+        const regTypeSelect = document.querySelector('select[name="regType"]');
+        const foursomeFields = document.getElementById('foursomeFields');
+        regTypeSelect.addEventListener('change', () => {
+            foursomeFields.style.display = regTypeSelect.value === 'foursome' ? 'block' : 'none';
+        });
+
+        // Countdown timer to June 27, 2026 1:00 PM CT (UTC-5)
+        function updateCountdown() {
+            const eventDate = new Date('2026-06-27T18:00:00Z'); // 1 PM CT = 6 PM UTC
+            const now = new Date();
+            const diff = eventDate - now;
+            if (diff <= 0) {
+                document.getElementById('countdown').style.display = 'none';
+                return;
+            }
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('countDays').textContent = days;
+            document.getElementById('countHours').textContent = hours;
+            document.getElementById('countMinutes').textContent = minutes;
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 60000);
+
         // === CONFIGURATION ===
         // After deploying the Apps Script, paste the web app URL here:
         const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwJIufjaAiKGA5YWHs1tKnGDO3zWm7jUbgVRHzVeVkrhRGX8-RtkDCE4XWzSJNl59bWhw/exec';
@@ -1256,7 +1420,8 @@
             'foursome': 320,
             'sponsor-hole': 175,
             'sponsor-lunch': 200,
-            'sponsor-beverage': 500
+            'sponsor-beverage': 500,
+            'donation': 0
         };
 
         const TYPE_LABELS = {
@@ -1264,7 +1429,8 @@
             'foursome': 'Foursome',
             'sponsor-hole': 'Hole Sponsor',
             'sponsor-lunch': 'Lunch Sponsor',
-            'sponsor-beverage': 'Beverage Cart Sponsor'
+            'sponsor-beverage': 'Beverage Cart Sponsor',
+            'donation': 'Donation'
         };
 
         // Registration form handler
@@ -1280,6 +1446,9 @@
                 email: data.get('email'),
                 phone: data.get('phone'),
                 regType: data.get('regType'),
+                player2: data.get('player2'),
+                player3: data.get('player3'),
+                player4: data.get('player4'),
                 notes: data.get('notes')
             };
 
@@ -1307,21 +1476,38 @@
                 }
 
                 if (result.status === 'success') {
-                    // Show success + Venmo payment
-                    form.innerHTML = `
-                        <div style="text-align: center; padding: 20px 0;">
-                            <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--emerald); color: white; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 20px;">&#10003;</div>
-                            <h3 style="margin-bottom: 8px;">You're In, ${payload.firstName}!</h3>
-                            <p style="color: var(--gray-600); margin-bottom: 24px;">Your registration has been received. A confirmation email has been sent to <strong>${payload.email}</strong>.</p>
-                            <div style="background: var(--white); border-radius: 8px; padding: 24px; border-left: 4px solid var(--gold); text-align: left; margin-bottom: 24px;">
-                                <p style="font-weight: 600; color: var(--charcoal); margin-bottom: 4px;">${typeLabel}</p>
-                                <p style="font-size: 2rem; font-family: 'Playfair Display', serif; color: var(--emerald); font-weight: 700; margin-bottom: 16px;">$${amount}</p>
-                                <p style="color: var(--gray-600); font-size: 0.9rem;">Please complete your payment via Venmo:</p>
+                    if (payload.regType === 'donation') {
+                        // Show donation thank-you + Venmo link (no amount)
+                        form.innerHTML = `
+                            <div style="text-align: center; padding: 20px 0;">
+                                <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--emerald); color: white; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 20px;">&#10003;</div>
+                                <h3 style="margin-bottom: 8px;">Thank You, ${payload.firstName}!</h3>
+                                <p style="color: var(--gray-600); margin-bottom: 24px;">Your generous support means the world to us and helps keep Ryan's legacy alive. A confirmation has been sent to <strong>${payload.email}</strong>.</p>
+                                <div style="background: var(--white); border-radius: 8px; padding: 24px; border-left: 4px solid var(--gold); text-align: left; margin-bottom: 24px;">
+                                    <p style="font-weight: 600; color: var(--charcoal); margin-bottom: 4px;">Donation</p>
+                                    <p style="color: var(--gray-600); font-size: 0.9rem;">Every dollar goes directly to supporting our cause. Please send your donation via Venmo:</p>
+                                </div>
+                                <a href="https://venmo.com/Kizzier-Classic" target="_blank" style="display: inline-block; background: #008CFF; color: white; padding: 16px 40px; border-radius: 4px; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px; transition: all 0.3s; text-decoration: none;">Donate with Venmo</a>
+                                <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 16px;">Send to <strong>@Kizzier-Classic</strong> on Venmo<br>Or email <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald);">kizzierclassic@gmail.com</a> for alternative payment</p>
                             </div>
-                            <a href="https://venmo.com/Kizzier-Classic?txn=pay&amount=${amount}&note=Kizzier%20Classic%202026%20-%20${encodeURIComponent(typeLabel)}%20-%20${encodeURIComponent(payload.firstName)}%20${encodeURIComponent(payload.lastName)}" target="_blank" style="display: inline-block; background: #008CFF; color: white; padding: 16px 40px; border-radius: 4px; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px; transition: all 0.3s; text-decoration: none;">Pay $${amount} with Venmo</a>
-                            <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 16px;">Send to <strong>@Kizzier-Classic</strong> on Venmo<br>Or email <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald);">kizzierclassic@gmail.com</a> for alternative payment</p>
-                        </div>
-                    `;
+                        `;
+                    } else {
+                        // Show success + Venmo payment with amount
+                        form.innerHTML = `
+                            <div style="text-align: center; padding: 20px 0;">
+                                <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--emerald); color: white; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 20px;">&#10003;</div>
+                                <h3 style="margin-bottom: 8px;">You're In, ${payload.firstName}!</h3>
+                                <p style="color: var(--gray-600); margin-bottom: 24px;">Your registration has been received. A confirmation email has been sent to <strong>${payload.email}</strong>.</p>
+                                <div style="background: var(--white); border-radius: 8px; padding: 24px; border-left: 4px solid var(--gold); text-align: left; margin-bottom: 24px;">
+                                    <p style="font-weight: 600; color: var(--charcoal); margin-bottom: 4px;">${typeLabel}</p>
+                                    <p style="font-size: 2rem; font-family: 'Playfair Display', serif; color: var(--emerald); font-weight: 700; margin-bottom: 16px;">$${amount}</p>
+                                    <p style="color: var(--gray-600); font-size: 0.9rem;">Please complete your payment via Venmo:</p>
+                                </div>
+                                <a href="https://venmo.com/Kizzier-Classic?txn=pay&amount=${amount}&note=Kizzier%20Classic%202026%20-%20${encodeURIComponent(typeLabel)}%20-%20${encodeURIComponent(payload.firstName)}%20${encodeURIComponent(payload.lastName)}" target="_blank" style="display: inline-block; background: #008CFF; color: white; padding: 16px 40px; border-radius: 4px; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px; transition: all 0.3s; text-decoration: none;">Pay $${amount} with Venmo</a>
+                                <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 16px;">Send to <strong>@Kizzier-Classic</strong> on Venmo<br>Or email <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald);">kizzierclassic@gmail.com</a> for alternative payment</p>
+                            </div>
+                        `;
+                    }
                 } else {
                     throw new Error(result.message || 'Registration failed');
                 }
@@ -1349,7 +1535,38 @@
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
         });
+
+        // Gallery lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target.classList.contains('lightbox-close')) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
     </script>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox-overlay" id="lightbox">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <img src="" alt="Full-size photo" id="lightboxImg">
+    </div>
 
 </body>
 </html>

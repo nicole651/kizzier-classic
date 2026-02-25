@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save the Date — The 6th Annual Kizzier Classic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #2D2D2D;
+        }
+
+        .card {
+            width: 1080px;
+            height: 1080px;
+            background: #5B7D6E;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Inter', Arial, sans-serif;
+        }
+
+        /* Grass-like bottom texture */
+        .grass {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 180px;
+            background: linear-gradient(to top, #4A6E5D 0%, #5B7D6E 100%);
+        }
+
+        /* Golf flag */
+        .flag {
+            position: absolute;
+            top: 80px;
+            right: 120px;
+        }
+        .flag-pole {
+            width: 3px;
+            height: 120px;
+            background: white;
+            position: absolute;
+            right: 0;
+        }
+        .flag-fabric {
+            width: 55px;
+            height: 35px;
+            background: #C4AA6A;
+            position: absolute;
+            top: 0;
+            right: 3px;
+            clip-path: polygon(0 0, 100% 15%, 100% 85%, 0 100%);
+        }
+        .flag-hole {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.2);
+            position: absolute;
+            bottom: -7px;
+            right: -5px;
+        }
+
+        /* Golf balls scattered */
+        .golf-ball {
+            position: absolute;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 40% 35%, #ffffff 0%, #e8e8e8 70%, #d0d0d0 100%);
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+        }
+        .ball-1 { top: 160px; left: 80px; width: 22px; height: 22px; }
+        .ball-2 { bottom: 220px; right: 90px; width: 26px; height: 26px; }
+        .ball-3 { bottom: 260px; left: 140px; width: 20px; height: 20px; }
+
+        /* Content area */
+        .content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            padding: 60px 80px;
+        }
+
+        .save-text {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 18px;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            color: #C4AA6A;
+            margin-bottom: 20px;
+        }
+
+        .logo-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #C4AA6A;
+            margin-bottom: 24px;
+            background: #FAF8F4;
+        }
+
+        .event-name {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 72px;
+            font-weight: 900;
+            color: #FFFFFF;
+            line-height: 1.05;
+            margin-bottom: 2px;
+        }
+
+        .event-name .classic {
+            color: #C4AA6A;
+        }
+
+        .annual {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 30px;
+        }
+
+        .tagline {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 24px;
+            font-style: italic;
+            color: #C4AA6A;
+            margin-bottom: 32px;
+        }
+
+        .date-block {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 24px 60px;
+            margin-bottom: 28px;
+            border: 1px solid rgba(196,170,106,0.3);
+        }
+
+        .date {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 38px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 6px;
+        }
+
+        .time {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .venue {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-bottom: 4px;
+        }
+
+        .venue-location {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 28px;
+        }
+
+        .details-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .detail-chip {
+            background: rgba(196,170,106,0.2);
+            border: 1px solid rgba(196,170,106,0.4);
+            border-radius: 20px;
+            padding: 8px 22px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: #C4AA6A;
+            letter-spacing: 1px;
+        }
+
+        .register-btn {
+            display: inline-block;
+            background: #C4AA6A;
+            color: #3D3D3D;
+            padding: 16px 48px;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+
+        .memorial {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 14px;
+            font-style: italic;
+            color: rgba(255,255,255,0.4);
+        }
+
+        .website-url {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: rgba(196,170,106,0.6);
+            margin-top: 6px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="card">
+        <!-- Decorative elements -->
+        <div class="grass"></div>
+        <div class="flag">
+            <div class="flag-fabric"></div>
+            <div class="flag-pole"></div>
+            <div class="flag-hole"></div>
+        </div>
+        <div class="golf-ball ball-1"></div>
+        <div class="golf-ball ball-2"></div>
+        <div class="golf-ball ball-3"></div>
+
+        <div class="content">
+            <div class="save-text">Save the Date</div>
+
+            <img src="img/logo.png" class="logo-img" alt="Kizzier Classic Logo">
+
+            <div class="event-name">Kizzier <span class="classic">Classic</span></div>
+            <div class="annual">6th Annual Charity Golf Tournament</div>
+
+            <div class="tagline">Grab your clubs. It's for a great cause.</div>
+
+            <div style="background: rgba(196,170,106,0.15); border: 1px solid rgba(196,170,106,0.4); border-radius: 8px; padding: 10px 32px; margin-bottom: 8px;">
+                <span style="font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; color: #C4AA6A; letter-spacing: 1px;">NEW VENUE THIS YEAR!</span>
+            </div>
+
+            <div class="date-block">
+                <div class="date">Saturday, June 27, 2026</div>
+                <div class="time">1:00 PM Shotgun Start &nbsp;&bull;&nbsp; Registration at 11:30 AM</div>
+            </div>
+
+            <div class="venue">Hidden Valley Golf Club</div>
+            <div class="venue-location">10501 Pine Lake Rd, Lincoln, NE</div>
+
+            <div class="details-row">
+                <div class="detail-chip">18-Hole Scramble</div>
+                <div class="detail-chip">Dinner & Drinks</div>
+                <div class="detail-chip">Prizes & Awards</div>
+            </div>
+
+            <div class="register-btn">Register Now to Save Your Spot</div>
+
+            <div style="font-family: 'Inter', sans-serif; font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 20px;">Can't make it? <span style="color: #C4AA6A; font-weight: 600;">Donations are always welcome!</span></div>
+
+            <div style="background: rgba(0,0,0,0.15); border-radius: 10px; padding: 18px 40px; margin-bottom: 16px; border: 1px solid rgba(196,170,106,0.3); text-align: center;">
+                <div style="font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #C4AA6A; margin-bottom: 8px;">Sponsorship Opportunities Available</div>
+                <div style="display: flex; gap: 16px; justify-content: center;">
+                    <div style="font-family: 'Inter', sans-serif; font-size: 13px; color: rgba(255,255,255,0.7);">Hole Sponsor <span style="color: #C4AA6A; font-weight: 700;">$175</span></div>
+                    <div style="color: rgba(255,255,255,0.3);">|</div>
+                    <div style="font-family: 'Inter', sans-serif; font-size: 13px; color: rgba(255,255,255,0.7);">Beverage Cart Sponsor <span style="color: #C4AA6A; font-weight: 700;">$500</span></div>
+                </div>
+            </div>
+
+            <div class="memorial">In loving memory of Ryan Kizzier</div>
+            <div class="website-url">nicole651.github.io/kizzier-classic</div>
+        </div>
+    </div>
+</body>
+</html>
