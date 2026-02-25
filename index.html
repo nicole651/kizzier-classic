@@ -1086,7 +1086,7 @@
                 </p>
             </div>
 
-            <div class="sponsor-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 800px; margin-left: auto; margin-right: auto; margin-top: 64px;">
+            <div class="sponsor-grid" style="grid-template-columns: repeat(3, 1fr); max-width: 1000px; margin-left: auto; margin-right: auto; margin-top: 64px;">
                 <!-- Hole Sponsor -->
                 <div class="sponsor-card">
                     <div class="sponsor-tier">Hole Sponsor</div>
@@ -1096,6 +1096,19 @@
                         <li>Name or logo on tournament website</li>
                         <li>Social media recognition</li>
                         <li>Choose your own sign message</li>
+                    </ul>
+                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Become a Sponsor</button>
+                </div>
+
+                <!-- Lunch Sponsor -->
+                <div class="sponsor-card">
+                    <div class="sponsor-tier">Lunch Sponsor</div>
+                    <div class="sponsor-price"><sup>$</sup>200</div>
+                    <ul class="sponsor-perks">
+                        <li>Sponsor lunch for all players</li>
+                        <li>Name or logo on tournament website</li>
+                        <li>Social media recognition</li>
+                        <li>Signage at lunch area</li>
                     </ul>
                     <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Become a Sponsor</button>
                 </div>
@@ -1170,6 +1183,7 @@
                                 <option value="individual">Individual Player — $85</option>
                                 <option value="foursome">Foursome — $320</option>
                                 <option value="sponsor-hole">Hole Sponsor — $175</option>
+                                <option value="sponsor-lunch">Lunch Sponsor — $200</option>
                                 <option value="sponsor-beverage">Beverage Cart Sponsor — $500</option>
                             </select>
                         </div>
@@ -1241,6 +1255,7 @@
             'individual': 85,
             'foursome': 320,
             'sponsor-hole': 175,
+            'sponsor-lunch': 200,
             'sponsor-beverage': 500
         };
 
@@ -1248,6 +1263,7 @@
             'individual': 'Individual Player',
             'foursome': 'Foursome',
             'sponsor-hole': 'Hole Sponsor',
+            'sponsor-lunch': 'Lunch Sponsor',
             'sponsor-beverage': 'Beverage Cart Sponsor'
         };
 
