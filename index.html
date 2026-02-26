@@ -891,6 +891,97 @@
             background: rgba(255,255,255,0.25);
         }
 
+        /* ========== PAST TOURNAMENTS ========== */
+        .past-tournaments {
+            background: var(--charcoal);
+            padding: 100px 0;
+            color: var(--white);
+        }
+
+        .past-tournaments .section-label {
+            color: var(--gold);
+        }
+
+        .past-tournaments h2 {
+            color: var(--white);
+        }
+
+        .past-tournaments p {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .year-section {
+            margin-bottom: 64px;
+        }
+
+        .year-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .year-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .year-badge {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+            min-width: 80px;
+        }
+
+        .year-subtitle {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .year-divider {
+            flex: 1;
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .year-photos {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .year-photos img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.3s, filter 0.3s;
+            filter: brightness(0.9);
+        }
+
+        .year-photos img:hover {
+            transform: scale(1.03);
+            filter: brightness(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .year-photos {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .year-photos img {
+                height: 160px;
+            }
+
+            .year-badge {
+                font-size: 1.8rem;
+            }
+        }
+
         /* ========== CONTACT / FOOTER ========== */
         .footer {
             background: #4A6E5D;
@@ -1011,6 +1102,7 @@
                 <li><a href="#gallery">Ryan</a></li>
                 <li><a href="#schedule">Schedule</a></li>
                 <li><a href="#sponsorship">Sponsors</a></li>
+                <li><a href="#past-tournaments">Past Years</a></li>
                 <li><a href="#register" class="nav-donate">Donate</a></li>
                 <li><a href="#register" class="nav-cta">Register</a></li>
             </ul>
@@ -1251,6 +1343,85 @@
         </div>
     </section>
 
+    <!-- ========== PAST TOURNAMENTS ========== -->
+    <section class="past-tournaments" id="past-tournaments">
+        <div class="container">
+            <div class="section-label">Looking Back</div>
+            <h2>5 Years of Memories</h2>
+            <p style="max-width: 640px; margin: 0 auto 64px; text-align: center;">Five years of swings, laughs, and coming together for a cause that matters. Here's a look back at the moments that made each year special.</p>
+
+            <div class="year-section">
+                <div class="year-header">
+                    <div class="year-badge">2025</div>
+                    <div class="year-subtitle">5th Annual</div>
+                    <div class="year-divider"></div>
+                </div>
+                <div class="year-photos">
+                    <img src="img/past/2025/golfer-action.jpeg" alt="Golfer teeing off at the 2025 Kizzier Classic" loading="lazy">
+                    <img src="img/past/2025/awards-ceremony.jpeg" alt="Awards ceremony at the 2025 Kizzier Classic" loading="lazy">
+                    <img src="img/past/2025/memorial-sign.jpeg" alt="Memorial hole sponsor sign with photos of Ryan" loading="lazy">
+                    <img src="img/past/2025/course-scenery.jpeg" alt="Beautiful fairway view at the 2025 tournament" loading="lazy">
+                </div>
+            </div>
+
+            <div class="year-section">
+                <div class="year-header">
+                    <div class="year-badge">2024</div>
+                    <div class="year-subtitle">4th Annual</div>
+                    <div class="year-divider"></div>
+                </div>
+                <div class="year-photos">
+                    <img src="img/past/2024/youth-foursome.jpeg" alt="Youth foursome on the green at the 2024 Kizzier Classic" loading="lazy">
+                    <img src="img/past/2024/fairway-action.jpeg" alt="Players on the fairway during the 2024 tournament" loading="lazy">
+                    <img src="img/past/2024/clubhouse-awards.jpeg" alt="Clubhouse awards and prizes at the 2024 Kizzier Classic" loading="lazy">
+                    <img src="img/past/2024/memorial-table.jpeg" alt="Memorial photos at the registration table" loading="lazy">
+                </div>
+            </div>
+
+            <div class="year-section">
+                <div class="year-header">
+                    <div class="year-badge">2023</div>
+                    <div class="year-subtitle">3rd Annual</div>
+                    <div class="year-divider"></div>
+                </div>
+                <div class="year-photos">
+                    <img src="img/past/2023/banner.jpeg" alt="Welcome banner at the 3rd Annual Kizzier Classic" loading="lazy">
+                    <img src="img/past/2023/golfer-tee.jpeg" alt="Golfer on the tee box at the 2023 tournament" loading="lazy">
+                    <img src="img/past/2023/laughing.jpeg" alt="Friends laughing together on the course" loading="lazy">
+                    <img src="img/past/2023/group-kids.jpeg" alt="Family group photo at the 2023 Kizzier Classic" loading="lazy">
+                </div>
+            </div>
+
+            <div class="year-section">
+                <div class="year-header">
+                    <div class="year-badge">2022</div>
+                    <div class="year-subtitle">2nd Annual</div>
+                    <div class="year-divider"></div>
+                </div>
+                <div class="year-photos">
+                    <img src="img/past/2022/memorial-collage.jpeg" alt="Kids holding Ryan's memorial photo collage" loading="lazy">
+                    <img src="img/past/2022/group-selfie.jpeg" alt="Group selfie at the 2022 Kizzier Classic" loading="lazy">
+                    <img src="img/past/2022/couple-course.jpeg" alt="Couple posing on the course" loading="lazy">
+                    <img src="img/past/2022/family-group.jpeg" alt="Family group at the 2022 tournament" loading="lazy">
+                </div>
+            </div>
+
+            <div class="year-section">
+                <div class="year-header">
+                    <div class="year-badge">2021</div>
+                    <div class="year-subtitle">1st Annual</div>
+                    <div class="year-divider"></div>
+                </div>
+                <div class="year-photos">
+                    <img src="img/past/2021/banner.jpeg" alt="First Annual Kizzier Classic welcome banner" loading="lazy">
+                    <img src="img/past/2021/friends-selfie.jpeg" alt="Friends selfie at the first Kizzier Classic" loading="lazy">
+                    <img src="img/past/2021/golfer-swing.jpeg" alt="Golfer mid-swing at the 2021 tournament" loading="lazy">
+                    <img src="img/past/2021/kids-cart.jpeg" alt="Kids riding in a golf cart" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ========== REGISTRATION ========== -->
     <section class="registration" id="register">
         <div class="container">
@@ -1348,6 +1519,7 @@
                     <a href="#gallery">Ryan</a>
                     <a href="#schedule">Schedule</a>
                     <a href="#sponsorship">Sponsorship</a>
+                    <a href="#past-tournaments">Past Years</a>
                     <a href="#register">Register</a>
                 </div>
                 <div class="footer-col">
