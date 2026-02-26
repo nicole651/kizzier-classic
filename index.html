@@ -1495,7 +1495,7 @@
 
                 <div class="reg-form">
                     <h3>Player Registration</h3>
-                    <p class="price-tag">$85 per player &nbsp;|&nbsp; $320 per foursome</p>
+                    <p class="price-tag">$85 per player &nbsp;|&nbsp; $320 per foursome &nbsp;|&nbsp; $80 to join a team</p>
 
                     <form id="regForm" onsubmit="handleRegistration(event)">
                         <div class="form-row">
@@ -1522,6 +1522,7 @@
                                 <option value="">Select an option</option>
                                 <option value="individual">Individual Player — $85</option>
                                 <option value="foursome">Foursome — $320</option>
+                                <option value="join-foursome">Join a Foursome — $80/person</option>
                                 <option value="sponsor-hole">Hole Sponsor — $175</option>
                                 <option value="sponsor-lunch">Lunch Sponsor — $200</option>
                                 <option value="sponsor-beverage">Beverage Cart Sponsor — $500</option>
@@ -1540,6 +1541,15 @@
                             <div class="form-group">
                                 <label>Player 4 Name</label>
                                 <input type="text" name="player4" placeholder="First and Last Name">
+                            </div>
+                        </div>
+                        <div id="joinFoursomeFields" style="display: none;">
+                            <div class="form-group">
+                                <label>Select a Team to Join</label>
+                                <select name="teamName" id="teamSelect">
+                                    <option value="">Loading available teams...</option>
+                                </select>
+                                <p id="teamHelpText" style="font-size: 0.8rem; color: var(--gray-400); margin-top: 6px;">Teams are created when a captain registers a foursome. Pick a team with open spots.</p>
                             </div>
                         </div>
                         <div class="form-group">
@@ -1605,12 +1615,49 @@
             link.addEventListener('click', () => navLinks.classList.remove('open'));
         });
 
-        // Show/hide foursome player fields
+        // Show/hide foursome player fields and join-foursome team selection
         const regTypeSelect = document.querySelector('select[name="regType"]');
         const foursomeFields = document.getElementById('foursomeFields');
+        const joinFoursomeFields = document.getElementById('joinFoursomeFields');
         regTypeSelect.addEventListener('change', () => {
-            foursomeFields.style.display = regTypeSelect.value === 'foursome' ? 'block' : 'none';
+            const val = regTypeSelect.value;
+            foursomeFields.style.display = val === 'foursome' ? 'block' : 'none';
+            joinFoursomeFields.style.display = val === 'join-foursome' ? 'block' : 'none';
+            if (val === 'join-foursome') {
+                fetchAvailableTeams();
+            }
         });
+
+        // Fetch available foursome teams from Apps Script
+        async function fetchAvailableTeams() {
+            const teamSelect = document.getElementById('teamSelect');
+            const helpText = document.getElementById('teamHelpText');
+            teamSelect.innerHTML = '<option value="">Loading available teams...</option>';
+            teamSelect.disabled = true;
+            try {
+                const res = await fetch(APPS_SCRIPT_URL + '?action=getTeams');
+                const text = await res.text();
+                const data = JSON.parse(text);
+                if (data.status === 'ok' && data.teams && data.teams.length > 0) {
+                    teamSelect.innerHTML = '<option value="">Select a team...</option>';
+                    data.teams.forEach(function(team) {
+                        const opt = document.createElement('option');
+                        opt.value = team.name;
+                        opt.textContent = team.name + "'s Team — " + team.spots + (team.spots === 1 ? ' spot' : ' spots') + ' left';
+                        teamSelect.appendChild(opt);
+                    });
+                    helpText.textContent = 'Pick a team with open spots. Your captain registered the foursome.';
+                } else {
+                    teamSelect.innerHTML = '<option value="">No teams available yet</option>';
+                    helpText.textContent = 'No foursomes have been registered yet. Ask your captain to register a foursome first, then come back to join their team.';
+                }
+            } catch (err) {
+                console.error('Error fetching teams:', err);
+                teamSelect.innerHTML = '<option value="">Could not load teams</option>';
+                helpText.textContent = 'Unable to load teams right now. Please try again or email kizzierclassic@gmail.com.';
+            }
+            teamSelect.disabled = false;
+        }
 
         // Countdown timer to June 27, 2026 1:00 PM CT (UTC-5)
         function updateCountdown() {
@@ -1638,6 +1685,7 @@
         const AMOUNTS = {
             'individual': 85,
             'foursome': 320,
+            'join-foursome': 80,
             'sponsor-hole': 175,
             'sponsor-lunch': 200,
             'sponsor-beverage': 500,
@@ -1647,6 +1695,7 @@
         const TYPE_LABELS = {
             'individual': 'Individual Player',
             'foursome': 'Foursome',
+            'join-foursome': 'Join a Foursome',
             'sponsor-hole': 'Hole Sponsor',
             'sponsor-lunch': 'Lunch Sponsor',
             'sponsor-beverage': 'Beverage Cart Sponsor',
@@ -1669,8 +1718,17 @@
                 player2: data.get('player2'),
                 player3: data.get('player3'),
                 player4: data.get('player4'),
+                teamName: data.get('teamName') || '',
                 notes: data.get('notes')
             };
+
+            // Validate team selection for join-foursome
+            if (payload.regType === 'join-foursome' && !payload.teamName) {
+                alert('Please select a team to join.');
+                submitBtn.textContent = 'Submit Registration';
+                submitBtn.disabled = false;
+                return;
+            }
 
             const amount = AMOUNTS[payload.regType] || 0;
             const typeLabel = TYPE_LABELS[payload.regType] || payload.regType;
@@ -1696,7 +1754,24 @@
                 }
 
                 if (result.status === 'success') {
-                    if (payload.regType === 'donation') {
+                    if (payload.regType === 'join-foursome') {
+                        // Show join-foursome success with team info
+                        form.innerHTML = `
+                            <div style="text-align: center; padding: 20px 0;">
+                                <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--emerald); color: white; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 20px;">&#10003;</div>
+                                <h3 style="margin-bottom: 8px;">You're In, ${payload.firstName}!</h3>
+                                <p style="color: var(--gray-600); margin-bottom: 24px;">You've joined <strong>${payload.teamName}'s Team</strong>. A confirmation email has been sent to <strong>${payload.email}</strong>.</p>
+                                <div style="background: var(--white); border-radius: 8px; padding: 24px; border-left: 4px solid var(--gold); text-align: left; margin-bottom: 24px;">
+                                    <p style="font-weight: 600; color: var(--charcoal); margin-bottom: 4px;">Join a Foursome</p>
+                                    <p style="color: var(--gray-600); font-size: 0.9rem; margin-bottom: 8px;">Team: <strong>${payload.teamName}'s Team</strong></p>
+                                    <p style="font-size: 2rem; font-family: 'Playfair Display', serif; color: var(--emerald); font-weight: 700; margin-bottom: 16px;">$${amount}</p>
+                                    <p style="color: var(--gray-600); font-size: 0.9rem;">Please complete your payment via Venmo:</p>
+                                </div>
+                                <a href="https://venmo.com/Kizzier-Classic?txn=pay&amount=${amount}&note=Kizzier%20Classic%202026%20-%20Join%20Foursome%20(${encodeURIComponent(payload.teamName)}%20Team)%20-%20${encodeURIComponent(payload.firstName)}%20${encodeURIComponent(payload.lastName)}" target="_blank" style="display: inline-block; background: #008CFF; color: white; padding: 16px 40px; border-radius: 4px; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px; transition: all 0.3s; text-decoration: none;">Pay $${amount} with Venmo</a>
+                                <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 16px;">Send to <strong>@Kizzier-Classic</strong> on Venmo<br>Or email <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald);">kizzierclassic@gmail.com</a> for alternative payment</p>
+                            </div>
+                        `;
+                    } else if (payload.regType === 'donation') {
                         // Show donation thank-you + Venmo link (no amount)
                         form.innerHTML = `
                             <div style="text-align: center; padding: 20px 0;">
