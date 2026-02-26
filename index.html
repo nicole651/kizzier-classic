@@ -1517,6 +1517,26 @@
                             <input type="tel" name="phone">
                         </div>
                         <div class="form-group">
+                            <label>Street Address <span style="font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 0.75rem; color: var(--gray-400);">(for thank you cards)</span></label>
+                            <input type="text" name="street" required placeholder="123 Main St">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" name="city" required>
+                            </div>
+                            <div class="form-row" style="gap: 12px;">
+                                <div class="form-group">
+                                    <label>State</label>
+                                    <input type="text" name="state" required placeholder="NE" maxlength="2" style="text-transform: uppercase;">
+                                </div>
+                                <div class="form-group">
+                                    <label>Zip</label>
+                                    <input type="text" name="zip" required placeholder="68526" maxlength="10">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label>Registration Type</label>
                             <select name="regType" required>
                                 <option value="">Select an option</option>
@@ -1526,21 +1546,42 @@
                                 <option value="sponsor-hole">Hole Sponsor — $175</option>
                                 <option value="sponsor-lunch">Lunch Sponsor — $200</option>
                                 <option value="sponsor-beverage">Beverage Cart Sponsor — $500</option>
+                                <option value="after-celebration">After Celebration Contribution — Any Amount</option>
                                 <option value="donation">Donate — Any Amount</option>
+                                <option value="raffle-donation">Donate Raffle Items — Free</option>
                             </select>
                         </div>
                         <div id="foursomeFields" style="display: none;">
-                            <div class="form-group">
-                                <label>Player 2 Name</label>
-                                <input type="text" name="player2" placeholder="First and Last Name">
+                            <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 16px;">Please provide each teammate's name and email so we can send them event details and a thank you after the tournament.</p>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Player 2 Name</label>
+                                    <input type="text" name="player2" placeholder="First and Last Name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Player 2 Email</label>
+                                    <input type="email" name="player2email" placeholder="email@example.com">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Player 3 Name</label>
-                                <input type="text" name="player3" placeholder="First and Last Name">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Player 3 Name</label>
+                                    <input type="text" name="player3" placeholder="First and Last Name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Player 3 Email</label>
+                                    <input type="email" name="player3email" placeholder="email@example.com">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label>Player 4 Name</label>
-                                <input type="text" name="player4" placeholder="First and Last Name">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Player 4 Name</label>
+                                    <input type="text" name="player4" placeholder="First and Last Name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Player 4 Email</label>
+                                    <input type="email" name="player4email" placeholder="email@example.com">
+                                </div>
                             </div>
                         </div>
                         <div id="joinFoursomeFields" style="display: none;">
@@ -1552,12 +1593,46 @@
                                 <p id="teamHelpText" style="font-size: 0.8rem; color: var(--gray-400); margin-top: 6px;">Teams are created when a captain registers a foursome. Pick a team with open spots.</p>
                             </div>
                         </div>
+                        <div id="raffleDonationFields" style="display: none;">
+                            <div class="form-group">
+                                <label>What items will you donate?</label>
+                                <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 12px;">Select all that apply. Bring items to registration check-in on June 27.</p>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--charcoal); cursor: pointer; padding: 8px 12px; background: var(--white); border-radius: 4px; border: 1px solid var(--gray-200);">
+                                        <input type="checkbox" name="raffleItem" value="Sunscreen" style="width: auto; accent-color: var(--emerald);"> Sunscreen
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--charcoal); cursor: pointer; padding: 8px 12px; background: var(--white); border-radius: 4px; border: 1px solid var(--gray-200);">
+                                        <input type="checkbox" name="raffleItem" value="Chapstick" style="width: auto; accent-color: var(--emerald);"> Chapstick
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--charcoal); cursor: pointer; padding: 8px 12px; background: var(--white); border-radius: 4px; border: 1px solid var(--gray-200);">
+                                        <input type="checkbox" name="raffleItem" value="Water Bottles" style="width: auto; accent-color: var(--emerald);"> Water Bottles
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--charcoal); cursor: pointer; padding: 8px 12px; background: var(--white); border-radius: 4px; border: 1px solid var(--gray-200);">
+                                        <input type="checkbox" name="raffleItem" value="Shooters" style="width: auto; accent-color: var(--emerald);"> Shooters
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--charcoal); cursor: pointer; padding: 8px 12px; background: var(--white); border-radius: 4px; border: 1px solid var(--gray-200);">
+                                        <input type="checkbox" name="raffleItem" value="Koozies" style="width: auto; accent-color: var(--emerald);"> Koozies
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--charcoal); cursor: pointer; padding: 8px 12px; background: var(--white); border-radius: 4px; border: 1px solid var(--gray-200);">
+                                        <input type="checkbox" name="raffleItem" value="Gift Cards" style="width: auto; accent-color: var(--emerald);"> Gift Cards
+                                    </label>
+                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--charcoal); cursor: pointer; padding: 8px 12px; background: var(--white); border-radius: 4px; border: 1px solid var(--gray-200); grid-column: span 2;" id="raffleOtherLabel">
+                                        <input type="checkbox" name="raffleItem" value="Other" id="raffleOtherCheck" style="width: auto; accent-color: var(--emerald);"> Other
+                                    </label>
+                                </div>
+                                <input type="text" id="raffleOtherText" name="raffleOtherText" placeholder="Describe your item(s)..." style="display: none; margin-top: 8px;">
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label>Additional Notes (Team Names, Dietary Needs, etc.)</label>
                             <textarea name="notes" rows="3"></textarea>
                         </div>
                         <button type="submit" class="btn-register">Submit Registration</button>
                     </form>
+                    <div style="margin-top: 24px; padding: 16px 20px; background: var(--white); border-radius: 6px; border-left: 3px solid var(--gold); display: flex; align-items: flex-start; gap: 12px;">
+                        <span style="font-size: 1.1rem; line-height: 1.4;">?</span>
+                        <p style="font-size: 0.85rem; color: var(--gray-600); margin: 0; line-height: 1.6;"><strong style="color: var(--charcoal);">Need help registering or making a payment?</strong><br>No worries — just email us at <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald); font-weight: 600;">kizzierclassic@gmail.com</a> and we'll get you taken care of.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1615,17 +1690,27 @@
             link.addEventListener('click', () => navLinks.classList.remove('open'));
         });
 
-        // Show/hide foursome player fields and join-foursome team selection
+        // Show/hide foursome player fields, join-foursome team selection, and raffle donation fields
         const regTypeSelect = document.querySelector('select[name="regType"]');
         const foursomeFields = document.getElementById('foursomeFields');
         const joinFoursomeFields = document.getElementById('joinFoursomeFields');
+        const raffleDonationFields = document.getElementById('raffleDonationFields');
         regTypeSelect.addEventListener('change', () => {
             const val = regTypeSelect.value;
             foursomeFields.style.display = val === 'foursome' ? 'block' : 'none';
             joinFoursomeFields.style.display = val === 'join-foursome' ? 'block' : 'none';
+            raffleDonationFields.style.display = val === 'raffle-donation' ? 'block' : 'none';
             if (val === 'join-foursome') {
                 fetchAvailableTeams();
             }
+        });
+
+        // Toggle "Other" text input when Other checkbox is checked
+        const raffleOtherCheck = document.getElementById('raffleOtherCheck');
+        const raffleOtherText = document.getElementById('raffleOtherText');
+        raffleOtherCheck.addEventListener('change', () => {
+            raffleOtherText.style.display = raffleOtherCheck.checked ? 'block' : 'none';
+            if (!raffleOtherCheck.checked) raffleOtherText.value = '';
         });
 
         // Fetch available foursome teams from Apps Script
@@ -1689,7 +1774,9 @@
             'sponsor-hole': 175,
             'sponsor-lunch': 200,
             'sponsor-beverage': 500,
-            'donation': 0
+            'donation': 0,
+            'after-celebration': 0,
+            'raffle-donation': 0
         };
 
         const TYPE_LABELS = {
@@ -1699,7 +1786,9 @@
             'sponsor-hole': 'Hole Sponsor',
             'sponsor-lunch': 'Lunch Sponsor',
             'sponsor-beverage': 'Beverage Cart Sponsor',
-            'donation': 'Donation'
+            'after-celebration': 'After Celebration Contribution',
+            'donation': 'Donation',
+            'raffle-donation': 'Raffle Item Donation'
         };
 
         // Registration form handler
@@ -1709,22 +1798,58 @@
             const submitBtn = form.querySelector('.btn-register');
             const data = new FormData(form);
 
+            // Collect raffle items if applicable
+            var raffleItems = '';
+            if (data.get('regType') === 'raffle-donation') {
+                const checked = form.querySelectorAll('input[name="raffleItem"]:checked');
+                const items = [];
+                checked.forEach(function(cb) {
+                    if (cb.value === 'Other') {
+                        const otherText = form.querySelector('#raffleOtherText').value.trim();
+                        if (otherText) {
+                            items.push('Other: ' + otherText);
+                        } else {
+                            items.push('Other');
+                        }
+                    } else {
+                        items.push(cb.value);
+                    }
+                });
+                raffleItems = items.join(', ');
+            }
+
             const payload = {
                 firstName: data.get('firstName'),
                 lastName: data.get('lastName'),
                 email: data.get('email'),
                 phone: data.get('phone'),
+                street: data.get('street'),
+                city: data.get('city'),
+                state: (data.get('state') || '').toUpperCase(),
+                zip: data.get('zip'),
                 regType: data.get('regType'),
                 player2: data.get('player2'),
+                player2email: data.get('player2email'),
                 player3: data.get('player3'),
+                player3email: data.get('player3email'),
                 player4: data.get('player4'),
+                player4email: data.get('player4email'),
                 teamName: data.get('teamName') || '',
-                notes: data.get('notes')
+                notes: data.get('notes'),
+                raffleItems: raffleItems
             };
 
             // Validate team selection for join-foursome
             if (payload.regType === 'join-foursome' && !payload.teamName) {
                 alert('Please select a team to join.');
+                submitBtn.textContent = 'Submit Registration';
+                submitBtn.disabled = false;
+                return;
+            }
+
+            // Validate at least one raffle item checked
+            if (payload.regType === 'raffle-donation' && !payload.raffleItems) {
+                alert('Please select at least one item you\'d like to donate.');
                 submitBtn.textContent = 'Submit Registration';
                 submitBtn.disabled = false;
                 return;
@@ -1768,6 +1893,38 @@
                                     <p style="color: var(--gray-600); font-size: 0.9rem;">Please complete your payment via Venmo:</p>
                                 </div>
                                 <a href="https://venmo.com/Kizzier-Classic?txn=pay&amount=${amount}&note=Kizzier%20Classic%202026%20-%20Join%20Foursome%20(${encodeURIComponent(payload.teamName)}%20Team)%20-%20${encodeURIComponent(payload.firstName)}%20${encodeURIComponent(payload.lastName)}" target="_blank" style="display: inline-block; background: #008CFF; color: white; padding: 16px 40px; border-radius: 4px; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px; transition: all 0.3s; text-decoration: none;">Pay $${amount} with Venmo</a>
+                                <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 16px;">Send to <strong>@Kizzier-Classic</strong> on Venmo<br>Or email <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald);">kizzierclassic@gmail.com</a> for alternative payment</p>
+                            </div>
+                        `;
+                    } else if (payload.regType === 'raffle-donation') {
+                        // Show raffle donation thank-you (no payment)
+                        form.innerHTML = `
+                            <div style="text-align: center; padding: 20px 0;">
+                                <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--emerald); color: white; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 20px;">&#10003;</div>
+                                <h3 style="margin-bottom: 8px;">Thank You, ${payload.firstName}!</h3>
+                                <p style="color: var(--gray-600); margin-bottom: 24px;">Your raffle item donation has been recorded. A confirmation has been sent to <strong>${payload.email}</strong>.</p>
+                                <div style="background: var(--white); border-radius: 8px; padding: 24px; border-left: 4px solid var(--gold); text-align: left; margin-bottom: 24px;">
+                                    <p style="font-weight: 600; color: var(--charcoal); margin-bottom: 8px;">Items You're Donating</p>
+                                    <p style="color: var(--gray-600); font-size: 0.95rem;">${payload.raffleItems}</p>
+                                </div>
+                                <div style="background: var(--white); border-radius: 8px; padding: 20px; border-left: 4px solid var(--emerald); text-align: left;">
+                                    <p style="color: var(--gray-600); font-size: 0.9rem;">Please bring your items to <strong>registration check-in at 11:30 AM</strong> on Saturday, June 27 at Hidden Valley Golf Club.</p>
+                                </div>
+                                <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 20px;">Questions? Email <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald);">kizzierclassic@gmail.com</a></p>
+                            </div>
+                        `;
+                    } else if (payload.regType === 'after-celebration') {
+                        // Show after celebration contribution thank-you + Venmo link (no amount)
+                        form.innerHTML = `
+                            <div style="text-align: center; padding: 20px 0;">
+                                <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--emerald); color: white; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 20px;">&#10003;</div>
+                                <h3 style="margin-bottom: 8px;">Thank You, ${payload.firstName}!</h3>
+                                <p style="color: var(--gray-600); margin-bottom: 24px;">Your After Celebration Contribution means so much to us and helps keep Ryan's legacy alive. A confirmation has been sent to <strong>${payload.email}</strong>.</p>
+                                <div style="background: var(--white); border-radius: 8px; padding: 24px; border-left: 4px solid var(--gold); text-align: left; margin-bottom: 24px;">
+                                    <p style="font-weight: 600; color: var(--charcoal); margin-bottom: 4px;">After Celebration Contribution</p>
+                                    <p style="color: var(--gray-600); font-size: 0.9rem;">Every dollar goes directly to supporting our cause. Please send your contribution via Venmo:</p>
+                                </div>
+                                <a href="https://venmo.com/Kizzier-Classic" target="_blank" style="display: inline-block; background: #008CFF; color: white; padding: 16px 40px; border-radius: 4px; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px; transition: all 0.3s; text-decoration: none;">Contribute with Venmo</a>
                                 <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 16px;">Send to <strong>@Kizzier-Classic</strong> on Venmo<br>Or email <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald);">kizzierclassic@gmail.com</a> for alternative payment</p>
                             </div>
                         `;

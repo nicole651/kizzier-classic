@@ -17,7 +17,9 @@ var AMOUNTS = {
   'sponsor-hole': 175,
   'sponsor-lunch': 200,
   'sponsor-beverage': 500,
-  'donation': 0
+  'donation': 0,
+  'after-celebration': 0,
+  'raffle-donation': 0
 };
 
 var TYPE_LABELS = {
@@ -27,7 +29,9 @@ var TYPE_LABELS = {
   'sponsor-hole': 'Hole Sponsor',
   'sponsor-lunch': 'Lunch Sponsor',
   'sponsor-beverage': 'Beverage Cart Sponsor',
-  'donation': 'Donation'
+  'after-celebration': 'After Celebration Contribution',
+  'donation': 'Donation',
+  'raffle-donation': 'Raffle Item Donation'
 };
 
 // ============================================================
@@ -41,21 +45,34 @@ function doPost(e) {
     var lastName = data.lastName || '';
     var email = data.email || '';
     var phone = data.phone || '';
+    var street = data.street || '';
+    var city = data.city || '';
+    var state = data.state || '';
+    var zip = data.zip || '';
     var regType = data.regType || '';
     var player2 = data.player2 || '';
+    var player2email = data.player2email || '';
     var player3 = data.player3 || '';
+    var player3email = data.player3email || '';
     var player4 = data.player4 || '';
+    var player4email = data.player4email || '';
     var teamName = data.teamName || '';
     var notes = data.notes || '';
+    var raffleItems = data.raffleItems || '';
     var amount = AMOUNTS[regType] || 0;
     var typeLabel = TYPE_LABELS[regType] || regType;
 
-    // Build player list for foursomes
+    // Build player list for foursomes (names and emails)
     var playerNames = '';
+    var playerEmails = '';
     if (regType === 'foursome') {
       var players = [player2, player3, player4].filter(function(p) { return p.trim() !== ''; });
+      var emails = [player2email, player3email, player4email].filter(function(e) { return e.trim() !== ''; });
       if (players.length > 0) {
         playerNames = players.join(', ');
+      }
+      if (emails.length > 0) {
+        playerEmails = emails.join(', ');
       }
     }
 
@@ -69,7 +86,17 @@ function doPost(e) {
       team = teamName;
     }
 
-    // Log to spreadsheet (column J = Team)
+    // Full mailing address for easy reference
+    var mailingAddress = '';
+    if (street) {
+      mailingAddress = street + ', ' + city + ', ' + state + ' ' + zip;
+    }
+
+    // Log to spreadsheet
+    // Columns: A=Timestamp, B=First, C=Last, D=Email, E=Phone,
+    //          F=Street, G=City, H=State, I=Zip, J=FullAddress,
+    //          K=Type, L=Amount, M=PlayerNames, N=PlayerEmails,
+    //          O=Notes, P=Team, Q=RaffleItems
     var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
     var sheet = ss.getSheetByName(SHEET_NAME);
     sheet.appendRow([
@@ -78,15 +105,26 @@ function doPost(e) {
       lastName,
       email,
       phone,
+      street,
+      city,
+      state,
+      zip,
+      mailingAddress,
       typeLabel,
       '$' + amount,
       playerNames,
+      playerEmails,
       notes,
-      team
+      team,
+      raffleItems
     ]);
 
     // Send confirmation email to registrant
-    if (regType === 'donation') {
+    if (regType === 'raffle-donation') {
+      sendRaffleDonationEmail(firstName, email, raffleItems);
+    } else if (regType === 'after-celebration') {
+      sendAfterCelebrationEmail(firstName, email);
+    } else if (regType === 'donation') {
       sendDonationEmail(firstName, email);
     } else if (regType === 'join-foursome') {
       sendJoinFoursomeEmail(firstName, email, amount, teamName);
@@ -136,18 +174,23 @@ function getAvailableTeams() {
     var data = sheet.getDataRange().getValues();
 
     // Find all foursome registrations and count named players
-    // Columns: 0=Timestamp, 1=FirstName, 2=LastName, 3=Email, 4=Phone,
-    //          5=Type, 6=Amount, 7=PlayerNames, 8=Notes, 9=Team
+    // Updated columns: 0=Timestamp, 1=First, 2=Last, 3=Email, 4=Phone,
+    //   5=Street, 6=City, 7=State, 8=Zip, 9=FullAddress,
+    //   10=Type, 11=Amount, 12=PlayerNames, 13=PlayerEmails,
+    //   14=Notes, 15=Team, 16=RaffleItems
+    var COL_TYPE = 10;
+    var COL_PLAYER_NAMES = 12;
+    var COL_TEAM = 15;
     var foursomes = {}; // captainName -> { namedPlayers: count }
 
     for (var i = 1; i < data.length; i++) {
       var row = data[i];
-      var type = String(row[5]);
-      var team = String(row[9] || '');
+      var type = String(row[COL_TYPE]);
+      var team = String(row[COL_TEAM] || '');
 
       if (type === 'Foursome') {
         var captainName = row[1] + ' ' + row[2];
-        var playerNames = String(row[7] || '');
+        var playerNames = String(row[COL_PLAYER_NAMES] || '');
         var namedCount = 0;
         if (playerNames.trim()) {
           namedCount = playerNames.split(',').filter(function(p) { return p.trim() !== ''; }).length;
@@ -160,8 +203,8 @@ function getAvailableTeams() {
     // Count join-foursome registrations per team
     for (var j = 1; j < data.length; j++) {
       var row2 = data[j];
-      var type2 = String(row2[5]);
-      var team2 = String(row2[9] || '');
+      var type2 = String(row2[COL_TYPE]);
+      var team2 = String(row2[COL_TEAM] || '');
 
       if (type2 === 'Join a Foursome' && team2 && foursomes[team2]) {
         foursomes[team2].joins++;
@@ -368,6 +411,106 @@ function sendDonationEmail(firstName, email) {
 }
 
 // ============================================================
+// AFTER CELEBRATION CONTRIBUTION EMAIL
+// ============================================================
+function sendAfterCelebrationEmail(firstName, email) {
+  var subject = 'Kizzier Classic 2026 — Thank You for Your Contribution!';
+
+  var body = 'Hi ' + firstName + ',\n\n'
+    + 'Thank you so much for your After Celebration Contribution to the Kizzier Classic! '
+    + 'Your support helps keep Ryan\'s legacy alive and makes a real difference.\n\n'
+    + '--- HOW TO CONTRIBUTE ---\n'
+    + 'Please send your contribution via Venmo to: ' + VENMO_HANDLE + '\n'
+    + 'Venmo link: https://venmo.com/Kizzier-Classic\n\n'
+    + 'If you have questions or need an alternative payment method, email us at kizzierclassic@gmail.com.\n\n'
+    + 'With gratitude,\n'
+    + 'The Kizzier Classic Team';
+
+  var htmlBody = '<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">'
+    + '<div style="background: #7A9E8E; padding: 30px; text-align: center;">'
+    + '<h1 style="color: white; margin: 0; font-size: 28px;">The Kizzier <span style="color: #C4AA6A;">Classic</span></h1>'
+    + '<p style="color: rgba(255,255,255,0.7); margin: 8px 0 0;">6th Annual Charity Golf Tournament</p>'
+    + '</div>'
+    + '<div style="padding: 30px; background: #FAF8F4;">'
+    + '<h2 style="color: #3D3D3D; margin-top: 0;">Thank You, ' + firstName + '!</h2>'
+    + '<p style="color: #6B6B6B;">Your After Celebration Contribution to the Kizzier Classic means the world to us. Every dollar helps keep Ryan\'s legacy alive and supports our cause.</p>'
+    + '<div style="background: #5B7D6E; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">'
+    + '<h3 style="color: white; margin-top: 0;">Send Your Contribution</h3>'
+    + '<p style="color: rgba(255,255,255,0.8); margin: 4px 0;">Send any amount via Venmo to:</p>'
+    + '<a href="https://venmo.com/Kizzier-Classic" style="display: inline-block; background: #C4AA6A; color: #3D3D3D; padding: 12px 32px; border-radius: 4px; font-weight: bold; text-decoration: none; margin-top: 12px; font-size: 16px;">' + VENMO_HANDLE + '</a>'
+    + '</div>'
+    + '<p style="color: #A0A0A0; font-size: 13px; text-align: center; margin-top: 30px;">Questions? Email us at <a href="mailto:kizzierclassic@gmail.com" style="color: #7A9E8E;">kizzierclassic@gmail.com</a></p>'
+    + '</div>'
+    + '<div style="background: #4A6E5D; padding: 20px; text-align: center;">'
+    + '<p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 0;">In loving memory of Ryan Kizzier</p>'
+    + '</div>'
+    + '</div>';
+
+  GmailApp.sendEmail(email, subject, body, {
+    htmlBody: htmlBody,
+    name: 'The Kizzier Classic'
+  });
+}
+
+// ============================================================
+// RAFFLE ITEM DONATION THANK-YOU EMAIL
+// ============================================================
+function sendRaffleDonationEmail(firstName, email, raffleItems) {
+  var subject = 'Kizzier Classic 2026 — Thank You for Donating Raffle Items!';
+
+  var body = 'Hi ' + firstName + ',\n\n'
+    + 'Thank you for pledging raffle items for the 6th Annual Kizzier Classic! '
+    + 'Your generosity helps make our raffle a highlight of the day.\n\n'
+    + '--- ITEMS YOU\'RE DONATING ---\n'
+    + raffleItems + '\n\n'
+    + '--- WHAT TO DO ---\n'
+    + 'Please bring your items to registration check-in at 11:30 AM on Saturday, June 27, 2026 '
+    + 'at Hidden Valley Golf Club, 10501 Pine Lake Rd, Lincoln, NE 68526.\n\n'
+    + 'No payment is needed — your item donation is your contribution!\n\n'
+    + 'If you have questions, email us at kizzierclassic@gmail.com.\n\n'
+    + 'With gratitude,\n'
+    + 'The Kizzier Classic Team';
+
+  // Build HTML list of items
+  var itemsArray = raffleItems.split(', ');
+  var itemsHtml = '';
+  for (var i = 0; i < itemsArray.length; i++) {
+    itemsHtml += '<li style="padding: 6px 0; color: #6B6B6B; border-bottom: 1px solid #E8E5DE;">' + itemsArray[i] + '</li>';
+  }
+
+  var htmlBody = '<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">'
+    + '<div style="background: #7A9E8E; padding: 30px; text-align: center;">'
+    + '<h1 style="color: white; margin: 0; font-size: 28px;">The Kizzier <span style="color: #C4AA6A;">Classic</span></h1>'
+    + '<p style="color: rgba(255,255,255,0.7); margin: 8px 0 0;">6th Annual Charity Golf Tournament</p>'
+    + '</div>'
+    + '<div style="padding: 30px; background: #FAF8F4;">'
+    + '<h2 style="color: #3D3D3D; margin-top: 0;">Thank You, ' + firstName + '!</h2>'
+    + '<p style="color: #6B6B6B;">Your raffle item donation for the 6th Annual Kizzier Classic is greatly appreciated. Every item makes the raffle more fun for everyone!</p>'
+    + '<div style="background: white; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #C4AA6A;">'
+    + '<h3 style="color: #3D3D3D; margin-top: 0;">Items You\'re Donating</h3>'
+    + '<ul style="list-style: none; padding: 0; margin: 0;">' + itemsHtml + '</ul>'
+    + '</div>'
+    + '<div style="background: white; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #7A9E8E;">'
+    + '<h3 style="color: #3D3D3D; margin-top: 0;">Drop-Off Details</h3>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;">Please bring your items to <strong>registration check-in</strong>:</p>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Date:</strong> Saturday, June 27, 2026</p>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Time:</strong> 11:30 AM</p>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Location:</strong> Hidden Valley Golf Club, 10501 Pine Lake Rd, Lincoln, NE 68526</p>'
+    + '</div>'
+    + '<p style="color: #A0A0A0; font-size: 13px; text-align: center; margin-top: 30px;">Questions? Email us at <a href="mailto:kizzierclassic@gmail.com" style="color: #7A9E8E;">kizzierclassic@gmail.com</a></p>'
+    + '</div>'
+    + '<div style="background: #4A6E5D; padding: 20px; text-align: center;">'
+    + '<p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 0;">In loving memory of Ryan Kizzier</p>'
+    + '</div>'
+    + '</div>';
+
+  GmailApp.sendEmail(email, subject, body, {
+    htmlBody: htmlBody,
+    name: 'The Kizzier Classic'
+  });
+}
+
+// ============================================================
 // WEEKLY RECAP EMAIL (set up a Monday 8am trigger)
 // ============================================================
 function sendWeeklyRecap() {
@@ -388,11 +531,12 @@ function sendWeeklyRecap() {
   var totalRevenue = 0;
   var typeCounts = {};
 
+  // Column indexes: 0=Timestamp, 3=Email, 10=Type, 11=Amount
   for (var i = 1; i < data.length; i++) {
     var row = data[i];
     var timestamp = new Date(row[0]);
-    var amount = parseFloat(String(row[6]).replace('$', '')) || 0;
-    var type = row[5];
+    var amount = parseFloat(String(row[11]).replace('$', '')) || 0;
+    var type = row[10];
 
     totalRegs++;
     totalRevenue += amount;
@@ -473,4 +617,32 @@ function authorizeServices() {
   Logger.log('Sheet access OK: ' + sheet.getName());
   Logger.log('Gmail access OK');
   Logger.log('All services authorized!');
+}
+
+// ============================================================
+// SET UP HEADER ROW (run once after updating to new column layout)
+// ============================================================
+function setupHeaderRow() {
+  var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  var sheet = ss.getSheetByName(SHEET_NAME);
+
+  var headers = [
+    'Timestamp', 'First Name', 'Last Name', 'Email', 'Phone',
+    'Street', 'City', 'State', 'Zip', 'Full Address',
+    'Type', 'Amount', 'Teammate Names', 'Teammate Emails',
+    'Notes', 'Team', 'Raffle Items'
+  ];
+
+  // Write headers to row 1
+  for (var i = 0; i < headers.length; i++) {
+    sheet.getRange(1, i + 1).setValue(headers[i]);
+  }
+
+  // Bold the header row
+  sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
+
+  // Freeze header row
+  sheet.setFrozenRows(1);
+
+  Logger.log('Header row set up with ' + headers.length + ' columns');
 }
