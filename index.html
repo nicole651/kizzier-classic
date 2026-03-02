@@ -1564,16 +1564,16 @@
     <!-- ========== REGISTRATION ========== -->
     <section class="registration" id="register">
         <div class="container">
-            <div class="section-label">Join Us</div>
-            <h2 class="section-title">Register to Play</h2>
-            <p class="section-subtitle">Secure your spot in the 6th Annual Kizzier Classic. Space is limited.</p>
+            <div class="section-label" id="regSectionLabel">Join Us</div>
+            <h2 class="section-title" id="regSectionTitle">Register to Play</h2>
+            <p class="section-subtitle" id="regSectionSubtitle">Secure your spot in the 6th Annual Kizzier Classic. Space is limited.</p>
 
             <div class="reg-wrapper">
-                <div class="reg-info">
-                    <h3>What's Included</h3>
-                    <p>Your registration covers everything you need for a fantastic day on the course — plus the satisfaction of supporting a cause that matters.</p>
+                <div class="reg-info" id="regInfoPanel">
+                    <h3 id="regInfoTitle">What's Included</h3>
+                    <p id="regInfoDesc">Your registration covers everything you need for a fantastic day on the course — plus the satisfaction of supporting a cause that matters.</p>
 
-                    <ul class="reg-includes">
+                    <ul class="reg-includes" id="regInfoList">
                         <li><span class="check">✓</span> 18 holes of golf with cart</li>
                         <li><span class="check">✓</span> Lunch & post-round dinner</li>
                         <li><span class="check">✓</span> Beverages on the course</li>
@@ -1631,15 +1631,21 @@
                             <label>Registration Type</label>
                             <select name="regType" required>
                                 <option value="">Select an option</option>
-                                <option value="individual">Individual Player — $80</option>
-                                <option value="foursome">Foursome — $320</option>
-                                <option value="join-foursome">Join a Foursome — $80/person</option>
-                                <option value="sponsor-hole">Hole Sponsor — $175</option>
-                                <option value="sponsor-lunch">Lunch Sponsor — $200</option>
-                                <option value="sponsor-beverage">Beverage Cart Sponsor — $500</option>
-                                <option value="after-celebration">After Celebration Contribution — Any Amount</option>
-                                <option value="donation">Donate — Any Amount</option>
-                                <option value="raffle-donation">Donate Raffle Items — Free</option>
+                                <optgroup label="Play">
+                                    <option value="individual">Individual Player — $80</option>
+                                    <option value="foursome">Foursome — $320</option>
+                                    <option value="join-foursome">Join a Foursome — $80/person</option>
+                                </optgroup>
+                                <optgroup label="Sponsor">
+                                    <option value="sponsor-hole">Hole Sponsor — $175</option>
+                                    <option value="sponsor-lunch">Lunch Sponsor — $200</option>
+                                    <option value="sponsor-beverage">Beverage Cart Sponsor — $500</option>
+                                </optgroup>
+                                <optgroup label="Donate">
+                                    <option value="after-celebration">After Celebration Contribution — Any Amount</option>
+                                    <option value="donation">Donate — Any Amount</option>
+                                    <option value="raffle-donation">Donate Raffle Items</option>
+                                </optgroup>
                             </select>
                         </div>
                         <div id="sponsorNote" style="display: none; margin-bottom: 20px;">
@@ -1828,6 +1834,32 @@
         const sponsorNote = document.getElementById('sponsorNote');
         const regFormTitle = document.getElementById('regFormTitle');
         const regFormSubtitle = document.getElementById('regFormSubtitle');
+        const regSectionLabel = document.getElementById('regSectionLabel');
+        const regSectionTitle = document.getElementById('regSectionTitle');
+        const regSectionSubtitle = document.getElementById('regSectionSubtitle');
+        const regInfoTitle = document.getElementById('regInfoTitle');
+        const regInfoDesc = document.getElementById('regInfoDesc');
+        const regInfoList = document.getElementById('regInfoList');
+        const playerInfoDefault = {
+            title: "What's Included",
+            desc: "Your registration covers everything you need for a fantastic day on the course — plus the satisfaction of supporting a cause that matters.",
+            items: ['18 holes of golf with cart', 'Lunch & post-round dinner', 'Beverages on the course', 'Tournament gift bag', 'Raffle entry', 'Contest eligibility (longest drive, closest to pin)', 'Awards reception']
+        };
+        const sponsorInfo = {
+            title: "Why Sponsor?",
+            desc: "Your sponsorship directly supports the Kizzier Classic's mission. Every dollar goes toward honoring Ryan's memory and giving back to the community.",
+            items: ['Your name or logo featured at the tournament', 'Recognition on the website and social media', 'Support a cause that matters', 'Tax-deductible contribution', 'Be part of Ryan\'s legacy']
+        };
+        const donateInfo = {
+            title: "Make a Difference",
+            desc: "Can't make it to the tournament? Your donation still makes a huge impact. Every contribution helps keep Ryan's legacy alive.",
+            items: ['100% goes to charity', 'Tax-deductible contribution', 'Honor Ryan\'s memory', 'Support the local community']
+        };
+        function setInfoPanel(info) {
+            regInfoTitle.textContent = info.title;
+            regInfoDesc.textContent = info.desc;
+            regInfoList.innerHTML = info.items.map(i => '<li><span class="check">✓</span> ' + i + '</li>').join('');
+        }
         regTypeSelect.addEventListener('change', () => {
             const val = regTypeSelect.value;
             foursomeFields.style.display = val === 'foursome' ? 'block' : 'none';
@@ -1837,16 +1869,28 @@
             const isSponsor = val.startsWith('sponsor-');
             const isDonate = val === 'donation' || val === 'raffle-donation' || val === 'after-celebration';
             sponsorNote.style.display = isSponsor ? 'block' : 'none';
-            // Update form header based on type
+            // Update ALL headers and info panel based on type
             if (isSponsor) {
                 regFormTitle.textContent = 'Sponsor Registration';
                 regFormSubtitle.innerHTML = 'Thank you for supporting the Kizzier Classic!';
+                regSectionLabel.textContent = 'Support Us';
+                regSectionTitle.textContent = 'Become a Sponsor';
+                regSectionSubtitle.textContent = 'Put your name behind a great cause and honor Ryan\'s legacy.';
+                setInfoPanel(sponsorInfo);
             } else if (isDonate) {
                 regFormTitle.textContent = 'Donate';
                 regFormSubtitle.innerHTML = 'Every contribution helps keep Ryan\'s legacy alive.';
+                regSectionLabel.textContent = 'Give Back';
+                regSectionTitle.textContent = 'Make a Donation';
+                regSectionSubtitle.textContent = 'Can\'t make it? Your support still makes a difference.';
+                setInfoPanel(donateInfo);
             } else {
                 regFormTitle.textContent = 'Player Registration';
                 regFormSubtitle.innerHTML = '$80 per player &nbsp;|&nbsp; $320 per foursome';
+                regSectionLabel.textContent = 'Join Us';
+                regSectionTitle.textContent = 'Register to Play';
+                regSectionSubtitle.textContent = 'Secure your spot in the 6th Annual Kizzier Classic. Space is limited.';
+                setInfoPanel(playerInfoDefault);
             }
             if (isSponsor) {
                 const perks = {
