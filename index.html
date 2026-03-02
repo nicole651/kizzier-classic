@@ -1375,7 +1375,7 @@
                         <li>Social media recognition</li>
                         <li>Choose your own sign message</li>
                     </ul>
-                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Become a Sponsor</button>
+                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='sponsor-hole'; s.dispatchEvent(new Event('change')); }, 600);">Become a Sponsor</button>
                 </div>
 
                 <!-- Lunch Sponsor -->
@@ -1388,7 +1388,7 @@
                         <li>Social media recognition</li>
                         <li>Signage at lunch area</li>
                     </ul>
-                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Become a Sponsor</button>
+                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='sponsor-lunch'; s.dispatchEvent(new Event('change')); }, 600);">Become a Sponsor</button>
                 </div>
 
                 <!-- Beverage Cart Sponsor -->
@@ -1402,7 +1402,7 @@
                         <li>Banner at registration & awards</li>
                         <li>Recognition during awards ceremony</li>
                     </ul>
-                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Become a Sponsor</button>
+                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='sponsor-beverage'; s.dispatchEvent(new Event('change')); }, 600);">Become a Sponsor</button>
                 </div>
 
                 <!-- After Celebration Sponsor -->
@@ -1415,7 +1415,7 @@
                         <li>Social media recognition</li>
                         <li>Signage at dinner & awards area</li>
                     </ul>
-                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Become a Sponsor</button>
+                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='after-celebration'; s.dispatchEvent(new Event('change')); }, 600);">Become a Sponsor</button>
                 </div>
 
                 <!-- Raffle Donation -->
@@ -1642,6 +1642,10 @@
                                 <option value="raffle-donation">Donate Raffle Items — Free</option>
                             </select>
                         </div>
+                        <div id="sponsorNote" style="display: none; background: rgba(196,170,106,0.15); border-left: 3px solid var(--gold); border-radius: 4px; padding: 14px 16px; margin-bottom: 20px;">
+                            <p style="font-size: 0.9rem; color: var(--charcoal); margin-bottom: 4px; font-weight: 600;">Want to play too?</p>
+                            <p style="font-size: 0.85rem; color: var(--gray-600);">This registration is for sponsorship only. If you'd also like to play, please submit a separate registration as an Individual ($85) or Foursome ($320) after completing this one.</p>
+                        </div>
                         <div id="soloNote" style="display: none; background: rgba(122,158,142,0.1); border-left: 3px solid var(--emerald); border-radius: 4px; padding: 14px 16px; margin-bottom: 20px;">
                             <p style="font-size: 0.9rem; color: var(--gray-600); margin-bottom: 8px;">Flying solo? No worries — we'll pair you with other players to make a full foursome!</p>
                             <div class="form-group" style="margin-bottom: 0;">
@@ -1815,12 +1819,14 @@
         const joinFoursomeFields = document.getElementById('joinFoursomeFields');
         const raffleDonationFields = document.getElementById('raffleDonationFields');
         const soloNote = document.getElementById('soloNote');
+        const sponsorNote = document.getElementById('sponsorNote');
         regTypeSelect.addEventListener('change', () => {
             const val = regTypeSelect.value;
             foursomeFields.style.display = val === 'foursome' ? 'block' : 'none';
             joinFoursomeFields.style.display = val === 'join-foursome' ? 'block' : 'none';
             raffleDonationFields.style.display = val === 'raffle-donation' ? 'block' : 'none';
             soloNote.style.display = val === 'individual' ? 'block' : 'none';
+            sponsorNote.style.display = val.startsWith('sponsor-') ? 'block' : 'none';
             if (val === 'join-foursome') {
                 fetchAvailableTeams();
             }
