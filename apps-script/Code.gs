@@ -11,7 +11,7 @@ var VENMO_HANDLE = '@Kizzier-Classic';
 
 // Registration amounts
 var AMOUNTS = {
-  'individual': 85,
+  'individual': 80,
   'foursome': 320,
   'join-foursome': 80,
   'sponsor-hole': 175,
