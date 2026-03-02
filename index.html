@@ -1631,7 +1631,7 @@
                             <label>Registration Type</label>
                             <select name="regType" required>
                                 <option value="">Select an option</option>
-                                <optgroup label="Play">
+                                <optgroup label="Play" id="optgroupPlay">
                                     <option value="individual">Individual Player — $80</option>
                                     <option value="foursome">Foursome — $320</option>
                                     <option value="join-foursome">Join a Foursome — $80/person</option>
@@ -1647,16 +1647,12 @@
                                     <option value="raffle-donation">Donate Raffle Items</option>
                                 </optgroup>
                             </select>
+                            <p id="playerRegLink" style="display: none; margin-top: 8px; font-size: 0.85rem; color: var(--gray-600);">Want to play in the tournament? <a href="#" onclick="event.preventDefault(); var og = document.getElementById('optgroupPlay'); og.style.display = ''; var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='individual'; s.dispatchEvent(new Event('change'));" style="font-weight: 600; color: var(--emerald); text-decoration: underline; cursor: pointer;">Register as a Player →</a></p>
                         </div>
                         <div id="sponsorNote" style="display: none; margin-bottom: 20px;">
                             <div id="sponsorPerks" style="background: rgba(196,170,106,0.15); border-left: 3px solid var(--gold); border-radius: 4px; padding: 16px; margin-bottom: 12px;">
                                 <p style="font-size: 1rem; color: var(--charcoal); font-weight: 700; margin-bottom: 10px;">Your Sponsorship Includes:</p>
                                 <ul id="sponsorPerksList" style="list-style: none; padding: 0; margin: 0;"></ul>
-                            </div>
-                            <div style="background: rgba(122,158,142,0.1); border-left: 3px solid var(--emerald); border-radius: 4px; padding: 14px 16px;">
-                                <p style="font-size: 0.9rem; color: var(--charcoal); margin-bottom: 4px; font-weight: 600;">Want to play too?</p>
-                                <p style="font-size: 0.85rem; color: var(--gray-600);">This registration is for sponsorship only. If you'd also like to play, submit a separate player registration after completing this one.</p>
-                                <a href="#" onclick="event.preventDefault(); var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='individual'; s.dispatchEvent(new Event('change')); document.getElementById('register').scrollIntoView({behavior:'smooth'});" style="display: inline-block; margin-top: 8px; font-size: 0.85rem; font-weight: 600; color: var(--emerald); text-decoration: underline; cursor: pointer;">Register as a Player →</a>
                             </div>
                         </div>
                         <div id="playerNote" style="display: none; background: rgba(196,170,106,0.1); border-left: 3px solid var(--gold); border-radius: 4px; padding: 14px 16px; margin-bottom: 20px;">
@@ -1840,6 +1836,8 @@
         const soloNote = document.getElementById('soloNote');
         const sponsorNote = document.getElementById('sponsorNote');
         const playerNote = document.getElementById('playerNote');
+        const optgroupPlay = document.getElementById('optgroupPlay');
+        const playerRegLink = document.getElementById('playerRegLink');
         const regFormTitle = document.getElementById('regFormTitle');
         const regFormSubtitle = document.getElementById('regFormSubtitle');
         const regSectionLabel = document.getElementById('regSectionLabel');
@@ -1879,6 +1877,9 @@
             sponsorNote.style.display = isSponsor ? 'block' : 'none';
             const isPlayer = val === 'individual' || val === 'foursome' || val === 'join-foursome';
             playerNote.style.display = isPlayer ? 'block' : 'none';
+            // Hide player options and show player link when in sponsor/donate mode
+            optgroupPlay.style.display = (isSponsor || isDonate) ? 'none' : '';
+            playerRegLink.style.display = (isSponsor || isDonate) ? 'block' : 'none';
             // Update ALL headers and info panel based on type
             if (isSponsor) {
                 regFormTitle.textContent = 'Sponsor Registration';
