@@ -1104,7 +1104,7 @@
                 <li><a href="#schedule">Schedule</a></li>
                 <li><a href="#sponsorship">Sponsors</a></li>
                 <li><a href="#past-tournaments">Past Years</a></li>
-                <li><a href="https://venmo.com/Kizzier-Classic" target="_blank" class="nav-donate">Donate</a></li>
+                <li><a href="#register" class="nav-donate" onclick="setTimeout(function(){ var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='donation'; s.dispatchEvent(new Event('change')); }, 600);">Donate</a></li>
                 <li><a href="#register" class="nav-cta">Register</a></li>
             </ul>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
@@ -1659,6 +1659,12 @@
                                 <a href="#" onclick="event.preventDefault(); var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='individual'; s.dispatchEvent(new Event('change')); document.getElementById('register').scrollIntoView({behavior:'smooth'});" style="display: inline-block; margin-top: 8px; font-size: 0.85rem; font-weight: 600; color: var(--emerald); text-decoration: underline; cursor: pointer;">Register as a Player →</a>
                             </div>
                         </div>
+                        <div id="playerNote" style="display: none; background: rgba(196,170,106,0.1); border-left: 3px solid var(--gold); border-radius: 4px; padding: 14px 16px; margin-bottom: 20px;">
+                            <p style="font-size: 0.9rem; color: var(--charcoal); margin-bottom: 4px; font-weight: 600;">Want to support the tournament?</p>
+                            <p style="font-size: 0.85rem; color: var(--gray-600);">Consider sponsoring a hole, lunch, or the beverage cart — or make a donation.</p>
+                            <a href="#" onclick="event.preventDefault(); var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='sponsor-hole'; s.dispatchEvent(new Event('change')); document.getElementById('register').scrollIntoView({behavior:'smooth'});" style="display: inline-block; margin-top: 8px; font-size: 0.85rem; font-weight: 600; color: var(--gold-dark); text-decoration: underline; cursor: pointer;">Become a Sponsor →</a>
+                            <a href="#" onclick="event.preventDefault(); var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='donation'; s.dispatchEvent(new Event('change')); document.getElementById('register').scrollIntoView({behavior:'smooth'});" style="display: inline-block; margin-top: 8px; margin-left: 16px; font-size: 0.85rem; font-weight: 600; color: var(--emerald); text-decoration: underline; cursor: pointer;">Make a Donation →</a>
+                        </div>
                         <div id="soloNote" style="display: none; background: rgba(122,158,142,0.1); border-left: 3px solid var(--emerald); border-radius: 4px; padding: 14px 16px; margin-bottom: 20px;">
                             <p style="font-size: 0.9rem; color: var(--gray-600); margin-bottom: 8px;">Flying solo? No worries — we'll pair you with other players to make a full foursome!</p>
                             <div class="form-group" style="margin-bottom: 0;">
@@ -1833,6 +1839,7 @@
         const raffleDonationFields = document.getElementById('raffleDonationFields');
         const soloNote = document.getElementById('soloNote');
         const sponsorNote = document.getElementById('sponsorNote');
+        const playerNote = document.getElementById('playerNote');
         const regFormTitle = document.getElementById('regFormTitle');
         const regFormSubtitle = document.getElementById('regFormSubtitle');
         const regSectionLabel = document.getElementById('regSectionLabel');
@@ -1870,6 +1877,8 @@
             const isSponsor = val.startsWith('sponsor-');
             const isDonate = val === 'donation' || val === 'raffle-donation' || val === 'after-celebration';
             sponsorNote.style.display = isSponsor ? 'block' : 'none';
+            const isPlayer = val === 'individual' || val === 'foursome' || val === 'join-foursome';
+            playerNote.style.display = isPlayer ? 'block' : 'none';
             // Update ALL headers and info panel based on type
             if (isSponsor) {
                 regFormTitle.textContent = 'Sponsor Registration';
