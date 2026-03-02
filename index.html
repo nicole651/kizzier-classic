@@ -1104,8 +1104,8 @@
                 <li><a href="#schedule">Schedule</a></li>
                 <li><a href="#sponsorship">Sponsors</a></li>
                 <li><a href="#past-tournaments">Past Years</a></li>
-                <li><a href="#register" class="nav-donate" onclick="setTimeout(function(){ var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='donation'; s.dispatchEvent(new Event('change')); }, 600);">Donate</a></li>
-                <li><a href="#register" class="nav-cta" onclick="setTimeout(function(){ var og = document.getElementById('optgroupPlay'); og.style.display = ''; var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value=''; s.dispatchEvent(new Event('change')); }, 600);">Register</a></li>
+                <li><a href="#register" class="nav-donate" onclick="setTimeout(function(){ setDropdownMode('sponsor', 'donation'); }, 600);">Donate</a></li>
+                <li><a href="#register" class="nav-cta" onclick="setTimeout(function(){ setDropdownMode('player', ''); }, 600);">Register</a></li>
             </ul>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
                 <span></span><span></span><span></span>
@@ -1152,8 +1152,8 @@
             </div>
 
             <div class="hero-buttons">
-                <a href="#register" class="btn btn-primary" onclick="setTimeout(function(){ var og = document.getElementById('optgroupPlay'); og.style.display = ''; var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value=''; s.dispatchEvent(new Event('change')); }, 600);">Register to Play</a>
-                <a href="#sponsorship" class="btn btn-outline">Become a Sponsor</a>
+                <a href="#register" class="btn btn-primary" onclick="setTimeout(function(){ setDropdownMode('player', ''); }, 600);">Register to Play</a>
+                <a href="#register" class="btn btn-outline" onclick="setTimeout(function(){ setDropdownMode('sponsor', ''); }, 600);">Become a Sponsor</a>
             </div>
         </div>
         <div class="scroll-indicator">Scroll</div>
@@ -1375,7 +1375,7 @@
                         <li>Social media recognition</li>
                         <li>Choose your own sign message</li>
                     </ul>
-                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='sponsor-hole'; s.dispatchEvent(new Event('change')); }, 600);">Become a Sponsor</button>
+                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ setDropdownMode('sponsor', 'sponsor-hole'); }, 600);">Become a Sponsor</button>
                 </div>
 
                 <!-- Lunch Sponsor -->
@@ -1388,7 +1388,7 @@
                         <li>Social media recognition</li>
                         <li>Signage at lunch area</li>
                     </ul>
-                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='sponsor-lunch'; s.dispatchEvent(new Event('change')); }, 600);">Become a Sponsor</button>
+                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ setDropdownMode('sponsor', 'sponsor-lunch'); }, 600);">Become a Sponsor</button>
                 </div>
 
                 <!-- Beverage Cart Sponsor -->
@@ -1402,7 +1402,7 @@
                         <li>Banner at registration & awards</li>
                         <li>Recognition during awards ceremony</li>
                     </ul>
-                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='sponsor-beverage'; s.dispatchEvent(new Event('change')); }, 600);">Become a Sponsor</button>
+                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ setDropdownMode('sponsor', 'sponsor-beverage'); }, 600);">Become a Sponsor</button>
                 </div>
 
                 <!-- After Celebration Sponsor -->
@@ -1415,7 +1415,7 @@
                         <li>Social media recognition</li>
                         <li>Signage at dinner & awards area</li>
                     </ul>
-                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='after-celebration'; s.dispatchEvent(new Event('change')); }, 600);">Become a Sponsor</button>
+                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ setDropdownMode('sponsor', 'after-celebration'); }, 600);">Become a Sponsor</button>
                 </div>
 
                 <!-- Raffle Donation -->
@@ -1428,7 +1428,7 @@
                         <li>Social media recognition</li>
                         <li>A great way to promote your business or show support</li>
                     </ul>
-                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='raffle-donation'; s.dispatchEvent(new Event('change')); }, 600);">Donate Items</button>
+                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ setDropdownMode('sponsor', 'raffle-donation'); }, 600);">Donate Items</button>
                 </div>
             </div>
         </div>
@@ -1629,37 +1629,19 @@
                         </div>
                         <div class="form-group">
                             <label>Registration Type</label>
-                            <select name="regType" required>
+                            <select name="regType" required id="regTypeSelect">
                                 <option value="">Select an option</option>
-                                <optgroup label="Play" id="optgroupPlay">
-                                    <option value="individual">Individual Player — $80</option>
-                                    <option value="foursome">Foursome — $320</option>
-                                    <option value="join-foursome">Join a Foursome — $80/person</option>
-                                </optgroup>
-                                <optgroup label="Sponsor">
-                                    <option value="sponsor-hole">Hole Sponsor — $175</option>
-                                    <option value="sponsor-lunch">Lunch Sponsor — $200</option>
-                                    <option value="sponsor-beverage">Beverage Cart Sponsor — $500</option>
-                                </optgroup>
-                                <optgroup label="Donate">
-                                    <option value="after-celebration">After Celebration Contribution — Any Amount</option>
-                                    <option value="donation">Donate — Any Amount</option>
-                                    <option value="raffle-donation">Donate Raffle Items</option>
-                                </optgroup>
+                                <option value="individual">Individual Player — $80</option>
+                                <option value="foursome">Foursome — $320</option>
+                                <option value="join-foursome">Join a Foursome — $80/person</option>
                             </select>
-                            <p id="playerRegLink" style="display: none; margin-top: 8px; font-size: 0.85rem; color: var(--gray-600);">Want to play in the tournament? <a href="#" onclick="event.preventDefault(); var og = document.getElementById('optgroupPlay'); og.style.display = ''; var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='individual'; s.dispatchEvent(new Event('change'));" style="font-weight: 600; color: var(--emerald); text-decoration: underline; cursor: pointer;">Register as a Player →</a></p>
+                            <p id="switchLink" style="display: none; margin-top: 8px; font-size: 0.85rem; color: var(--gray-600);"></p>
                         </div>
                         <div id="sponsorNote" style="display: none; margin-bottom: 20px;">
                             <div id="sponsorPerks" style="background: rgba(196,170,106,0.15); border-left: 3px solid var(--gold); border-radius: 4px; padding: 16px; margin-bottom: 12px;">
                                 <p style="font-size: 1rem; color: var(--charcoal); font-weight: 700; margin-bottom: 10px;">Your Sponsorship Includes:</p>
                                 <ul id="sponsorPerksList" style="list-style: none; padding: 0; margin: 0;"></ul>
                             </div>
-                        </div>
-                        <div id="playerNote" style="display: none; background: rgba(196,170,106,0.1); border-left: 3px solid var(--gold); border-radius: 4px; padding: 14px 16px; margin-bottom: 20px;">
-                            <p style="font-size: 0.9rem; color: var(--charcoal); margin-bottom: 4px; font-weight: 600;">Want to support the tournament?</p>
-                            <p style="font-size: 0.85rem; color: var(--gray-600);">Consider sponsoring a hole, lunch, or the beverage cart — or make a donation.</p>
-                            <a href="#" onclick="event.preventDefault(); var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='sponsor-hole'; s.dispatchEvent(new Event('change')); document.getElementById('register').scrollIntoView({behavior:'smooth'});" style="display: inline-block; margin-top: 8px; font-size: 0.85rem; font-weight: 600; color: var(--gold-dark); text-decoration: underline; cursor: pointer;">Become a Sponsor →</a>
-                            <a href="#" onclick="event.preventDefault(); var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='donation'; s.dispatchEvent(new Event('change')); document.getElementById('register').scrollIntoView({behavior:'smooth'});" style="display: inline-block; margin-top: 8px; margin-left: 16px; font-size: 0.85rem; font-weight: 600; color: var(--emerald); text-decoration: underline; cursor: pointer;">Make a Donation →</a>
                         </div>
                         <div id="soloNote" style="display: none; background: rgba(122,158,142,0.1); border-left: 3px solid var(--emerald); border-radius: 4px; padding: 14px 16px; margin-bottom: 20px;">
                             <p style="font-size: 0.9rem; color: var(--gray-600); margin-bottom: 8px;">Flying solo? No worries — we'll pair you with other players to make a full foursome!</p>
@@ -1829,15 +1811,13 @@
         });
 
         // Show/hide foursome player fields, join-foursome team selection, and raffle donation fields
-        const regTypeSelect = document.querySelector('select[name="regType"]');
+        const regTypeSelect = document.getElementById('regTypeSelect');
         const foursomeFields = document.getElementById('foursomeFields');
         const joinFoursomeFields = document.getElementById('joinFoursomeFields');
         const raffleDonationFields = document.getElementById('raffleDonationFields');
         const soloNote = document.getElementById('soloNote');
         const sponsorNote = document.getElementById('sponsorNote');
-        const playerNote = document.getElementById('playerNote');
-        const optgroupPlay = document.getElementById('optgroupPlay');
-        const playerRegLink = document.getElementById('playerRegLink');
+        const switchLink = document.getElementById('switchLink');
         const regFormTitle = document.getElementById('regFormTitle');
         const regFormSubtitle = document.getElementById('regFormSubtitle');
         const regSectionLabel = document.getElementById('regSectionLabel');
@@ -1846,6 +1826,48 @@
         const regInfoTitle = document.getElementById('regInfoTitle');
         const regInfoDesc = document.getElementById('regInfoDesc');
         const regInfoList = document.getElementById('regInfoList');
+
+        // Define the three separate dropdown option sets
+        const playerOptions = [
+            {value: 'individual', label: 'Individual Player — $80'},
+            {value: 'foursome', label: 'Foursome — $320'},
+            {value: 'join-foursome', label: 'Join a Foursome — $80/person'}
+        ];
+        const sponsorDonateOptions = [
+            {value: 'sponsor-hole', label: 'Hole Sponsor — $175'},
+            {value: 'sponsor-lunch', label: 'Lunch Sponsor — $200'},
+            {value: 'sponsor-beverage', label: 'Beverage Cart Sponsor — $500'},
+            {value: 'after-celebration', label: 'After Celebration Contribution — Any Amount'},
+            {value: 'donation', label: 'Donate — Any Amount'},
+            {value: 'raffle-donation', label: 'Donate Raffle Items'}
+        ];
+
+        // Rebuild dropdown with only the relevant options
+        function setDropdownMode(mode, selectedValue) {
+            const opts = mode === 'sponsor' ? sponsorDonateOptions : playerOptions;
+            regTypeSelect.innerHTML = '<option value="">Select an option</option>';
+            opts.forEach(o => {
+                const opt = document.createElement('option');
+                opt.value = o.value;
+                opt.textContent = o.label;
+                regTypeSelect.appendChild(opt);
+            });
+            if (selectedValue) {
+                regTypeSelect.value = selectedValue;
+                regTypeSelect.dispatchEvent(new Event('change'));
+            }
+            // Show link to switch to the other mode
+            if (mode === 'sponsor') {
+                switchLink.innerHTML = 'Want to play in the tournament? <a href="#" onclick="event.preventDefault(); setDropdownMode(\'player\', \'individual\');" style="font-weight: 600; color: var(--emerald); text-decoration: underline; cursor: pointer;">Register as a Player →</a>';
+                switchLink.style.display = 'block';
+            } else {
+                switchLink.innerHTML = 'Want to sponsor or donate? <a href="#" onclick="event.preventDefault(); setDropdownMode(\'sponsor\', \'\');" style="font-weight: 600; color: var(--gold-dark); text-decoration: underline; cursor: pointer;">Become a Sponsor →</a>';
+                switchLink.style.display = 'block';
+            }
+        }
+        // Make it globally accessible for onclick handlers
+        window.setDropdownMode = setDropdownMode;
+
         const playerInfoDefault = {
             title: "What's Included",
             desc: "Your registration covers everything you need for a fantastic day on the course — plus the satisfaction of supporting a cause that matters.",
@@ -1876,10 +1898,6 @@
             const isDonate = val === 'donation' || val === 'raffle-donation' || val === 'after-celebration';
             sponsorNote.style.display = isSponsor ? 'block' : 'none';
             const isPlayer = val === 'individual' || val === 'foursome' || val === 'join-foursome';
-            playerNote.style.display = isPlayer ? 'block' : 'none';
-            // Hide player options and show player link when in sponsor/donate mode
-            optgroupPlay.style.display = (isSponsor || isDonate) ? 'none' : '';
-            playerRegLink.style.display = (isSponsor || isDonate) ? 'block' : 'none';
             // Update ALL headers and info panel based on type
             if (isSponsor) {
                 regFormTitle.textContent = 'Sponsor Registration';
