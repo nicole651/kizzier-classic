@@ -1105,7 +1105,7 @@
                 <li><a href="#sponsorship">Sponsors</a></li>
                 <li><a href="#past-tournaments">Past Years</a></li>
                 <li><a href="#register" class="nav-donate" onclick="setTimeout(function(){ var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='donation'; s.dispatchEvent(new Event('change')); }, 600);">Donate</a></li>
-                <li><a href="#register" class="nav-cta">Register</a></li>
+                <li><a href="#register" class="nav-cta" onclick="setTimeout(function(){ var og = document.getElementById('optgroupPlay'); og.style.display = ''; var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value=''; s.dispatchEvent(new Event('change')); }, 600);">Register</a></li>
             </ul>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
                 <span></span><span></span><span></span>
@@ -1152,7 +1152,7 @@
             </div>
 
             <div class="hero-buttons">
-                <a href="#register" class="btn btn-primary">Register to Play</a>
+                <a href="#register" class="btn btn-primary" onclick="setTimeout(function(){ var og = document.getElementById('optgroupPlay'); og.style.display = ''; var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value=''; s.dispatchEvent(new Event('change')); }, 600);">Register to Play</a>
                 <a href="#sponsorship" class="btn btn-outline">Become a Sponsor</a>
             </div>
         </div>
