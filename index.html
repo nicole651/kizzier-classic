@@ -353,6 +353,28 @@
             transform: translateY(-2px);
         }
 
+        /* ========== FEEDBACK BANNER ========== */
+        .feedback-banner {
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+            padding: 28px 0;
+            text-align: center;
+        }
+
+        .feedback-text {
+            color: var(--white);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .feedback-text strong {
+            font-size: 1.25rem;
+            display: block;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
         .scroll-indicator {
             position: absolute;
             bottom: 40px;
@@ -1103,7 +1125,7 @@
                 <li><a href="#schedule">Schedule</a></li>
                 <li><a href="#sponsorship">Sponsors</a></li>
                 <li><a href="#past-tournaments">Past Years</a></li>
-                <li><a href="#register" class="nav-donate">Donate</a></li>
+                <li><a href="https://venmo.com/Kizzier-Classic" target="_blank" class="nav-donate">Donate</a></li>
                 <li><a href="#register" class="nav-cta">Register</a></li>
             </ul>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
@@ -1158,6 +1180,13 @@
         <div class="scroll-indicator">Scroll</div>
     </section>
 
+    <!-- ========== FEEDBACK BANNER ========== -->
+    <div class="feedback-banner">
+        <div class="container">
+            <p class="feedback-text"><strong>We Heard You!</strong> You asked for a Saturday, away from the 4th of July, with an afternoon tee time. Done, done, and done. See you June 27th.</p>
+        </div>
+    </div>
+
     <!-- ========== ABOUT ========== -->
     <section class="about" id="about">
         <div class="container">
@@ -1175,6 +1204,8 @@
                     <p class="section-subtitle">
                         This annual charity golf tournament brings together friends, family, and community to celebrate Ryan's spirit while raising funds for causes close to his heart. Every swing, every laugh, every moment on the course carries forward his legacy.
                     </p>
+                    <br>
+                    <p style="font-size: 0.9rem;"><a href="https://www.1011now.com/content/news/Fire-Responders-on-scene-of-Nebraska-Animal-Medical-Center-in-Lincoln-512730571.html" target="_blank" style="color: var(--gold-dark); font-weight: 500; border-bottom: 1px solid var(--gold-light);">Read more about Ryan's story &rarr;</a></p>
 
                     <div class="about-stats">
                         <div class="stat">
@@ -1238,6 +1269,60 @@
                 <div class="gallery-item wide">
                     <img src="img/ryan-disney.jpg" alt="Ryan and kids at Disney" loading="lazy">
                 </div>
+                <div class="gallery-item">
+                    <img src="img/ryan-family-1417.jpg" alt="Ryan holding his baby in a tux" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/ryan-family-0226.jpg" alt="Ryan and his dad holding babies" loading="lazy">
+                </div>
+                <div class="gallery-item wide">
+                    <img src="img/ryan-family-0982.jpg" alt="Kizzier family dinner together" loading="lazy">
+                </div>
+                <div class="gallery-item tall">
+                    <img src="img/ryan-family-2273.jpg" alt="Dana and Ryan on their wedding day" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/ryan-family-1139.jpg" alt="Ryan and Nicole at an evening out" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/ryan-family-1122.jpg" alt="Ryan and sisters at a Huskers tailgate" loading="lazy">
+                </div>
+                <div class="gallery-item wide">
+                    <img src="img/ryan-family-0457.jpg" alt="Kizzier family wedding portrait" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/ryan-family-0686.jpg" alt="Ryan and Nicole embracing" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/ryan-family-0692.jpg" alt="Ryan and brother in tuxedos" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/ryan-family-0879.jpg" alt="Ryan with kids by the classic car" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/ryan-family-6648.jpg" alt="Family card game at the cabin" loading="lazy">
+                </div>
+                <div class="gallery-item tall">
+                    <img src="img/ryan-family-1562.jpg" alt="Ryan with kids at sleepover" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/ryan-family-0084.jpg" alt="Ryan relaxing on the couch with cats" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/ryan-family-0061.jpg" alt="Ryan and kids after a mud run" loading="lazy">
+                </div>
+                <div class="gallery-item wide">
+                    <img src="img/ryan-september-16103.jpg" alt="Ryan with his groomsmen" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/ryan-family-1295.jpg" alt="Ryan and friends having a good time" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/ryan-family-1352.jpg" alt="Ryan and son at Memorial Stadium" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="img/ryan-family-1353.jpg" alt="Ryan and son at a color run" loading="lazy">
+                </div>
             </div>
         </div>
     </section>
@@ -1256,8 +1341,8 @@
                     <div class="timeline-dot">11A</div>
                     <div class="timeline-content">
                         <span class="timeline-time">11:30 AM</span>
-                        <h4>Registration & Lunch</h4>
-                        <p>Check in, grab your cart, enjoy lunch, and hit the practice green.</p>
+                        <h4>Registration</h4>
+                        <p>Check in, grab your cart, and hit the practice green.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -1299,7 +1384,7 @@
                 </p>
             </div>
 
-            <div class="sponsor-grid" style="max-width: 1000px; margin-left: auto; margin-right: auto; margin-top: 64px;">
+            <div class="sponsor-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 1000px; margin-left: auto; margin-right: auto; margin-top: 64px;">
                 <!-- Hole Sponsor -->
                 <div class="sponsor-card">
                     <div class="sponsor-tier">Hole Sponsor</div>
@@ -1338,6 +1423,32 @@
                         <li>Recognition during awards ceremony</li>
                     </ul>
                     <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Become a Sponsor</button>
+                </div>
+
+                <!-- After Celebration Sponsor -->
+                <div class="sponsor-card">
+                    <div class="sponsor-tier">After Celebration</div>
+                    <div class="sponsor-price" style="font-size: 2rem;">Any Amount</div>
+                    <ul class="sponsor-perks">
+                        <li>Sponsor the post-round dinner & awards</li>
+                        <li>Name or logo on tournament website</li>
+                        <li>Social media recognition</li>
+                        <li>Signage at dinner & awards area</li>
+                    </ul>
+                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Become a Sponsor</button>
+                </div>
+
+                <!-- Raffle Donation -->
+                <div class="sponsor-card" style="grid-column: 1 / -1; max-width: 460px; justify-self: center;">
+                    <div class="sponsor-tier">Raffle Donation</div>
+                    <div class="sponsor-price" style="font-size: 2rem;">Donate Items</div>
+                    <ul class="sponsor-perks">
+                        <li>Donate raffle prizes or gift baskets</li>
+                        <li>Name or logo displayed with your donated items</li>
+                        <li>Social media recognition</li>
+                        <li>A great way to promote your business or show support</li>
+                    </ul>
+                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Donate Items</button>
                 </div>
             </div>
         </div>
@@ -1495,7 +1606,7 @@
 
                 <div class="reg-form">
                     <h3>Player Registration</h3>
-                    <p class="price-tag">$85 per player &nbsp;|&nbsp; $320 per foursome &nbsp;|&nbsp; $80 to join a team</p>
+                    <p class="price-tag">$80 per player &nbsp;|&nbsp; $320 per foursome</p>
 
                     <form id="regForm" onsubmit="handleRegistration(event)">
                         <div class="form-row">
@@ -1540,7 +1651,7 @@
                             <label>Registration Type</label>
                             <select name="regType" required>
                                 <option value="">Select an option</option>
-                                <option value="individual">Individual Player — $85</option>
+                                <option value="individual">Individual Player — $80</option>
                                 <option value="foursome">Foursome — $320</option>
                                 <option value="join-foursome">Join a Foursome — $80/person</option>
                                 <option value="sponsor-hole">Hole Sponsor — $175</option>
@@ -1550,6 +1661,13 @@
                                 <option value="donation">Donate — Any Amount</option>
                                 <option value="raffle-donation">Donate Raffle Items — Free</option>
                             </select>
+                        </div>
+                        <div id="soloNote" style="display: none; background: rgba(122,158,142,0.1); border-left: 3px solid var(--emerald); border-radius: 4px; padding: 14px 16px; margin-bottom: 20px;">
+                            <p style="font-size: 0.9rem; color: var(--gray-600); margin-bottom: 8px;">Flying solo? No worries — we'll pair you with other players to make a full foursome!</p>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Have a friend also registering solo? (optional)</label>
+                                <input type="text" name="pairWith" placeholder="Their name and we'll try to pair you together">
+                            </div>
                         </div>
                         <div id="foursomeFields" style="display: none;">
                             <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 16px;">Please provide each teammate's name and email so we can send them event details and a thank you after the tournament.</p>
@@ -1623,6 +1741,20 @@
                                 <input type="text" id="raffleOtherText" name="raffleOtherText" placeholder="Describe your item(s)..." style="display: none; margin-top: 8px;">
                             </div>
                         </div>
+                        <!-- Share Your Memories of Ryan -->
+                        <div style="background: rgba(122,158,142,0.08); border-radius: 8px; padding: 20px; margin-bottom: 20px; border: 1px solid rgba(122,158,142,0.2);">
+                            <p style="font-weight: 600; color: var(--charcoal); margin-bottom: 4px; font-size: 1rem;">Share Your Memories of Ryan</p>
+                            <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 16px;">Have a favorite photo of Ryan or a story that makes you smile? We'd love to include it in the tournament tribute. Totally optional — but it means the world to the family.</p>
+                            <div class="form-group" style="margin-bottom: 14px;">
+                                <label>Upload a Photo of Ryan</label>
+                                <input type="file" name="ryanPhoto" accept="image/*" style="font-size: 0.85rem; padding: 10px; background: var(--white); border: 1px dashed var(--gray-300); border-radius: 4px; cursor: pointer;">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Your Favorite Ryan Memory or Story</label>
+                                <textarea name="ryanStory" rows="3" placeholder="Tell us your favorite memory, funny moment, or what Ryan meant to you..."></textarea>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label>Additional Notes (Team Names, Dietary Needs, etc.)</label>
                             <textarea name="notes" rows="3"></textarea>
@@ -1660,7 +1792,8 @@
                     <div class="footer-contact-item"><a href="mailto:kizzierclassic@gmail.com">kizzierclassic@gmail.com</a></div>
                     <div class="footer-contact-item">Lincoln, NE</div>
                     <div class="footer-contact-item"><a href="https://venmo.com/Kizzier-Classic" target="_blank">Venmo @Kizzier-Classic</a></div>
-                    <div class="footer-contact-item"><a href="#" target="_blank">Facebook</a></div>
+                    <div class="footer-contact-item"><a href="https://www.facebook.com/share/174hybNwAo/?mibextid=wwXIfr" target="_blank">Facebook</a></div>
+                    <div class="footer-contact-item"><a href="https://www.instagram.com/kizzierclassic" target="_blank">Instagram @kizzierclassic</a></div>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -1669,6 +1802,12 @@
             </div>
         </div>
     </footer>
+
+    <!-- Lightbox overlay -->
+    <div class="lightbox-overlay" id="lightbox">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <img src="" alt="Full-size photo" id="lightboxImg">
+    </div>
 
     <!-- ========== SCRIPTS ========== -->
     <script>
@@ -1695,11 +1834,13 @@
         const foursomeFields = document.getElementById('foursomeFields');
         const joinFoursomeFields = document.getElementById('joinFoursomeFields');
         const raffleDonationFields = document.getElementById('raffleDonationFields');
+        const soloNote = document.getElementById('soloNote');
         regTypeSelect.addEventListener('change', () => {
             const val = regTypeSelect.value;
             foursomeFields.style.display = val === 'foursome' ? 'block' : 'none';
             joinFoursomeFields.style.display = val === 'join-foursome' ? 'block' : 'none';
             raffleDonationFields.style.display = val === 'raffle-donation' ? 'block' : 'none';
+            soloNote.style.display = val === 'individual' ? 'block' : 'none';
             if (val === 'join-foursome') {
                 fetchAvailableTeams();
             }
@@ -1768,7 +1909,7 @@
         const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxLUTqDaDtqZJHK80m-pn8qRYWmBPz9tqEbEFnokRWwNxEeM52FbauvJbczd8JoSD1mJA/exec';
 
         const AMOUNTS = {
-            'individual': 85,
+            'individual': 80,
             'foursome': 320,
             'join-foursome': 80,
             'sponsor-hole': 175,
@@ -1818,6 +1959,24 @@
                 raffleItems = items.join(', ');
             }
 
+            // Read Ryan photo as base64 if provided
+            var ryanPhotoData = '';
+            var ryanPhotoName = '';
+            var ryanPhotoType = '';
+            const photoInput = form.querySelector('input[name="ryanPhoto"]');
+            if (photoInput && photoInput.files && photoInput.files.length > 0) {
+                const file = photoInput.files[0];
+                ryanPhotoName = file.name;
+                ryanPhotoType = file.type;
+                ryanPhotoData = await new Promise(function(resolve) {
+                    const reader = new FileReader();
+                    reader.onload = function() {
+                        resolve(reader.result.split(',')[1]); // base64 part only
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+
             const payload = {
                 firstName: data.get('firstName'),
                 lastName: data.get('lastName'),
@@ -1836,7 +1995,11 @@
                 player4email: data.get('player4email'),
                 teamName: data.get('teamName') || '',
                 notes: data.get('notes'),
-                raffleItems: raffleItems
+                raffleItems: raffleItems,
+                ryanStory: data.get('ryanStory') || '',
+                ryanPhotoData: ryanPhotoData,
+                ryanPhotoName: ryanPhotoName,
+                ryanPhotoType: ryanPhotoType
             };
 
             // Validate team selection for join-foursome
@@ -2013,12 +2176,6 @@
             }
         });
     </script>
-
-    <!-- Lightbox overlay -->
-    <div class="lightbox-overlay" id="lightbox">
-        <button class="lightbox-close" aria-label="Close">&times;</button>
-        <img src="" alt="Full-size photo" id="lightboxImg">
-    </div>
 
 </body>
 </html>

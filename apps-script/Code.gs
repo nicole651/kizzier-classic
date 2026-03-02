@@ -59,8 +59,33 @@ function doPost(e) {
     var teamName = data.teamName || '';
     var notes = data.notes || '';
     var raffleItems = data.raffleItems || '';
+    var ryanStory = data.ryanStory || '';
+    var ryanPhotoData = data.ryanPhotoData || '';
+    var ryanPhotoName = data.ryanPhotoName || '';
+    var ryanPhotoType = data.ryanPhotoType || '';
     var amount = AMOUNTS[regType] || 0;
     var typeLabel = TYPE_LABELS[regType] || regType;
+
+    // Save Ryan photo to Google Drive if provided
+    var ryanPhotoLink = '';
+    if (ryanPhotoData) {
+      try {
+        var folderName = 'Kizzier Classic - Ryan Memories';
+        var folders = DriveApp.getFoldersByName(folderName);
+        var folder;
+        if (folders.hasNext()) {
+          folder = folders.next();
+        } else {
+          folder = DriveApp.createFolder(folderName);
+        }
+        var blob = Utilities.newBlob(Utilities.base64Decode(ryanPhotoData), ryanPhotoType, firstName + '_' + lastName + '_' + ryanPhotoName);
+        var file = folder.createFile(blob);
+        file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+        ryanPhotoLink = file.getUrl();
+      } catch (photoErr) {
+        ryanPhotoLink = 'Upload error: ' + photoErr.toString();
+      }
+    }
 
     // Build player list for foursomes (names and emails)
     var playerNames = '';
@@ -116,7 +141,9 @@ function doPost(e) {
       playerEmails,
       notes,
       team,
-      raffleItems
+      raffleItems,
+      ryanStory,
+      ryanPhotoLink
     ]);
 
     // Send confirmation email to registrant
@@ -616,6 +643,9 @@ function authorizeServices() {
   var sheet = ss.getSheetByName(SHEET_NAME);
   Logger.log('Sheet access OK: ' + sheet.getName());
   Logger.log('Gmail access OK');
+  // Touch DriveApp to authorize it
+  DriveApp.getRootFolder();
+  Logger.log('Drive access OK');
   Logger.log('All services authorized!');
 }
 
@@ -630,7 +660,7 @@ function setupHeaderRow() {
     'Timestamp', 'First Name', 'Last Name', 'Email', 'Phone',
     'Street', 'City', 'State', 'Zip', 'Full Address',
     'Type', 'Amount', 'Teammate Names', 'Teammate Emails',
-    'Notes', 'Team', 'Raffle Items'
+    'Notes', 'Team', 'Raffle Items', 'Ryan Memory/Story', 'Ryan Photo Link'
   ];
 
   // Write headers to row 1

@@ -1,0 +1,15 @@
+# Duplicate source images in root
+IMG_*.jpeg
+september-16103abw.jpeg
+
+# High-res originals (backup only)
+img/originals/
+
+# Working photos folder
+photos/
+
+# Sensitive files
+Kizzier Classic - Master Contact List.xlsx
+
+# OS files
+.DS_Store
