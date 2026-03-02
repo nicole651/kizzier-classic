@@ -1655,7 +1655,8 @@
                             </div>
                             <div style="background: rgba(122,158,142,0.1); border-left: 3px solid var(--emerald); border-radius: 4px; padding: 14px 16px;">
                                 <p style="font-size: 0.9rem; color: var(--charcoal); margin-bottom: 4px; font-weight: 600;">Want to play too?</p>
-                                <p style="font-size: 0.85rem; color: var(--gray-600);">This registration is for sponsorship only. If you'd also like to play, please submit a separate registration as an Individual ($85) or Foursome ($320) after completing this one.</p>
+                                <p style="font-size: 0.85rem; color: var(--gray-600);">This registration is for sponsorship only. If you'd also like to play, submit a separate player registration after completing this one.</p>
+                                <a href="#" onclick="event.preventDefault(); var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='individual'; s.dispatchEvent(new Event('change')); document.getElementById('register').scrollIntoView({behavior:'smooth'});" style="display: inline-block; margin-top: 8px; font-size: 0.85rem; font-weight: 600; color: var(--emerald); text-decoration: underline; cursor: pointer;">Register as a Player →</a>
                             </div>
                         </div>
                         <div id="soloNote" style="display: none; background: rgba(122,158,142,0.1); border-left: 3px solid var(--emerald); border-radius: 4px; padding: 14px 16px; margin-bottom: 20px;">
