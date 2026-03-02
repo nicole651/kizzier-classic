@@ -1428,7 +1428,7 @@
                         <li>Social media recognition</li>
                         <li>A great way to promote your business or show support</li>
                     </ul>
-                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Donate Items</button>
+                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ var s = document.querySelector('select[name=&quot;regType&quot;]'); s.value='raffle-donation'; s.dispatchEvent(new Event('change')); }, 600);">Donate Items</button>
                 </div>
             </div>
         </div>
