@@ -1642,9 +1642,15 @@
                                 <option value="raffle-donation">Donate Raffle Items — Free</option>
                             </select>
                         </div>
-                        <div id="sponsorNote" style="display: none; background: rgba(196,170,106,0.15); border-left: 3px solid var(--gold); border-radius: 4px; padding: 14px 16px; margin-bottom: 20px;">
-                            <p style="font-size: 0.9rem; color: var(--charcoal); margin-bottom: 4px; font-weight: 600;">Want to play too?</p>
-                            <p style="font-size: 0.85rem; color: var(--gray-600);">This registration is for sponsorship only. If you'd also like to play, please submit a separate registration as an Individual ($85) or Foursome ($320) after completing this one.</p>
+                        <div id="sponsorNote" style="display: none; margin-bottom: 20px;">
+                            <div id="sponsorPerks" style="background: rgba(196,170,106,0.15); border-left: 3px solid var(--gold); border-radius: 4px; padding: 16px; margin-bottom: 12px;">
+                                <p style="font-size: 1rem; color: var(--charcoal); font-weight: 700; margin-bottom: 10px;">Your Sponsorship Includes:</p>
+                                <ul id="sponsorPerksList" style="list-style: none; padding: 0; margin: 0;"></ul>
+                            </div>
+                            <div style="background: rgba(122,158,142,0.1); border-left: 3px solid var(--emerald); border-radius: 4px; padding: 14px 16px;">
+                                <p style="font-size: 0.9rem; color: var(--charcoal); margin-bottom: 4px; font-weight: 600;">Want to play too?</p>
+                                <p style="font-size: 0.85rem; color: var(--gray-600);">This registration is for sponsorship only. If you'd also like to play, please submit a separate registration as an Individual ($85) or Foursome ($320) after completing this one.</p>
+                            </div>
                         </div>
                         <div id="soloNote" style="display: none; background: rgba(122,158,142,0.1); border-left: 3px solid var(--emerald); border-radius: 4px; padding: 14px 16px; margin-bottom: 20px;">
                             <p style="font-size: 0.9rem; color: var(--gray-600); margin-bottom: 8px;">Flying solo? No worries — we'll pair you with other players to make a full foursome!</p>
@@ -1826,7 +1832,17 @@
             joinFoursomeFields.style.display = val === 'join-foursome' ? 'block' : 'none';
             raffleDonationFields.style.display = val === 'raffle-donation' ? 'block' : 'none';
             soloNote.style.display = val === 'individual' ? 'block' : 'none';
-            sponsorNote.style.display = val.startsWith('sponsor-') ? 'block' : 'none';
+            const isSponsor = val.startsWith('sponsor-');
+            sponsorNote.style.display = isSponsor ? 'block' : 'none';
+            if (isSponsor) {
+                const perks = {
+                    'sponsor-hole': ['Custom sign on your sponsored hole', 'Name or logo on tournament website', 'Social media recognition', 'Choose your own sign message'],
+                    'sponsor-lunch': ['Sponsor lunch for all players', 'Name or logo on tournament website', 'Social media recognition', 'Signage at lunch area'],
+                    'sponsor-beverage': ['Sponsor the beverage cart for the day', 'Premium logo placement on signage', 'Social media feature post', 'Banner at registration & awards', 'Recognition during awards ceremony']
+                };
+                const list = document.getElementById('sponsorPerksList');
+                list.innerHTML = (perks[val] || []).map(p => '<li style="font-size: 0.9rem; color: var(--gray-600); padding: 4px 0; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: var(--gold);">✓</span>' + p + '</li>').join('');
+            }
             if (val === 'join-foursome') {
                 fetchAvailableTeams();
             }
