@@ -1396,7 +1396,7 @@
                     <div class="sponsor-tier">Beverage Cart Sponsor</div>
                     <div class="sponsor-price"><sup>$</sup>500</div>
                     <ul class="sponsor-perks">
-                        <li>Sponsor the beverage cart for the day</li>
+                        <li>Drink tickets for the beverage cart</li>
                         <li>Premium logo placement on signage</li>
                         <li>Social media feature post</li>
                         <li>Banner at registration & awards</li>
@@ -1585,8 +1585,8 @@
                 </div>
 
                 <div class="reg-form">
-                    <h3>Player Registration</h3>
-                    <p class="price-tag">$80 per player &nbsp;|&nbsp; $320 per foursome</p>
+                    <h3 id="regFormTitle">Player Registration</h3>
+                    <p class="price-tag" id="regFormSubtitle">$80 per player &nbsp;|&nbsp; $320 per foursome</p>
 
                     <form id="regForm" onsubmit="handleRegistration(event)">
                         <div class="form-row">
@@ -1826,6 +1826,8 @@
         const raffleDonationFields = document.getElementById('raffleDonationFields');
         const soloNote = document.getElementById('soloNote');
         const sponsorNote = document.getElementById('sponsorNote');
+        const regFormTitle = document.getElementById('regFormTitle');
+        const regFormSubtitle = document.getElementById('regFormSubtitle');
         regTypeSelect.addEventListener('change', () => {
             const val = regTypeSelect.value;
             foursomeFields.style.display = val === 'foursome' ? 'block' : 'none';
@@ -1833,12 +1835,24 @@
             raffleDonationFields.style.display = val === 'raffle-donation' ? 'block' : 'none';
             soloNote.style.display = val === 'individual' ? 'block' : 'none';
             const isSponsor = val.startsWith('sponsor-');
+            const isDonate = val === 'donation' || val === 'raffle-donation' || val === 'after-celebration';
             sponsorNote.style.display = isSponsor ? 'block' : 'none';
+            // Update form header based on type
+            if (isSponsor) {
+                regFormTitle.textContent = 'Sponsor Registration';
+                regFormSubtitle.innerHTML = 'Thank you for supporting the Kizzier Classic!';
+            } else if (isDonate) {
+                regFormTitle.textContent = 'Donate';
+                regFormSubtitle.innerHTML = 'Every contribution helps keep Ryan\'s legacy alive.';
+            } else {
+                regFormTitle.textContent = 'Player Registration';
+                regFormSubtitle.innerHTML = '$80 per player &nbsp;|&nbsp; $320 per foursome';
+            }
             if (isSponsor) {
                 const perks = {
                     'sponsor-hole': ['Custom sign on your sponsored hole', 'Name or logo on tournament website', 'Social media recognition', 'Choose your own sign message'],
                     'sponsor-lunch': ['Sponsor lunch for all players', 'Name or logo on tournament website', 'Social media recognition', 'Signage at lunch area'],
-                    'sponsor-beverage': ['Sponsor the beverage cart for the day', 'Premium logo placement on signage', 'Social media feature post', 'Banner at registration & awards', 'Recognition during awards ceremony']
+                    'sponsor-beverage': ['Drink tickets for the beverage cart', 'Premium logo placement on signage', 'Social media feature post', 'Banner at registration & awards', 'Recognition during awards ceremony']
                 };
                 const list = document.getElementById('sponsorPerksList');
                 list.innerHTML = (perks[val] || []).map(p => '<li style="font-size: 0.9rem; color: var(--gray-600); padding: 4px 0; padding-left: 20px; position: relative;"><span style="position: absolute; left: 0; color: var(--gold);">✓</span>' + p + '</li>').join('');
