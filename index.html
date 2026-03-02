@@ -2088,6 +2088,12 @@
                         `;
                     } else {
                         // Show success + Venmo payment with amount
+                        const isSponsor = payload.regType.startsWith('sponsor-');
+                        const logoNote = isSponsor ? `
+                                <div style="background: var(--white); border-radius: 8px; padding: 20px; border-left: 4px solid var(--emerald); text-align: left; margin-top: 24px;">
+                                    <p style="font-weight: 600; color: var(--charcoal); margin-bottom: 4px;">Send Us Your Logo</p>
+                                    <p style="color: var(--gray-600); font-size: 0.9rem;">Email your logo (PNG or JPG) to <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald); font-weight: 600;">kizzierclassic@gmail.com</a> so we can feature it on the website and tournament signage.</p>
+                                </div>` : '';
                         form.innerHTML = `
                             <div style="text-align: center; padding: 20px 0;">
                                 <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--emerald); color: white; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 20px;">&#10003;</div>
@@ -2100,6 +2106,7 @@
                                 </div>
                                 <a href="https://venmo.com/Kizzier-Classic?txn=pay&amount=${amount}&note=Kizzier%20Classic%202026%20-%20${encodeURIComponent(typeLabel)}%20-%20${encodeURIComponent(payload.firstName)}%20${encodeURIComponent(payload.lastName)}" target="_blank" style="display: inline-block; background: #008CFF; color: white; padding: 16px 40px; border-radius: 4px; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px; transition: all 0.3s; text-decoration: none;">Pay $${amount} with Venmo</a>
                                 <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 16px;">Send to <strong>@Kizzier-Classic</strong> on Venmo<br>Or email <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald);">kizzierclassic@gmail.com</a> for alternative payment</p>
+                                ${logoNote}
                             </div>
                         `;
                     }
