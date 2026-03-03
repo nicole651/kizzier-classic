@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save the Date — The 6th Annual Kizzier Classic</title>
+    <meta name="description" content="Save the Date! The 6th Annual Kizzier Classic — June 27, 2026 at Hidden Valley Golf Club, Lincoln, NE. 18-hole scramble, lunch & awards, post-tourney celebration. Register now!">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Save the Date — The 6th Annual Kizzier Classic">
+    <meta property="og:description" content="Join us June 27, 2026 at Hidden Valley Golf Club for the 6th Annual Kizzier Classic! 18-hole scramble, lunch & awards, and a post-tourney celebration. In loving memory of Ryan Kizzier.">
+    <meta property="og:image" content="https://nicole651.github.io/kizzier-classic/save-the-date.png">
+    <meta property="og:url" content="https://nicole651.github.io/kizzier-classic/save-the-date/">
+    <meta property="og:type" content="website">
+    <meta property="og:image:width" content="1080">
+    <meta property="og:image:height" content="1080">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Save the Date — The 6th Annual Kizzier Classic">
+    <meta name="twitter:description" content="June 27, 2026 at Hidden Valley Golf Club, Lincoln, NE. 18-hole scramble in memory of Ryan Kizzier. Register now!">
+    <meta name="twitter:image" content="https://nicole651.github.io/kizzier-classic/save-the-date.png">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="../img/favicon.png">
+    <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #4A6E5D;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 600px;
+            background: #5B7D6E;
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        /* Grass-like bottom texture */
+        .grass {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(to top, #4A6E5D 0%, #5B7D6E 100%);
+        }
+
+        /* Golf flag */
+        .flag {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+        }
+        .flag-pole {
+            width: 2px;
+            height: 80px;
+            background: white;
+            position: absolute;
+            right: 0;
+        }
+        .flag-fabric {
+            width: 40px;
+            height: 26px;
+            background: #C4AA6A;
+            position: absolute;
+            top: 0;
+            right: 2px;
+            clip-path: polygon(0 0, 100% 15%, 100% 85%, 0 100%);
+        }
+
+        /* Golf balls */
+        .golf-ball {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 40% 35%, #ffffff 0%, #e8e8e8 70%, #d0d0d0 100%);
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+        }
+        .ball-1 { top: 100px; left: 30px; width: 16px; height: 16px; }
+        .ball-2 { bottom: 160px; right: 40px; width: 18px; height: 18px; }
+        .ball-3 { bottom: 200px; left: 60px; width: 14px; height: 14px; }
+
+        /* Content */
+        .content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 48px 32px 40px;
+        }
+
+        .save-text {
+            font-weight: 300;
+            font-size: 14px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: #C4AA6A;
+            margin-bottom: 20px;
+        }
+
+        .logo-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #C4AA6A;
+            margin-bottom: 20px;
+            background: #FAF8F4;
+        }
+
+        .event-name {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 52px;
+            font-weight: 900;
+            color: #FFFFFF;
+            line-height: 1.05;
+            margin-bottom: 2px;
+        }
+
+        .event-name .classic {
+            color: #C4AA6A;
+        }
+
+        .annual {
+            font-weight: 400;
+            font-size: 12px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 24px;
+        }
+
+        .tagline {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 20px;
+            font-style: italic;
+            color: #C4AA6A;
+            margin-bottom: 24px;
+        }
+
+        .new-venue {
+            background: rgba(196,170,106,0.15);
+            border: 1px solid rgba(196,170,106,0.4);
+            border-radius: 8px;
+            padding: 8px 28px;
+            margin-bottom: 8px;
+        }
+
+        .new-venue span {
+            font-size: 13px;
+            font-weight: 600;
+            color: #C4AA6A;
+            letter-spacing: 1px;
+        }
+
+        .date-block {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px 40px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(196,170,106,0.3);
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .date {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 30px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 4px;
+        }
+
+        .time {
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .venue {
+            font-size: 18px;
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-bottom: 2px;
+        }
+
+        .venue-location {
+            font-size: 13px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 24px;
+        }
+
+        .details-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .detail-chip {
+            background: rgba(196,170,106,0.2);
+            border: 1px solid rgba(196,170,106,0.4);
+            border-radius: 20px;
+            padding: 6px 18px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #C4AA6A;
+            letter-spacing: 0.5px;
+        }
+
+        .pricing {
+            font-size: 15px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 20px;
+        }
+
+        .pricing .gold {
+            color: #C4AA6A;
+            font-weight: 700;
+        }
+
+        .register-btn {
+            display: inline-block;
+            background: #C4AA6A;
+            color: #3D3D3D;
+            padding: 16px 44px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            margin-bottom: 16px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .register-btn:hover {
+            background: #D9C48E;
+            transform: translateY(-2px);
+        }
+
+        .donate-text {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 20px;
+        }
+
+        .donate-text a {
+            color: #C4AA6A;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .donate-text a:hover {
+            text-decoration: underline;
+        }
+
+        .sponsor-box {
+            background: rgba(0,0,0,0.15);
+            border-radius: 10px;
+            padding: 16px 32px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(196,170,106,0.3);
+            text-align: center;
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .sponsor-title {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #C4AA6A;
+            margin-bottom: 8px;
+        }
+
+        .sponsor-tiers {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .sponsor-tiers span {
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .sponsor-tiers .gold {
+            color: #C4AA6A;
+            font-weight: 700;
+        }
+
+        .sponsor-tiers .divider {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .memorial {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 14px;
+            font-style: italic;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 16px;
+        }
+
+        .social-row {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.55);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-link:hover {
+            color: #C4AA6A;
+        }
+
+        .social-link:hover svg {
+            fill: #C4AA6A;
+        }
+
+        .social-link svg {
+            transition: fill 0.3s;
+        }
+
+        .website-url {
+            font-size: 13px;
+            color: rgba(196,170,106,0.6);
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .website-url:hover {
+            color: #C4AA6A;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 480px) {
+            .content { padding: 36px 20px 32px; }
+            .event-name { font-size: 40px; }
+            .tagline { font-size: 17px; }
+            .date { font-size: 24px; }
+            .date-block { padding: 16px 24px; }
+            .flag { top: 24px; right: 24px; }
+            .flag-pole { height: 60px; }
+            .flag-fabric { width: 30px; height: 20px; }
+            .social-row { gap: 14px; }
+            .social-link { font-size: 12px; }
+            .sponsor-tiers { gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- Decorative elements -->
+        <div class="grass"></div>
+        <div class="flag">
+            <div class="flag-fabric"></div>
+            <div class="flag-pole"></div>
+        </div>
+        <div class="golf-ball ball-1"></div>
+        <div class="golf-ball ball-2"></div>
+        <div class="golf-ball ball-3"></div>
+
+        <div class="content">
+            <div class="save-text">Save the Date</div>
+
+            <a href="https://nicole651.github.io/kizzier-classic/">
+                <img src="../img/logo.png" class="logo-img" alt="Kizzier Classic Logo">
+            </a>
+
+            <div class="event-name">Kizzier <span class="classic">Classic</span></div>
+            <div class="annual">6th Annual Charity Golf Tournament</div>
+
+            <div class="tagline">Grab your clubs. It's for a great cause.</div>
+
+            <div class="new-venue">
+                <span>NEW VENUE THIS YEAR!</span>
+            </div>
+
+            <div class="date-block">
+                <div class="date">Saturday, June 27, 2026</div>
+                <div class="time">9:00 AM Tee Off &nbsp;&bull;&nbsp; Registration 8:00–9:00 AM</div>
+            </div>
+
+            <div class="venue">Hidden Valley Golf Club</div>
+            <div class="venue-location">10501 Pine Lake Rd, Lincoln, NE</div>
+
+            <div class="details-row">
+                <div class="detail-chip">18-Hole Scramble</div>
+                <div class="detail-chip">Lunch & Awards</div>
+                <div class="detail-chip">Post-Tourney Celebration</div>
+            </div>
+
+            <div class="pricing">
+                <span class="gold">$80</span> per player &nbsp;&bull;&nbsp; <span class="gold">$320</span> per foursome
+            </div>
+
+            <a href="https://nicole651.github.io/kizzier-classic/#register" class="register-btn">Register Now to Save Your Spot</a>
+
+            <div class="donate-text">Can't make it? <a href="https://nicole651.github.io/kizzier-classic/#register">Donations are always welcome!</a></div>
+
+            <div class="sponsor-box">
+                <div class="sponsor-title">Sponsorship Opportunities Available</div>
+                <div class="sponsor-tiers">
+                    <span>Hole <span class="gold">$175</span></span>
+                    <span class="divider">|</span>
+                    <span>Lunch <span class="gold">$200</span></span>
+                    <span class="divider">|</span>
+                    <span>Beverage Cart <span class="gold">$500</span></span>
+                </div>
+            </div>
+
+            <div class="memorial">In loving memory of Ryan Kizzier</div>
+
+            <div class="social-row">
+                <a href="https://www.facebook.com/share/174hybNwAo/?mibextid=wwXIfr" target="_blank" class="social-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.55)"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    Facebook
+                </a>
+                <a href="https://www.instagram.com/kizzierclassic" target="_blank" class="social-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.55)"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    @kizzierclassic
+                </a>
+                <a href="mailto:kizzierclassic@gmail.com" class="social-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.55)"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    kizzierclassic@gmail.com
+                </a>
+            </div>
+
+            <a href="https://nicole651.github.io/kizzier-classic/" class="website-url">nicole651.github.io/kizzier-classic</a>
+        </div>
+    </div>
+</body>
+</html>
