@@ -2047,8 +2047,11 @@
                         <button type="submit" class="btn-register">Submit Registration</button>
                     </form>
                     <div style="margin-top: 28px; padding: 20px 24px; background: var(--white); border-radius: 8px; border: 1px solid var(--gray-200); text-align: center;">
-                        <p style="font-size: 0.95rem; color: var(--charcoal); font-weight: 600; margin: 0 0 8px;">Already registered? Make your payment here:</p>
+                        <p style="font-size: 0.95rem; color: var(--charcoal); font-weight: 600; margin: 0 0 12px;">Already registered? Make your payment here:</p>
                         <a href="https://venmo.com/u/Kizzier-Classic" target="_blank" style="display: inline-block; background: #008CFF; color: white; padding: 12px 32px; border-radius: 4px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: background 0.3s;">Pay with Venmo</a>
+                        <p style="font-size: 0.8rem; color: var(--gray-400); margin: 10px 0 0;">For best results, open in the Venmo app on your phone</p>
+                        <p style="font-size: 0.85rem; color: var(--gray-400); margin: 16px 0 8px;">Or scan the QR code:</p>
+                        <img src="img/venmo-qr.jpg" alt="Venmo QR Code for @Kizzier-Classic" style="width: 160px; border-radius: 8px;">
                     </div>
                     <div style="margin-top: 16px; padding: 16px 20px; background: var(--white); border-radius: 6px; border-left: 3px solid var(--gold); display: flex; align-items: flex-start; gap: 12px;">
                         <span style="font-size: 1.1rem; line-height: 1.4;">?</span>
@@ -2455,6 +2458,8 @@
                                 </div>
                                 <a href="https://venmo.com/u/Kizzier-Classic?txn=pay&amount=${amount}&note=Kizzier%20Classic%202026%20-%20Join%20Foursome%20(${encodeURIComponent(payload.teamName)}%20Team)%20-%20${encodeURIComponent(payload.firstName)}%20${encodeURIComponent(payload.lastName)}" target="_blank" style="display: inline-block; background: #008CFF; color: white; padding: 16px 40px; border-radius: 4px; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px; transition: all 0.3s; text-decoration: none;">Pay $${amount} with Venmo</a>
                                 <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 16px;">Send to <strong>@Kizzier-Classic</strong> on Venmo<br>Or email <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald);">kizzierclassic@gmail.com</a> for alternative payment</p>
+                                <p style="font-size: 0.85rem; color: var(--gray-400); margin: 12px 0 6px;">Or scan the QR code:</p>
+                                <img src="img/venmo-qr.jpg" alt="Venmo QR Code" style="width: 140px; border-radius: 8px;">
                             </div>
                         `;
                     } else if (payload.regType === 'raffle-donation') {
@@ -2486,7 +2491,10 @@
                                     <p style="color: var(--gray-600); font-size: 0.9rem;">Every dollar goes directly to supporting our cause. Please send your contribution via Venmo:</p>
                                 </div>
                                 <a href="https://venmo.com/u/Kizzier-Classic" target="_blank" style="display: inline-block; background: #008CFF; color: white; padding: 16px 40px; border-radius: 4px; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px; transition: all 0.3s; text-decoration: none;">Contribute with Venmo</a>
-                                <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 16px;">Send to <strong>@Kizzier-Classic</strong> on Venmo<br>Or email <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald);">kizzierclassic@gmail.com</a> for alternative payment</p>
+                                <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 10px;">For best results, open in the Venmo app on your phone</p>
+                                <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 8px;">Send to <strong>@Kizzier-Classic</strong> on Venmo<br>Or email <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald);">kizzierclassic@gmail.com</a> for alternative payment</p>
+                                <p style="font-size: 0.85rem; color: var(--gray-400); margin: 12px 0 6px;">Or scan the QR code:</p>
+                                <img src="img/venmo-qr.jpg" alt="Venmo QR Code" style="width: 140px; border-radius: 8px;">
                             </div>
                         `;
                     } else if (payload.regType === 'donation') {
@@ -2501,7 +2509,10 @@
                                     <p style="color: var(--gray-600); font-size: 0.9rem;">Every dollar goes directly to supporting our cause. Please send your donation via Venmo:</p>
                                 </div>
                                 <a href="https://venmo.com/u/Kizzier-Classic" target="_blank" style="display: inline-block; background: #008CFF; color: white; padding: 16px 40px; border-radius: 4px; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px; transition: all 0.3s; text-decoration: none;">Donate with Venmo</a>
-                                <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 16px;">Send to <strong>@Kizzier-Classic</strong> on Venmo<br>Or email <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald);">kizzierclassic@gmail.com</a> for alternative payment</p>
+                                <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 10px;">For best results, open in the Venmo app on your phone</p>
+                                <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 8px;">Send to <strong>@Kizzier-Classic</strong> on Venmo<br>Or email <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald);">kizzierclassic@gmail.com</a> for alternative payment</p>
+                                <p style="font-size: 0.85rem; color: var(--gray-400); margin: 12px 0 6px;">Or scan the QR code:</p>
+                                <img src="img/venmo-qr.jpg" alt="Venmo QR Code" style="width: 140px; border-radius: 8px;">
                             </div>
                         `;
                     } else {
@@ -2524,6 +2535,8 @@
                                 </div>
                                 <a href="https://venmo.com/u/Kizzier-Classic?txn=pay&amount=${amount}&note=Kizzier%20Classic%202026%20-%20${encodeURIComponent(typeLabel)}%20-%20${encodeURIComponent(payload.firstName)}%20${encodeURIComponent(payload.lastName)}" target="_blank" style="display: inline-block; background: #008CFF; color: white; padding: 16px 40px; border-radius: 4px; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px; transition: all 0.3s; text-decoration: none;">Pay $${amount} with Venmo</a>
                                 <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 16px;">Send to <strong>@Kizzier-Classic</strong> on Venmo<br>Or email <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald);">kizzierclassic@gmail.com</a> for alternative payment</p>
+                                <p style="font-size: 0.85rem; color: var(--gray-400); margin: 12px 0 6px;">Or scan the QR code:</p>
+                                <img src="img/venmo-qr.jpg" alt="Venmo QR Code" style="width: 140px; border-radius: 8px;">
                                 ${logoNote}
                             </div>
                         `;
