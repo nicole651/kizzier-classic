@@ -651,6 +651,213 @@
             background: var(--gold-light);
         }
 
+        /* ========== CHARITY ========== */
+        .charity { background: var(--white); }
+
+        .charity-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-top: 64px;
+        }
+
+        .charity-info h3 {
+            font-size: 1.5rem;
+            color: var(--charcoal);
+            margin-bottom: 16px;
+        }
+
+        .charity-info p {
+            color: var(--gray-600);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .charity-highlights {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 32px;
+        }
+
+        .charity-highlights li {
+            padding: 8px 0;
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .charity-highlights li::before {
+            content: '♥';
+            color: var(--emerald);
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .charity-card {
+            background: var(--cream);
+            border-radius: 12px;
+            padding: 48px 40px;
+            text-align: center;
+            border: 2px solid var(--gray-200);
+        }
+
+        .charity-card h3 {
+            font-size: 1.25rem;
+            color: var(--emerald-dark);
+            margin-bottom: 8px;
+        }
+
+        .charity-card .charity-tagline {
+            font-size: 0.9rem;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .charity-card p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+
+        .btn-donate {
+            display: inline-block;
+            padding: 14px 36px;
+            background: var(--emerald);
+            color: var(--white);
+            font-weight: 600;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-donate:hover {
+            background: var(--emerald-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-donate-outline {
+            display: inline-block;
+            padding: 12px 28px;
+            background: transparent;
+            color: var(--emerald);
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: 6px;
+            border: 2px solid var(--emerald);
+            transition: all 0.3s;
+            margin-top: 12px;
+        }
+
+        .btn-donate-outline:hover {
+            background: var(--emerald);
+            color: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            .charity-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        /* ========== HOTEL / TRAVEL ========== */
+        .travel { background: var(--cream); }
+
+        .travel-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 64px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .travel-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 40px 32px;
+            text-align: center;
+            border: 2px solid var(--gray-200);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .travel-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        }
+
+        .travel-icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+        }
+
+        .travel-card h3 {
+            font-size: 1.25rem;
+            color: var(--charcoal);
+            margin-bottom: 8px;
+        }
+
+        .travel-card .travel-subtitle {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+        }
+
+        .travel-card p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .travel-rate {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--emerald);
+            margin: 16px 0 4px;
+        }
+
+        .travel-rate-note {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            margin-bottom: 24px;
+        }
+
+        .btn-book {
+            display: inline-block;
+            padding: 12px 32px;
+            background: var(--gold);
+            color: var(--white);
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        .btn-book:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .travel-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* ========== REGISTRATION ========== */
         .registration { background: var(--white); }
 
@@ -1103,7 +1310,8 @@
                 <li><a href="#gallery">Ryan</a></li>
                 <li><a href="#schedule">Schedule</a></li>
                 <li><a href="#sponsorship">Sponsors</a></li>
-                <li><a href="#past-tournaments">Past Years</a></li>
+                <li><a href="#charity">Charity</a></li>
+                <li><a href="#travel">Stay & Play</a></li>
                 <li><a href="#register" class="nav-donate" onclick="setTimeout(function(){ setDropdownMode('sponsor', 'donation'); }, 600);">Donate</a></li>
                 <li><a href="#register" class="nav-cta" onclick="setTimeout(function(){ setDropdownMode('player', ''); }, 600);">Register</a></li>
             </ul>
@@ -1429,6 +1637,85 @@
                         <li>A great way to promote your business or show support</li>
                     </ul>
                     <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ setDropdownMode('sponsor', 'raffle-donation'); }, 600);">Donate Items</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CHARITY ========== -->
+    <section class="charity" id="charity">
+        <div class="container">
+            <div style="text-align: center;">
+                <div class="section-label">Playing for a Purpose</div>
+                <h2 class="section-title">Supporting Our First Responders</h2>
+                <p class="section-subtitle" style="margin: 0 auto;">
+                    This year's proceeds benefit the First Responders Foundation Lincoln Chapter — honoring those who serve and protect our community.
+                </p>
+            </div>
+
+            <div class="charity-content">
+                <div class="charity-info">
+                    <h3>First Responders Foundation — Lincoln Chapter</h3>
+                    <p>
+                        The mission of the First Responders Foundation Lincoln Chapter is to serve and honor all our First Responders, Veterans, and their families, build appreciation and respect for their work, and enhance public safety.
+                    </p>
+                    <p>
+                        The Chapter is led by local Lincoln community members who are best equipped to address the needs of First Responders and Veterans in the Lincoln and Lancaster County area. Funds raised here stay in Lincoln and Lancaster County.
+                    </p>
+                    <ul class="charity-highlights">
+                        <li>Co-sponsoring advanced medical screenings for First Responders due to increased cancer rates</li>
+                        <li>Donated over $20,000 in workout equipment to stations across Lincoln</li>
+                        <li>Training disability service dogs for Veterans</li>
+                        <li>Focused on the mental and physical health of officers and firefighters</li>
+                    </ul>
+                    <a href="https://firstrespondersfoundation.org/lincoln-nebraska-chapter/" target="_blank" class="btn-donate-outline">Learn More About the Foundation</a>
+                </div>
+
+                <div class="charity-card">
+                    <h3>First Responders Foundation</h3>
+                    <div class="charity-tagline">Lincoln &amp; Lancaster County</div>
+                    <p>
+                        Can't make it to the tournament? You can still make a difference. 100% of donations go directly to supporting Lincoln's First Responders and Veterans.
+                    </p>
+                    <a href="https://givebutter.com/LnLCFR2026" target="_blank" class="btn-donate">Donate Now</a>
+                    <br>
+                    <a href="#register" class="btn-donate-outline" onclick="setTimeout(function(){ setDropdownMode('sponsor', 'donation'); }, 600);">Donate via Venmo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TRAVEL / HOTEL ========== -->
+    <section class="travel" id="travel">
+        <div class="container">
+            <div style="text-align: center;">
+                <div class="section-label">Plan Your Trip</div>
+                <h2 class="section-title">Stay &amp; Play</h2>
+                <p class="section-subtitle" style="margin: 0 auto;">
+                    Coming from out of town? We've secured a special group rate at a hotel in the heart of Downtown Lincoln.
+                </p>
+            </div>
+
+            <div class="travel-cards">
+                <div class="travel-card">
+                    <div class="travel-icon">🏨</div>
+                    <h3>Residence Inn by Marriott</h3>
+                    <div class="travel-subtitle">Downtown Lincoln</div>
+                    <p>All-suite hotel in the heart of downtown — walking distance to the Haymarket district's restaurants and nightlife.</p>
+                    <div class="travel-rate"><sup style="font-size: 1rem; top: -0.8em;">$</sup>169<span style="font-size: 1rem; font-family: 'Inter', sans-serif; font-weight: 400; color: var(--gray-400);">/night</span></div>
+                    <div class="travel-rate-note">Special group rate — normally $189–$208/night</div>
+                    <p style="font-size: 0.85rem; color: var(--gray-400); margin-bottom: 20px;">Available Friday &amp; Saturday, June 26–27</p>
+                    <a href="mailto:Kelsey.Meyer@marriott.com?subject=Kizzier%20Classic%20Golf%20Tournament%20-%20Hotel%20Reservation&body=Hi%20Kelsey%2C%0A%0AI%27d%20like%20to%20book%20a%20room%20at%20the%20Kizzier%20Classic%20group%20rate%20for%20June%2026-27.%0A%0AThank%20you!" class="btn-book">Book Your Room</a>
+                </div>
+
+                <div class="travel-card">
+                    <div class="travel-icon">🚲</div>
+                    <h3>Group Therapy Bike Tours</h3>
+                    <div class="travel-subtitle">Optional Pre-Tournament Fun</div>
+                    <p>Explore Lincoln's Haymarket district on a pedal-powered party bike — a bar crawl on wheels! A perfect way to kick off tournament weekend with your crew.</p>
+                    <p style="font-size: 0.95rem; color: var(--charcoal); font-weight: 600; margin-top: 12px; margin-bottom: 4px;">Friday, June 26th</p>
+                    <p style="font-size: 0.9rem; color: var(--emerald); font-weight: 600; margin-bottom: 20px;">Details coming soon!</p>
+                    <a href="https://www.grouptherapybiketours.com/" target="_blank" class="btn-book">Learn More</a>
                 </div>
             </div>
         </div>
@@ -1765,7 +2052,8 @@
                     <a href="#gallery">Ryan</a>
                     <a href="#schedule">Schedule</a>
                     <a href="#sponsorship">Sponsorship</a>
-                    <a href="#past-tournaments">Past Years</a>
+                    <a href="#charity">Charity</a>
+                    <a href="#travel">Stay & Play</a>
                     <a href="#register">Register</a>
                 </div>
                 <div class="footer-col">

@@ -121,7 +121,8 @@ function doPost(e) {
     // Columns: A=Timestamp, B=First, C=Last, D=Email, E=Phone,
     //          F=Street, G=City, H=State, I=Zip, J=FullAddress,
     //          K=Type, L=Amount, M=PlayerNames, N=PlayerEmails,
-    //          O=Notes, P=Team, Q=RaffleItems
+    //          O=Notes, P=Team, Q=RaffleItems, R=RyanStory,
+    //          S=RyanPhotoLink, T=Paid
     var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
     var sheet = ss.getSheetByName(SHEET_NAME);
     sheet.appendRow([
@@ -143,7 +144,8 @@ function doPost(e) {
       team,
       raffleItems,
       ryanStory,
-      ryanPhotoLink
+      ryanPhotoLink,
+      'No'
     ]);
 
     // Send confirmation email to registrant
@@ -553,29 +555,79 @@ function sendWeeklyRecap() {
   var now = new Date();
   var oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
 
+  // Column indexes
+  var COL_TIMESTAMP = 0;
+  var COL_FIRST = 1;
+  var COL_LAST = 2;
+  var COL_EMAIL = 3;
+  var COL_TYPE = 10;
+  var COL_AMOUNT = 11;
+  var COL_PLAYER_NAMES = 12;
+  var COL_PAID = 19; // Column T
+
   var newRegs = [];
   var totalRegs = 0;
   var totalRevenue = 0;
+  var totalReceived = 0;
+  var totalTeams = 0;
+  var totalGolfers = 0;
   var typeCounts = {};
+  var sponsorCounts = {};
+  var sponsorRevenue = 0;
+  var sponsorReceived = 0;
+  var unpaidList = [];
 
-  // Column indexes: 0=Timestamp, 3=Email, 10=Type, 11=Amount
+  var sponsorTypes = ['Hole Sponsor', 'Lunch Sponsor', 'Beverage Cart Sponsor'];
+  var golferTypes = ['Individual Player', 'Foursome', 'Join a Foursome'];
+
   for (var i = 1; i < data.length; i++) {
     var row = data[i];
-    var timestamp = new Date(row[0]);
-    var amount = parseFloat(String(row[11]).replace('$', '')) || 0;
-    var type = row[10];
+    var timestamp = new Date(row[COL_TIMESTAMP]);
+    var amount = parseFloat(String(row[COL_AMOUNT]).replace('$', '')) || 0;
+    var type = String(row[COL_TYPE]);
+    var paid = String(row[COL_PAID] || 'No').trim().toLowerCase();
+    var isPaid = (paid === 'yes' || paid === 'y');
+    var name = row[COL_FIRST] + ' ' + row[COL_LAST];
 
     totalRegs++;
     totalRevenue += amount;
+    if (isPaid) {
+      totalReceived += amount;
+    }
+
+    // Count golfers
+    if (type === 'Foursome') {
+      totalTeams++;
+      totalGolfers += 4; // Always 4 spots per foursome
+    } else if (type === 'Individual Player') {
+      totalGolfers += 1;
+    } else if (type === 'Join a Foursome') {
+      totalGolfers += 1;
+    }
+
+    // Track sponsors separately
+    if (sponsorTypes.indexOf(type) >= 0) {
+      sponsorCounts[type] = (sponsorCounts[type] || 0) + 1;
+      sponsorRevenue += amount;
+      if (isPaid) sponsorReceived += amount;
+    }
+
+    // Type breakdown
     typeCounts[type] = (typeCounts[type] || 0) + 1;
 
+    // Track unpaid registrations with an amount due
+    if (!isPaid && amount > 0) {
+      unpaidList.push({ name: name, type: type, amount: amount });
+    }
+
+    // New this week
     if (timestamp >= oneWeekAgo) {
       newRegs.push({
-        name: row[1] + ' ' + row[2],
-        email: row[3],
+        name: name,
+        email: row[COL_EMAIL],
         type: type,
         amount: amount,
-        date: timestamp
+        paid: isPaid
       });
     }
   }
@@ -584,29 +636,61 @@ function sendWeeklyRecap() {
 
   var body = '--- KIZZIER CLASSIC WEEKLY RECAP ---\n'
     + 'Week ending: ' + Utilities.formatDate(now, 'America/Chicago', 'EEEE, MMM d, yyyy') + '\n\n'
-    + 'NEW THIS WEEK: ' + newRegs.length + ' registrations\n'
-    + 'TOTAL REGISTRATIONS: ' + totalRegs + '\n'
-    + 'TOTAL REVENUE: $' + totalRevenue + '\n\n';
+    + 'NEW THIS WEEK: ' + newRegs.length + ' registrations\n\n'
+    + '--- TOTALS ---\n'
+    + 'Total Registrations: ' + totalRegs + '\n'
+    + 'Total Teams: ' + totalTeams + '\n'
+    + 'Total Golfers: ' + totalGolfers + '\n'
+    + 'Total Revenue (Expected): $' + totalRevenue + '\n'
+    + 'Total Revenue (Received): $' + totalReceived + '\n'
+    + 'Outstanding Balance: $' + (totalRevenue - totalReceived) + '\n\n';
 
+  // Sponsorship section
+  if (Object.keys(sponsorCounts).length > 0) {
+    body += '--- SPONSORSHIPS ---\n';
+    for (var sType in sponsorCounts) {
+      body += sType + ': ' + sponsorCounts[sType] + '\n';
+    }
+    body += 'Sponsor Revenue (Expected): $' + sponsorRevenue + '\n';
+    body += 'Sponsor Revenue (Received): $' + sponsorReceived + '\n\n';
+  } else {
+    body += '--- SPONSORSHIPS ---\nNo sponsorships yet.\n\n';
+  }
+
+  // Type breakdown
   if (Object.keys(typeCounts).length > 0) {
     body += '--- BREAKDOWN BY TYPE ---\n';
-    for (var type in typeCounts) {
-      body += type + ': ' + typeCounts[type] + '\n';
+    for (var t in typeCounts) {
+      body += t + ': ' + typeCounts[t] + '\n';
     }
     body += '\n';
   }
 
+  // New registrants this week
   if (newRegs.length > 0) {
-    body += '--- NEW REGISTRANTS THIS WEEK ---\n';
+    body += '--- NEW THIS WEEK ---\n';
     for (var j = 0; j < newRegs.length; j++) {
       var reg = newRegs[j];
-      body += '• ' + reg.name + ' (' + reg.email + ') — ' + reg.type + ' — $' + reg.amount + '\n';
+      var paidTag = reg.paid ? ' ✓ PAID' : ' ⏳ UNPAID';
+      body += '• ' + reg.name + ' (' + reg.email + ') — ' + reg.type + ' — $' + reg.amount + paidTag + '\n';
     }
+    body += '\n';
   } else {
-    body += 'No new registrations this week.\n';
+    body += 'No new registrations this week.\n\n';
   }
 
-  body += '\nView full spreadsheet: https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID + '/edit\n';
+  // Outstanding payments
+  if (unpaidList.length > 0) {
+    body += '--- AWAITING PAYMENT ---\n';
+    for (var k = 0; k < unpaidList.length; k++) {
+      body += '• ' + unpaidList[k].name + ' — ' + unpaidList[k].type + ' — $' + unpaidList[k].amount + '\n';
+    }
+    body += '\n';
+  }
+
+  body += '💡 To mark a payment as received, open the spreadsheet and change column T ("Paid") to "Yes".\n'
+    + 'A confirmation email will be sent to the registrant automatically.\n\n'
+    + 'View full spreadsheet: https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID + '/edit\n';
 
   GmailApp.sendEmail(ADMIN_EMAIL, subject, body, {
     name: 'Kizzier Classic Bot'
@@ -660,7 +744,8 @@ function setupHeaderRow() {
     'Timestamp', 'First Name', 'Last Name', 'Email', 'Phone',
     'Street', 'City', 'State', 'Zip', 'Full Address',
     'Type', 'Amount', 'Teammate Names', 'Teammate Emails',
-    'Notes', 'Team', 'Raffle Items', 'Ryan Memory/Story', 'Ryan Photo Link'
+    'Notes', 'Team', 'Raffle Items', 'Ryan Memory/Story', 'Ryan Photo Link',
+    'Paid'
   ];
 
   // Write headers to row 1
@@ -675,4 +760,113 @@ function setupHeaderRow() {
   sheet.setFrozenRows(1);
 
   Logger.log('Header row set up with ' + headers.length + ' columns');
+}
+
+// ============================================================
+// PAYMENT CONFIRMATION — auto-sends when "Paid" column = "Yes"
+// ============================================================
+function onPaidEdit(e) {
+  var sheet = e.source.getActiveSheet();
+  if (sheet.getName() !== SHEET_NAME) return;
+
+  var range = e.range;
+  var col = range.getColumn();
+  var row = range.getRow();
+
+  // Column T = 20 (Paid column)
+  if (col !== 20 || row <= 1) return;
+
+  var newValue = String(range.getValue()).trim().toLowerCase();
+  var oldValue = String(e.oldValue || '').trim().toLowerCase();
+
+  // Only fire when changed TO "yes"
+  if ((newValue === 'yes' || newValue === 'y') && oldValue !== 'yes' && oldValue !== 'y') {
+    var data = sheet.getRange(row, 1, 1, 20).getValues()[0];
+    var firstName = data[1];  // Column B
+    var email = data[3];      // Column D
+    var typeLabel = data[10];  // Column K
+    var amount = parseFloat(String(data[11]).replace('$', '')) || 0;
+
+    if (email) {
+      sendPaymentConfirmationEmail(firstName, email, typeLabel, amount);
+      // Add timestamp note
+      var noteCell = sheet.getRange(row, 20);
+      noteCell.setNote('Payment confirmed: ' + new Date().toLocaleString());
+    }
+  }
+}
+
+// ============================================================
+// PAYMENT CONFIRMATION EMAIL
+// ============================================================
+function sendPaymentConfirmationEmail(firstName, email, typeLabel, amount) {
+  var subject = 'Kizzier Classic 2026 — Payment Received!';
+
+  var body = 'Hi ' + firstName + ',\n\n'
+    + 'We\'ve received your payment of $' + amount + ' for the Kizzier Classic. You\'re all set!\n\n'
+    + '--- CONFIRMATION ---\n'
+    + 'Type: ' + typeLabel + '\n'
+    + 'Amount Paid: $' + amount + '\n'
+    + 'Status: PAID ✓\n\n'
+    + '--- EVENT DETAILS ---\n'
+    + 'Date: Saturday, June 27, 2026\n'
+    + 'Time: 1:00 PM Shotgun Start (Registration at 11:30 AM)\n'
+    + 'Location: Hidden Valley Golf Club, 10501 Pine Lake Rd, Lincoln, NE 68526\n'
+    + 'Format: 18-Hole Scramble\n\n'
+    + 'See you on the course!\n'
+    + 'The Kizzier Classic Team';
+
+  var htmlBody = '<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">'
+    + '<div style="background: #7A9E8E; padding: 30px; text-align: center;">'
+    + '<h1 style="color: white; margin: 0; font-size: 28px;">The Kizzier <span style="color: #C4AA6A;">Classic</span></h1>'
+    + '<p style="color: rgba(255,255,255,0.7); margin: 8px 0 0;">6th Annual Charity Golf Tournament</p>'
+    + '</div>'
+    + '<div style="padding: 30px; background: #FAF8F4;">'
+    + '<h2 style="color: #3D3D3D; margin-top: 0;">Payment Received!</h2>'
+    + '<p style="color: #6B6B6B;">Hey ' + firstName + '! We\'ve got your payment — you\'re officially locked in for the 6th Annual Kizzier Classic!</p>'
+    + '<div style="background: white; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #4CAF50;">'
+    + '<h3 style="color: #3D3D3D; margin-top: 0;">Payment Confirmation</h3>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Type:</strong> ' + typeLabel + '</p>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Amount Paid:</strong> $' + amount + '</p>'
+    + '<p style="margin: 4px 0; color: #4CAF50; font-weight: bold;">✓ PAID IN FULL</p>'
+    + '</div>'
+    + '<div style="background: white; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #7A9E8E;">'
+    + '<h3 style="color: #3D3D3D; margin-top: 0;">Event Details</h3>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Date:</strong> Saturday, June 27, 2026</p>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Time:</strong> 1:00 PM Shotgun Start (Registration at 11:30 AM)</p>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Location:</strong> Hidden Valley Golf Club, 10501 Pine Lake Rd, Lincoln, NE 68526</p>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Format:</strong> 18-Hole Scramble</p>'
+    + '</div>'
+    + '<p style="color: #A0A0A0; font-size: 13px; text-align: center; margin-top: 30px;">Questions? Email us at <a href="mailto:kizzierclassic@gmail.com" style="color: #7A9E8E;">kizzierclassic@gmail.com</a></p>'
+    + '</div>'
+    + '<div style="background: #4A6E5D; padding: 20px; text-align: center;">'
+    + '<p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 0;">In loving memory of Ryan Kizzier</p>'
+    + '</div>'
+    + '</div>';
+
+  GmailApp.sendEmail(email, subject, body, {
+    htmlBody: htmlBody,
+    name: 'The Kizzier Classic'
+  });
+}
+
+// ============================================================
+// SET UP EDIT TRIGGER for payment confirmations (run once)
+// ============================================================
+function setupEditTrigger() {
+  // Remove existing onPaidEdit triggers
+  var triggers = ScriptApp.getProjectTriggers();
+  for (var i = 0; i < triggers.length; i++) {
+    if (triggers[i].getHandlerFunction() === 'onPaidEdit') {
+      ScriptApp.deleteTrigger(triggers[i]);
+    }
+  }
+
+  // Create new installable onEdit trigger
+  ScriptApp.newTrigger('onPaidEdit')
+    .forSpreadsheet(SPREADSHEET_ID)
+    .onEdit()
+    .create();
+
+  Logger.log('Edit trigger created — payment confirmations will auto-send when Paid = Yes');
 }
