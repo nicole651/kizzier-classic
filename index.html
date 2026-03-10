@@ -155,6 +155,20 @@
             color: var(--gold) !important;
         }
 
+        .nav-pay {
+            background: #008CFF;
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 600 !important;
+            transition: background 0.3s, transform 0.2s !important;
+        }
+
+        .nav-pay:hover {
+            background: #0070D4;
+            transform: translateY(-1px);
+        }
+
         .mobile-toggle {
             display: none;
             flex-direction: column;
@@ -1312,6 +1326,7 @@
                 <li><a href="#sponsorship">Sponsors</a></li>
                 <li><a href="#charity">Charity</a></li>
                 <li><a href="#travel">Stay & Play</a></li>
+                <li><a href="https://venmo.com/u/Kizzier-Classic" target="_blank" class="nav-pay">Pay Now</a></li>
                 <li><a href="#register" class="nav-donate" onclick="setTimeout(function(){ setDropdownMode('sponsor', 'donation'); }, 600);">Donate</a></li>
                 <li><a href="#register" class="nav-cta" onclick="setTimeout(function(){ setDropdownMode('player', ''); }, 600);">Register</a></li>
             </ul>
@@ -2029,7 +2044,11 @@
                         </div>
                         <button type="submit" class="btn-register">Submit Registration</button>
                     </form>
-                    <div style="margin-top: 24px; padding: 16px 20px; background: var(--white); border-radius: 6px; border-left: 3px solid var(--gold); display: flex; align-items: flex-start; gap: 12px;">
+                    <div style="margin-top: 28px; padding: 20px 24px; background: var(--white); border-radius: 8px; border: 1px solid var(--gray-200); text-align: center;">
+                        <p style="font-size: 0.95rem; color: var(--charcoal); font-weight: 600; margin: 0 0 8px;">Already registered? Make your payment here:</p>
+                        <a href="https://venmo.com/u/Kizzier-Classic" target="_blank" style="display: inline-block; background: #008CFF; color: white; padding: 12px 32px; border-radius: 4px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: background 0.3s;">Pay with Venmo</a>
+                    </div>
+                    <div style="margin-top: 16px; padding: 16px 20px; background: var(--white); border-radius: 6px; border-left: 3px solid var(--gold); display: flex; align-items: flex-start; gap: 12px;">
                         <span style="font-size: 1.1rem; line-height: 1.4;">?</span>
                         <p style="font-size: 0.85rem; color: var(--gray-600); margin: 0; line-height: 1.6;"><strong style="color: var(--charcoal);">Need help registering or making a payment?</strong><br>No worries — just email us at <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald); font-weight: 600;">kizzierclassic@gmail.com</a> and we'll get you taken care of.</p>
                     </div>
