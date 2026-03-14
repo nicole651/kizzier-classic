@@ -7,7 +7,7 @@
 var SPREADSHEET_ID = '1Ik1TupZf4-sPr7e_ktsp2O8qvvr0EOBWhjlZCg0l6Kc';
 var SHEET_NAME = 'Registrations';
 var ADMIN_EMAIL = 'kizzierclassic@gmail.com';
-var VENMO_HANDLE = '@Kizzier-Classic';
+var VENMO_HANDLE = '@KizzierClassic';
 
 // Registration amounts
 var AMOUNTS = {
@@ -285,8 +285,13 @@ function sendConfirmationEmail(firstName, email, typeLabel, amount, playerNames)
     + 'Format: 18-Hole Scramble\n\n'
     + '--- PAYMENT ---\n'
     + 'Please send $' + amount + ' via Venmo to: ' + VENMO_HANDLE + '\n'
-    + 'Venmo link: https://venmo.com/u/Kizzier-Classic\n\n'
+    + 'Venmo link: https://account.venmo.com/pay?recipients=KizzierClassic\n\n'
     + 'If you have questions or need an alternative payment method, email us at kizzierclassic@gmail.com.\n\n'
+    + '--- MAKE IT A WEEKEND ---\n'
+    + 'Discounted hotel rooms are available at the Residence Inn Downtown Lincoln at a special group rate of $169/night.\n'
+    + 'Visit our website under "Stay & Play" to book: https://nicole651.github.io/kizzier-classic/#travel\n'
+    + 'Book by May 27 to secure the rate!\n\n'
+    + 'Also keep an eye out for pre-tournament and post-tournament activities — we have some fun stuff planned!\n\n'
     + 'See you on the course!\n'
     + 'The Kizzier Classic Team';
 
@@ -319,9 +324,16 @@ function sendConfirmationEmail(firstName, email, typeLabel, amount, playerNames)
     + '<div style="background: #5B7D6E; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">'
     + '<h3 style="color: white; margin-top: 0;">Payment</h3>'
     + '<p style="color: rgba(255,255,255,0.8); margin: 4px 0;">Send <strong style="color: #C4AA6A;">$' + amount + '</strong> via Venmo to:</p>'
-    + '<a href="https://venmo.com/u/Kizzier-Classic" style="display: inline-block; background: #C4AA6A; color: #3D3D3D; padding: 12px 32px; border-radius: 4px; font-weight: bold; text-decoration: none; margin-top: 12px; font-size: 16px;">' + VENMO_HANDLE + '</a>'
+    + '<a href="https://account.venmo.com/pay?recipients=KizzierClassic" style="display: inline-block; background: #C4AA6A; color: #3D3D3D; padding: 12px 32px; border-radius: 4px; font-weight: bold; text-decoration: none; margin-top: 12px; font-size: 16px;">' + VENMO_HANDLE + '</a>'
     + '</div>'
-    + '<p style="color: #A0A0A0; font-size: 13px; text-align: center; margin-top: 30px;">Questions? Email us at <a href="mailto:kizzierclassic@gmail.com" style="color: #7A9E8E;">kizzierclassic@gmail.com</a></p>'
+    + '<div style="background: white; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #C4AA6A;">'
+    + '<h3 style="color: #3D3D3D; margin-top: 0;">🏨 Make It a Weekend!</h3>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;">We\'ve secured a special group rate at the <strong>Residence Inn Downtown Lincoln</strong> — just <strong style="color: #C4AA6A;">$169/night</strong> (normally $189–$208).</p>'
+    + '<p style="margin: 8px 0 0; color: #6B6B6B;">Book by <strong>May 27</strong> to secure the rate!</p>'
+    + '<a href="https://nicole651.github.io/kizzier-classic/#travel" style="display: inline-block; margin-top: 12px; color: #7A9E8E; font-weight: 600; text-decoration: none;">View Stay & Play on our website →</a>'
+    + '</div>'
+    + '<p style="color: #6B6B6B; font-size: 13px; text-align: center; margin-top: 10px; font-style: italic;">Keep an eye out for pre-tournament and post-tournament activities — we have some fun stuff planned!</p>'
+    + '<p style="color: #A0A0A0; font-size: 13px; text-align: center; margin-top: 20px;">Questions? Email us at <a href="mailto:kizzierclassic@gmail.com" style="color: #7A9E8E;">kizzierclassic@gmail.com</a></p>'
     + '</div>'
     + '<div style="background: #4A6E5D; padding: 20px; text-align: center;">'
     + '<p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 0;">In loving memory of Ryan Kizzier</p>'
@@ -353,8 +365,13 @@ function sendJoinFoursomeEmail(firstName, email, amount, teamName) {
     + 'Format: 18-Hole Scramble\n\n'
     + '--- PAYMENT ---\n'
     + 'Please send $' + amount + ' via Venmo to: ' + VENMO_HANDLE + '\n'
-    + 'Venmo link: https://venmo.com/u/Kizzier-Classic\n\n'
+    + 'Venmo link: https://account.venmo.com/pay?recipients=KizzierClassic\n\n'
     + 'If you have questions or need an alternative payment method, email us at kizzierclassic@gmail.com.\n\n'
+    + '--- MAKE IT A WEEKEND ---\n'
+    + 'Discounted hotel rooms are available at the Residence Inn Downtown Lincoln at a special group rate of $169/night.\n'
+    + 'Visit our website under "Stay & Play" to book: https://nicole651.github.io/kizzier-classic/#travel\n'
+    + 'Book by May 27 to secure the rate!\n\n'
+    + 'Also keep an eye out for pre-tournament and post-tournament activities — we have some fun stuff planned!\n\n'
     + 'See you on the course!\n'
     + 'The Kizzier Classic Team';
 
@@ -382,9 +399,16 @@ function sendJoinFoursomeEmail(firstName, email, amount, teamName) {
     + '<div style="background: #5B7D6E; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">'
     + '<h3 style="color: white; margin-top: 0;">Payment</h3>'
     + '<p style="color: rgba(255,255,255,0.8); margin: 4px 0;">Send <strong style="color: #C4AA6A;">$' + amount + '</strong> via Venmo to:</p>'
-    + '<a href="https://venmo.com/u/Kizzier-Classic" style="display: inline-block; background: #C4AA6A; color: #3D3D3D; padding: 12px 32px; border-radius: 4px; font-weight: bold; text-decoration: none; margin-top: 12px; font-size: 16px;">' + VENMO_HANDLE + '</a>'
+    + '<a href="https://account.venmo.com/pay?recipients=KizzierClassic" style="display: inline-block; background: #C4AA6A; color: #3D3D3D; padding: 12px 32px; border-radius: 4px; font-weight: bold; text-decoration: none; margin-top: 12px; font-size: 16px;">' + VENMO_HANDLE + '</a>'
     + '</div>'
-    + '<p style="color: #A0A0A0; font-size: 13px; text-align: center; margin-top: 30px;">Questions? Email us at <a href="mailto:kizzierclassic@gmail.com" style="color: #7A9E8E;">kizzierclassic@gmail.com</a></p>'
+    + '<div style="background: white; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #C4AA6A;">'
+    + '<h3 style="color: #3D3D3D; margin-top: 0;">🏨 Make It a Weekend!</h3>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;">We\'ve secured a special group rate at the <strong>Residence Inn Downtown Lincoln</strong> — just <strong style="color: #C4AA6A;">$169/night</strong> (normally $189–$208).</p>'
+    + '<p style="margin: 8px 0 0; color: #6B6B6B;">Book by <strong>May 27</strong> to secure the rate!</p>'
+    + '<a href="https://nicole651.github.io/kizzier-classic/#travel" style="display: inline-block; margin-top: 12px; color: #7A9E8E; font-weight: 600; text-decoration: none;">View Stay & Play on our website →</a>'
+    + '</div>'
+    + '<p style="color: #6B6B6B; font-size: 13px; text-align: center; margin-top: 10px; font-style: italic;">Keep an eye out for pre-tournament and post-tournament activities — we have some fun stuff planned!</p>'
+    + '<p style="color: #A0A0A0; font-size: 13px; text-align: center; margin-top: 20px;">Questions? Email us at <a href="mailto:kizzierclassic@gmail.com" style="color: #7A9E8E;">kizzierclassic@gmail.com</a></p>'
     + '</div>'
     + '<div style="background: #4A6E5D; padding: 20px; text-align: center;">'
     + '<p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 0;">In loving memory of Ryan Kizzier</p>'
@@ -408,7 +432,7 @@ function sendDonationEmail(firstName, email) {
     + 'Your support helps keep Ryan\'s legacy alive and makes a real difference.\n\n'
     + '--- HOW TO DONATE ---\n'
     + 'Please send your donation via Venmo to: ' + VENMO_HANDLE + '\n'
-    + 'Venmo link: https://venmo.com/u/Kizzier-Classic\n\n'
+    + 'Venmo link: https://account.venmo.com/pay?recipients=KizzierClassic\n\n'
     + 'If you have questions or need an alternative payment method, email us at kizzierclassic@gmail.com.\n\n'
     + 'With gratitude,\n'
     + 'The Kizzier Classic Team';
@@ -424,7 +448,7 @@ function sendDonationEmail(firstName, email) {
     + '<div style="background: #5B7D6E; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">'
     + '<h3 style="color: white; margin-top: 0;">Send Your Donation</h3>'
     + '<p style="color: rgba(255,255,255,0.8); margin: 4px 0;">Send any amount via Venmo to:</p>'
-    + '<a href="https://venmo.com/u/Kizzier-Classic" style="display: inline-block; background: #C4AA6A; color: #3D3D3D; padding: 12px 32px; border-radius: 4px; font-weight: bold; text-decoration: none; margin-top: 12px; font-size: 16px;">' + VENMO_HANDLE + '</a>'
+    + '<a href="https://account.venmo.com/pay?recipients=KizzierClassic" style="display: inline-block; background: #C4AA6A; color: #3D3D3D; padding: 12px 32px; border-radius: 4px; font-weight: bold; text-decoration: none; margin-top: 12px; font-size: 16px;">' + VENMO_HANDLE + '</a>'
     + '</div>'
     + '<p style="color: #A0A0A0; font-size: 13px; text-align: center; margin-top: 30px;">Questions? Email us at <a href="mailto:kizzierclassic@gmail.com" style="color: #7A9E8E;">kizzierclassic@gmail.com</a></p>'
     + '</div>'
@@ -450,7 +474,7 @@ function sendAfterCelebrationEmail(firstName, email) {
     + 'Your support helps keep Ryan\'s legacy alive and makes a real difference.\n\n'
     + '--- HOW TO CONTRIBUTE ---\n'
     + 'Please send your contribution via Venmo to: ' + VENMO_HANDLE + '\n'
-    + 'Venmo link: https://venmo.com/u/Kizzier-Classic\n\n'
+    + 'Venmo link: https://account.venmo.com/pay?recipients=KizzierClassic\n\n'
     + 'If you have questions or need an alternative payment method, email us at kizzierclassic@gmail.com.\n\n'
     + 'With gratitude,\n'
     + 'The Kizzier Classic Team';
@@ -466,7 +490,7 @@ function sendAfterCelebrationEmail(firstName, email) {
     + '<div style="background: #5B7D6E; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">'
     + '<h3 style="color: white; margin-top: 0;">Send Your Contribution</h3>'
     + '<p style="color: rgba(255,255,255,0.8); margin: 4px 0;">Send any amount via Venmo to:</p>'
-    + '<a href="https://venmo.com/u/Kizzier-Classic" style="display: inline-block; background: #C4AA6A; color: #3D3D3D; padding: 12px 32px; border-radius: 4px; font-weight: bold; text-decoration: none; margin-top: 12px; font-size: 16px;">' + VENMO_HANDLE + '</a>'
+    + '<a href="https://account.venmo.com/pay?recipients=KizzierClassic" style="display: inline-block; background: #C4AA6A; color: #3D3D3D; padding: 12px 32px; border-radius: 4px; font-weight: bold; text-decoration: none; margin-top: 12px; font-size: 16px;">' + VENMO_HANDLE + '</a>'
     + '</div>'
     + '<p style="color: #A0A0A0; font-size: 13px; text-align: center; margin-top: 30px;">Questions? Email us at <a href="mailto:kizzierclassic@gmail.com" style="color: #7A9E8E;">kizzierclassic@gmail.com</a></p>'
     + '</div>'
@@ -869,4 +893,124 @@ function setupEditTrigger() {
     .create();
 
   Logger.log('Edit trigger created — payment confirmations will auto-send when Paid = Yes');
+}
+
+// ============================================================
+// PAYMENT REMINDER — sends to all unpaid registrants
+// ============================================================
+function sendPaymentReminders() {
+  var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  var sheet = ss.getSheetByName(SHEET_NAME);
+  var data = sheet.getDataRange().getValues();
+
+  if (data.length <= 1) return;
+
+  var COL_FIRST = 1;
+  var COL_EMAIL = 3;
+  var COL_TYPE = 10;
+  var COL_AMOUNT = 11;
+  var COL_PAID = 19;
+
+  var reminded = 0;
+
+  for (var i = 1; i < data.length; i++) {
+    var row = data[i];
+    var paid = String(row[COL_PAID] || 'No').trim().toLowerCase();
+    var amount = parseFloat(String(row[COL_AMOUNT]).replace('$', '')) || 0;
+    var email = String(row[COL_EMAIL] || '').trim();
+    var firstName = String(row[COL_FIRST]);
+    var typeLabel = String(row[COL_TYPE]);
+
+    // Skip if paid, no amount due, or no email
+    if (paid === 'yes' || paid === 'y' || amount <= 0 || !email) continue;
+
+    sendPaymentReminderEmail(firstName, email, typeLabel, amount);
+    reminded++;
+  }
+
+  // Notify admin
+  if (reminded > 0) {
+    GmailApp.sendEmail(ADMIN_EMAIL,
+      'Payment Reminders Sent — ' + reminded + ' registrant(s)',
+      'Hey! Just sent payment reminders to ' + reminded + ' unpaid registrant(s).\n\n'
+      + 'View spreadsheet: https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID + '/edit',
+      { name: 'Kizzier Classic Bot' }
+    );
+  }
+}
+
+// ============================================================
+// PAYMENT REMINDER EMAIL
+// ============================================================
+function sendPaymentReminderEmail(firstName, email, typeLabel, amount) {
+  var subject = 'Kizzier Classic 2026 — Friendly Payment Reminder';
+
+  var body = 'Hi ' + firstName + ',\n\n'
+    + 'Just a friendly reminder that we still have a balance of $' + amount + ' for your '
+    + typeLabel + ' registration for the Kizzier Classic!\n\n'
+    + '--- PAYMENT ---\n'
+    + 'Amount Due: $' + amount + '\n'
+    + 'Send via Venmo to: ' + VENMO_HANDLE + '\n'
+    + 'Venmo link: https://account.venmo.com/pay?recipients=KizzierClassic\n'
+    + 'Or pay on our website: https://nicole651.github.io/kizzier-classic/#register\n\n'
+    + '--- EVENT DETAILS ---\n'
+    + 'Date: Saturday, June 27, 2026\n'
+    + 'Time: 1:00 PM Shotgun Start (Registration at 11:30 AM)\n'
+    + 'Location: Hidden Valley Golf Club, 10501 Pine Lake Rd, Lincoln, NE 68526\n\n'
+    + 'If you\'ve already paid and received this by mistake, just let us know!\n\n'
+    + 'See you on the course!\n'
+    + 'The Kizzier Classic Team';
+
+  var htmlBody = '<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">'
+    + '<div style="background: #7A9E8E; padding: 30px; text-align: center;">'
+    + '<h1 style="color: white; margin: 0; font-size: 28px;">The Kizzier <span style="color: #C4AA6A;">Classic</span></h1>'
+    + '<p style="color: rgba(255,255,255,0.7); margin: 8px 0 0;">6th Annual Charity Golf Tournament</p>'
+    + '</div>'
+    + '<div style="padding: 30px; background: #FAF8F4;">'
+    + '<h2 style="color: #3D3D3D; margin-top: 0;">Hey ' + firstName + '!</h2>'
+    + '<p style="color: #6B6B6B;">Just a friendly reminder — we still have an outstanding balance for your Kizzier Classic registration. No rush, just want to make sure you\'re all set before the big day!</p>'
+    + '<div style="background: white; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #C4AA6A;">'
+    + '<h3 style="color: #3D3D3D; margin-top: 0;">Payment Details</h3>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Type:</strong> ' + typeLabel + '</p>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Amount Due:</strong> <span style="color: #C4AA6A; font-weight: bold;">$' + amount + '</span></p>'
+    + '</div>'
+    + '<div style="background: #5B7D6E; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: center;">'
+    + '<h3 style="color: white; margin-top: 0;">Pay Now</h3>'
+    + '<p style="color: rgba(255,255,255,0.8); margin: 4px 0;">Send <strong style="color: #C4AA6A;">$' + amount + '</strong> via Venmo:</p>'
+    + '<a href="https://account.venmo.com/pay?recipients=KizzierClassic" style="display: inline-block; background: #C4AA6A; color: #3D3D3D; padding: 12px 32px; border-radius: 4px; font-weight: bold; text-decoration: none; margin-top: 12px; font-size: 16px;">' + VENMO_HANDLE + '</a>'
+    + '<p style="color: rgba(255,255,255,0.6); margin-top: 12px; font-size: 13px;">Or visit <a href="https://nicole651.github.io/kizzier-classic/#register" style="color: #C4AA6A;">our website</a> to pay</p>'
+    + '</div>'
+    + '<p style="color: #A0A0A0; font-size: 13px; text-align: center; margin-top: 20px;">Already paid? No worries — just ignore this email or let us know at <a href="mailto:kizzierclassic@gmail.com" style="color: #7A9E8E;">kizzierclassic@gmail.com</a></p>'
+    + '</div>'
+    + '<div style="background: #4A6E5D; padding: 20px; text-align: center;">'
+    + '<p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 0;">In loving memory of Ryan Kizzier</p>'
+    + '</div>'
+    + '</div>';
+
+  GmailApp.sendEmail(email, subject, body, {
+    htmlBody: htmlBody,
+    name: 'The Kizzier Classic'
+  });
+}
+
+// ============================================================
+// SET UP PAYMENT REMINDER TRIGGER — every 2 weeks (run once)
+// ============================================================
+function setupReminderTrigger() {
+  // Remove existing reminder triggers
+  var triggers = ScriptApp.getProjectTriggers();
+  for (var i = 0; i < triggers.length; i++) {
+    if (triggers[i].getHandlerFunction() === 'sendPaymentReminders') {
+      ScriptApp.deleteTrigger(triggers[i]);
+    }
+  }
+
+  // Create trigger every 14 days (Wednesday at 10 AM)
+  ScriptApp.newTrigger('sendPaymentReminders')
+    .timeBased()
+    .everyDays(14)
+    .atHour(10)
+    .create();
+
+  Logger.log('Payment reminder trigger created — every 2 weeks at 10 AM');
 }
