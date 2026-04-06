@@ -2401,7 +2401,8 @@
                 ryanStory: data.get('ryanStory') || '',
                 ryanPhotoData: ryanPhotoData,
                 ryanPhotoName: ryanPhotoName,
-                ryanPhotoType: ryanPhotoType
+                ryanPhotoType: ryanPhotoType,
+                pairWith: data.get('pairWith') || ''
             };
 
             // Validate team selection for join-foursome
@@ -2461,6 +2462,10 @@
                                 <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 16px;">Send to <strong>@KizzierClassic</strong> on Venmo<br>Or email <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald);">kizzierclassic@gmail.com</a> for alternative payment</p>
                                 <p style="font-size: 0.85rem; color: var(--gray-400); margin: 12px 0 6px;">Or scan the QR code:</p>
                                 <img src="img/venmo-qr.png" alt="Venmo QR Code" style="width: 140px; border-radius: 8px;">
+                                <div style="margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--gray-200);">
+                                    <p style="color: var(--gray-500); font-size: 0.85rem; margin-bottom: 10px;">Registering for someone else too?</p>
+                                    <a href="#register" onclick="location.reload()" style="display: inline-block; background: var(--charcoal); color: white; padding: 12px 28px; border-radius: 4px; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.5px; text-decoration: none; cursor: pointer;">Register Another Team</a>
+                                </div>
                             </div>
                         `;
                     } else if (payload.regType === 'raffle-donation') {
@@ -2478,6 +2483,10 @@
                                     <p style="color: var(--gray-600); font-size: 0.9rem;">Please bring your items to <strong>registration check-in at 8:00 AM</strong> on Saturday, June 27 at Hidden Valley Golf Club.</p>
                                 </div>
                                 <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 20px;">Questions? Email <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald);">kizzierclassic@gmail.com</a></p>
+                                <div style="margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--gray-200);">
+                                    <p style="color: var(--gray-500); font-size: 0.85rem; margin-bottom: 10px;">Want to register to play or submit another entry?</p>
+                                    <a href="#register" onclick="location.reload()" style="display: inline-block; background: var(--charcoal); color: white; padding: 12px 28px; border-radius: 4px; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.5px; text-decoration: none; cursor: pointer;">Register Again</a>
+                                </div>
                             </div>
                         `;
                     } else if (payload.regType === 'after-celebration') {
@@ -2496,6 +2505,10 @@
                                 <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 8px;">Send to <strong>@KizzierClassic</strong> on Venmo<br>Or email <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald);">kizzierclassic@gmail.com</a> for alternative payment</p>
                                 <p style="font-size: 0.85rem; color: var(--gray-400); margin: 12px 0 6px;">Or scan the QR code:</p>
                                 <img src="img/venmo-qr.png" alt="Venmo QR Code" style="width: 140px; border-radius: 8px;">
+                                <div style="margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--gray-200);">
+                                    <p style="color: var(--gray-500); font-size: 0.85rem; margin-bottom: 10px;">Want to register to play or submit another entry?</p>
+                                    <a href="#register" onclick="location.reload()" style="display: inline-block; background: var(--charcoal); color: white; padding: 12px 28px; border-radius: 4px; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.5px; text-decoration: none; cursor: pointer;">Register Again</a>
+                                </div>
                             </div>
                         `;
                     } else if (payload.regType === 'donation') {
@@ -2514,6 +2527,10 @@
                                 <p style="color: var(--gray-400); font-size: 0.8rem; margin-top: 8px;">Send to <strong>@KizzierClassic</strong> on Venmo<br>Or email <a href="mailto:kizzierclassic@gmail.com" style="color: var(--emerald);">kizzierclassic@gmail.com</a> for alternative payment</p>
                                 <p style="font-size: 0.85rem; color: var(--gray-400); margin: 12px 0 6px;">Or scan the QR code:</p>
                                 <img src="img/venmo-qr.png" alt="Venmo QR Code" style="width: 140px; border-radius: 8px;">
+                                <div style="margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--gray-200);">
+                                    <p style="color: var(--gray-500); font-size: 0.85rem; margin-bottom: 10px;">Want to register to play or submit another entry?</p>
+                                    <a href="#register" onclick="location.reload()" style="display: inline-block; background: var(--charcoal); color: white; padding: 12px 28px; border-radius: 4px; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.5px; text-decoration: none; cursor: pointer;">Register Again</a>
+                                </div>
                             </div>
                         `;
                     } else {
@@ -2539,6 +2556,10 @@
                                 <p style="font-size: 0.85rem; color: var(--gray-400); margin: 12px 0 6px;">Or scan the QR code:</p>
                                 <img src="img/venmo-qr.png" alt="Venmo QR Code" style="width: 140px; border-radius: 8px;">
                                 ${logoNote}
+                                <div style="margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--gray-200);">
+                                    <p style="color: var(--gray-500); font-size: 0.85rem; margin-bottom: 10px;">Registering for someone else too?</p>
+                                    <a href="#register" onclick="location.reload()" style="display: inline-block; background: var(--charcoal); color: white; padding: 12px 28px; border-radius: 4px; font-weight: 600; font-size: 0.85rem; letter-spacing: 0.5px; text-decoration: none; cursor: pointer;">Register Another Team</a>
+                                </div>
                             </div>
                         `;
                     }
