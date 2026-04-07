@@ -1616,8 +1616,9 @@
                     <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ setDropdownMode('sponsor', 'sponsor-lunch'); }, 600);">Become a Sponsor</button>
                 </div>
 
-                <!-- Beverage Cart Sponsor -->
-                <div class="sponsor-card featured">
+                <!-- Beverage Cart Sponsor — SOLD OUT -->
+                <div class="sponsor-card featured" style="opacity: 0.75;">
+                    <div style="position: absolute; top: 16px; right: 16px; background: var(--charcoal); color: white; padding: 4px 12px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;">Sold Out</div>
                     <div class="sponsor-tier">Beverage Cart Sponsor</div>
                     <div class="sponsor-price"><sup>$</sup>500</div>
                     <ul class="sponsor-perks">
@@ -1627,7 +1628,7 @@
                         <li>Banner at registration & awards</li>
                         <li>Recognition during awards ceremony</li>
                     </ul>
-                    <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ setDropdownMode('sponsor', 'sponsor-beverage'); }, 600);">Become a Sponsor</button>
+                    <button class="btn-sponsor" disabled style="opacity: 0.5; cursor: not-allowed;">Sold Out</button>
                 </div>
 
                 <!-- After Celebration Sponsor -->
@@ -2149,7 +2150,7 @@
         const sponsorDonateOptions = [
             {value: 'sponsor-hole', label: 'Hole Sponsor — $175'},
             {value: 'sponsor-lunch', label: 'Lunch Sponsor — $200'},
-            {value: 'sponsor-beverage', label: 'Beverage Cart Sponsor — $500'},
+            {value: 'sponsor-beverage', label: 'Beverage Cart Sponsor — SOLD OUT', disabled: true},
             {value: 'after-celebration', label: 'After Celebration Contribution — Any Amount'},
             {value: 'donation', label: 'Donate — Any Amount'},
             {value: 'raffle-donation', label: 'Donate Raffle Items'}
@@ -2163,6 +2164,7 @@
                 const opt = document.createElement('option');
                 opt.value = o.value;
                 opt.textContent = o.label;
+                if (o.disabled) opt.disabled = true;
                 regTypeSelect.appendChild(opt);
             });
             if (selectedValue) {
