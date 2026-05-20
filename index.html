@@ -1894,7 +1894,7 @@
 
                 <div class="reg-form">
                     <h3 id="regFormTitle">Player Registration</h3>
-                    <p class="price-tag" id="regFormSubtitle">$80 per player &nbsp;|&nbsp; $320 per foursome</p>
+                    <p class="price-tag" id="regFormSubtitle">$80 per player &nbsp;|&nbsp; Start or join a team!</p>
 
                     <form id="regForm" onsubmit="handleRegistration(event)">
                         <div class="form-row">
@@ -1940,7 +1940,7 @@
                             <select name="regType" required id="regTypeSelect">
                                 <option value="">Select an option</option>
                                 <option value="individual">Individual Player — $80</option>
-                                <option value="foursome">Foursome — $320</option>
+                                <option value="foursome">Start a Team (Foursome) — $80/person</option>
                                 <option value="join-foursome">Join a Foursome — $80/person</option>
                             </select>
                             <p id="switchLink" style="display: none; margin-top: 8px; font-size: 0.85rem; color: var(--gray-600);"></p>
@@ -1959,7 +1959,7 @@
                             </div>
                         </div>
                         <div id="foursomeFields" style="display: none;">
-                            <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 16px;">Please provide each teammate's name and email so we can send them event details and a thank you after the tournament.</p>
+                            <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 16px;">You're the team captain! Add your teammates below. Each player pays their own $80 — they can register and pay by selecting "Join a Foursome" and picking your team.</p>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label>Player 2 Name</label>
@@ -2146,7 +2146,7 @@
         // Define the three separate dropdown option sets
         const playerOptions = [
             {value: 'individual', label: 'Individual Player — $80'},
-            {value: 'foursome', label: 'Foursome — $320'},
+            {value: 'foursome', label: 'Start a Team (Foursome) — $80/person'},
             {value: 'join-foursome', label: 'Join a Foursome — $80/person'}
         ];
         const sponsorDonateOptions = [
@@ -2232,7 +2232,7 @@
                 setInfoPanel(donateInfo);
             } else {
                 regFormTitle.textContent = 'Player Registration';
-                regFormSubtitle.innerHTML = '$80 per player &nbsp;|&nbsp; $320 per foursome';
+                regFormSubtitle.innerHTML = '$80 per player &nbsp;|&nbsp; Start or join a team!';
                 regSectionLabel.textContent = 'Join Us';
                 regSectionTitle.textContent = 'Register to Play';
                 regSectionSubtitle.textContent = 'Secure your spot in the 6th Annual Kizzier Classic. Space is limited.';
@@ -2316,7 +2316,7 @@
 
         const AMOUNTS = {
             'individual': 80,
-            'foursome': 320,
+            'foursome': 80,
             'join-foursome': 80,
             'sponsor-hole': 175,
             'sponsor-lunch': 200,
@@ -2328,7 +2328,7 @@
 
         const TYPE_LABELS = {
             'individual': 'Individual Player',
-            'foursome': 'Foursome',
+            'foursome': 'Start a Team (Foursome)',
             'join-foursome': 'Join a Foursome',
             'sponsor-hole': 'Hole Sponsor',
             'sponsor-lunch': 'Lunch Sponsor',
