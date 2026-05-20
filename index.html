@@ -1941,6 +1941,7 @@
                                 <option value="">Select an option</option>
                                 <option value="individual">Individual Player — $80</option>
                                 <option value="foursome">Start a Team (Foursome) — $80/person</option>
+                                <option value="foursome-full">Start a Team (Foursome) — $320 (pay for all 4)</option>
                                 <option value="join-foursome">Join a Foursome — $80/person</option>
                             </select>
                             <p id="switchLink" style="display: none; margin-top: 8px; font-size: 0.85rem; color: var(--gray-600);"></p>
@@ -2147,6 +2148,7 @@
         const playerOptions = [
             {value: 'individual', label: 'Individual Player — $80'},
             {value: 'foursome', label: 'Start a Team (Foursome) — $80/person'},
+            {value: 'foursome-full', label: 'Start a Team (Foursome) — $320 (pay for all 4)'},
             {value: 'join-foursome', label: 'Join a Foursome — $80/person'}
         ];
         const sponsorDonateOptions = [
@@ -2207,14 +2209,14 @@
         }
         regTypeSelect.addEventListener('change', () => {
             const val = regTypeSelect.value;
-            foursomeFields.style.display = val === 'foursome' ? 'block' : 'none';
+            foursomeFields.style.display = (val === 'foursome' || val === 'foursome-full') ? 'block' : 'none';
             joinFoursomeFields.style.display = val === 'join-foursome' ? 'block' : 'none';
             raffleDonationFields.style.display = val === 'raffle-donation' ? 'block' : 'none';
             soloNote.style.display = val === 'individual' ? 'block' : 'none';
             const isSponsor = val.startsWith('sponsor-');
             const isDonate = val === 'donation' || val === 'raffle-donation' || val === 'after-celebration';
             sponsorNote.style.display = isSponsor ? 'block' : 'none';
-            const isPlayer = val === 'individual' || val === 'foursome' || val === 'join-foursome';
+            const isPlayer = val === 'individual' || val === 'foursome' || val === 'foursome-full' || val === 'join-foursome';
             // Update ALL headers and info panel based on type
             if (isSponsor) {
                 regFormTitle.textContent = 'Sponsor Registration';
@@ -2317,6 +2319,7 @@
         const AMOUNTS = {
             'individual': 80,
             'foursome': 80,
+            'foursome-full': 320,
             'join-foursome': 80,
             'sponsor-hole': 175,
             'sponsor-lunch': 200,
@@ -2329,6 +2332,7 @@
         const TYPE_LABELS = {
             'individual': 'Individual Player',
             'foursome': 'Start a Team (Foursome)',
+            'foursome-full': 'Start a Team (Foursome — Full)',
             'join-foursome': 'Join a Foursome',
             'sponsor-hole': 'Hole Sponsor',
             'sponsor-lunch': 'Lunch Sponsor',
