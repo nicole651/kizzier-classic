@@ -9,10 +9,11 @@ var SHEET_NAME = 'Registrations';
 var ADMIN_EMAIL = 'kizzierclassic@gmail.com';
 var VENMO_HANDLE = '@KizzierClassic';
 
-// Registration amounts
+// Registration amounts — MUST match frontend index.html AMOUNTS dict
 var AMOUNTS = {
   'individual': 80,
-  'foursome': 320,
+  'foursome': 80,           // Captain pays own $80 only; teammates pay individually
+  'foursome-full': 320,     // Captain pays $320 for entire team (all 4 players)
   'join-foursome': 80,
   'sponsor-hole': 175,
   'sponsor-lunch': 200,
@@ -24,7 +25,8 @@ var AMOUNTS = {
 
 var TYPE_LABELS = {
   'individual': 'Individual Player',
-  'foursome': 'Foursome',
+  'foursome': 'Foursome (Captain $80)',
+  'foursome-full': 'Foursome (Captain Pays $320 for All 4)',
   'join-foursome': 'Join a Foursome',
   'sponsor-hole': 'Hole Sponsor',
   'sponsor-lunch': 'Lunch Sponsor',
@@ -63,6 +65,7 @@ function doPost(e) {
     var ryanPhotoData = data.ryanPhotoData || '';
     var ryanPhotoName = data.ryanPhotoName || '';
     var ryanPhotoType = data.ryanPhotoType || '';
+    var pairWith = data.pairWith || '';
     var amount = AMOUNTS[regType] || 0;
     var typeLabel = TYPE_LABELS[regType] || regType;
 
@@ -90,7 +93,7 @@ function doPost(e) {
     // Build player list for foursomes (names and emails)
     var playerNames = '';
     var playerEmails = '';
-    if (regType === 'foursome') {
+    if (regType === 'foursome' || regType === 'foursome-full') {
       var players = [player2, player3, player4].filter(function(p) { return p.trim() !== ''; });
       var emails = [player2email, player3email, player4email].filter(function(e) { return e.trim() !== ''; });
       if (players.length > 0) {
@@ -105,7 +108,7 @@ function doPost(e) {
     // Foursome captains: store their own name as team identifier
     // Join-foursome players: store the captain name they selected
     var team = '';
-    if (regType === 'foursome') {
+    if (regType === 'foursome' || regType === 'foursome-full') {
       team = firstName + ' ' + lastName;
     } else if (regType === 'join-foursome') {
       team = teamName;
@@ -118,35 +121,59 @@ function doPost(e) {
     }
 
     // Log to spreadsheet
-    // Columns: A=Timestamp, B=First, C=Last, D=Email, E=Phone,
-    //          F=Street, G=City, H=State, I=Zip, J=FullAddress,
-    //          K=Type, L=Amount, M=PlayerNames, N=PlayerEmails,
-    //          O=Notes, P=Team, Q=RaffleItems, R=RyanStory,
-    //          S=RyanPhotoLink, T=Paid
     var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
-    var sheet = ss.getSheetByName(SHEET_NAME);
-    sheet.appendRow([
-      new Date(),
-      firstName,
-      lastName,
-      email,
-      phone,
-      street,
-      city,
-      state,
-      zip,
-      mailingAddress,
-      typeLabel,
-      '$' + amount,
-      playerNames,
-      playerEmails,
-      notes,
-      team,
-      raffleItems,
-      ryanStory,
-      ryanPhotoLink,
-      'No'
-    ]);
+
+    // Route sponsor registrations to Sponsorships tab
+    var isSponsor = (regType === 'sponsor-hole' || regType === 'sponsor-lunch' || regType === 'sponsor-beverage');
+
+    if (isSponsor) {
+      // Sponsorships tab columns: A=Timestamp, B=First, C=Last, D=Email,
+      //   E=Phone, F=Company, G=SponsorType, H=Amount, I=Notes, J=Paid
+      var sponsorSheet = ss.getSheetByName('Sponsorships');
+      sponsorSheet.appendRow([
+        new Date(),
+        firstName,
+        lastName,
+        email,
+        phone,
+        '', // Company — can be filled in manually
+        typeLabel,
+        '$' + amount,
+        notes,
+        'No'
+      ]);
+    } else {
+      // Golf registrations tab columns: A=Timestamp, B=First, C=Last, D=Email, E=Phone,
+      //   F=Street, G=City, H=State, I=Zip, J=FullAddress,
+      //   K=Type, L=Amount, M=PlayerNames, N=PlayerEmails,
+      //   O=Notes, P=Team, Q=RaffleItems, R=RyanStory,
+      //   S=RyanPhotoLink, T=Paid, U=TeeOffHolePref
+      var sheet = ss.getSheetByName(SHEET_NAME);
+      sheet.appendRow([
+        new Date(),
+        firstName,
+        lastName,
+        email,
+        phone,
+        street,
+        city,
+        state,
+        zip,
+        mailingAddress,
+        typeLabel,
+        '$' + amount,
+        playerNames,
+        playerEmails,
+        notes,
+        team,
+        raffleItems,
+        ryanStory,
+        ryanPhotoLink,
+        'No',
+        '', // Tee Off Hole Preference — filled in manually later
+        pairWith // Pairing Request — from individual registration form
+      ]);
+    }
 
     // Send confirmation email to registrant
     if (regType === 'raffle-donation') {
