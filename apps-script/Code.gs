@@ -1041,3 +1041,111 @@ function setupReminderTrigger() {
 
   Logger.log('Payment reminder trigger created — every 2 weeks at 10 AM');
 }
+
+// ============================================================
+// TEST EMAILS — send sample confirmation + reminder to Nicole for review
+// Run from Apps Script editor: Select function -> testEmailsToNicole -> Run
+// ============================================================
+function testEmailsToNicole() {
+  var testEmail = 'nicole@leiterconsultinggroup.com';
+  var testFirst = 'Nicole';
+  var testTypeLabel = 'Foursome (Captain)';
+  var testAmount = '320.00';
+
+  // Send the payment confirmation email (the one Joy triggers by marking Paid = Yes)
+  sendPaymentConfirmationEmail(testFirst, testEmail, testTypeLabel, testAmount);
+  Logger.log('Test payment confirmation sent to ' + testEmail);
+
+  // Send the payment reminder email (the one the bi-weekly cron sends to unpaid registrants)
+  sendPaymentReminderEmail(testFirst, testEmail, testTypeLabel, testAmount);
+  Logger.log('Test payment reminder sent to ' + testEmail);
+}
+
+// ============================================================
+// SEND ONE-TIME TIME-CORRECTION EMAIL to all registrants
+// Previous reminder/confirmation emails went out with 1 PM Shotgun Start.
+// The tournament is 9 AM Tee Off. This sends a correction to everyone.
+// Run once from Apps Script editor: sendTimeCorrectionToAllRegistrants
+// ============================================================
+function sendTimeCorrectionToAllRegistrants() {
+  var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  var sheet = ss.getSheetByName(SHEET_NAME);
+  var data = sheet.getDataRange().getValues();
+
+  if (data.length <= 1) {
+    Logger.log('No registrants — nothing to send.');
+    return;
+  }
+
+  var COL_FIRST = 1;
+  var COL_EMAIL = 3;
+
+  var sent = 0;
+  var seenEmails = {}; // dedupe so couples/groups with same email don't double-up
+
+  for (var i = 1; i < data.length; i++) {
+    var row = data[i];
+    var email = String(row[COL_EMAIL] || '').trim().toLowerCase();
+    var firstName = String(row[COL_FIRST] || '').trim();
+
+    if (!email || !firstName) continue;
+    if (seenEmails[email]) continue;
+    seenEmails[email] = true;
+
+    sendTimeCorrectionEmail(firstName, email);
+    sent++;
+  }
+
+  // Notify admin
+  GmailApp.sendEmail(ADMIN_EMAIL,
+    'Time-Correction Emails Sent — ' + sent + ' registrants',
+    'Just sent a time-correction notice to ' + sent + ' unique registrant(s).\n\n'
+    + 'The original 1:00 PM Shotgun Start time was incorrect. All registrants now know the correct 9:00 AM Tee Off time.\n\n'
+    + 'View spreadsheet: https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID + '/edit',
+    { name: 'Kizzier Classic Bot' }
+  );
+
+  Logger.log('Time-correction emails sent to ' + sent + ' unique registrants.');
+}
+
+function sendTimeCorrectionEmail(firstName, email) {
+  var subject = 'Important Update — Kizzier Classic Start Time Correction';
+
+  var body = 'Hi ' + firstName + ',\n\n'
+    + 'Quick correction — earlier confirmation and reminder emails listed the wrong start time. Here is the correct information:\n\n'
+    + '--- KIZZIER CLASSIC 2026 ---\n'
+    + 'Date: Saturday, June 27, 2026\n'
+    + 'Time: 9:00 AM Tee Off (Registration 8:00–9:00 AM)\n'
+    + 'Location: Hidden Valley Golf Club, 10501 Pine Lake Rd, Lincoln, NE 68526\n'
+    + 'Format: 18-Hole Scramble — Four flights of play, winning team in each flight earns a round of golf\n\n'
+    + 'Sorry for any confusion. See you on the course bright and early!\n\n'
+    + 'The Kizzier Classic Team';
+
+  var htmlBody = '<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">'
+    + '<div style="background: #7A9E8E; padding: 30px; text-align: center;">'
+    + '<h1 style="color: white; margin: 0; font-size: 28px;">The Kizzier <span style="color: #C4AA6A;">Classic</span></h1>'
+    + '<p style="color: rgba(255,255,255,0.7); margin: 8px 0 0;">6th Annual Charity Golf Tournament</p>'
+    + '</div>'
+    + '<div style="padding: 30px; background: #FAF8F4;">'
+    + '<h2 style="color: #3D3D3D; margin-top: 0;">Heads up, ' + firstName + ' — start time correction!</h2>'
+    + '<p style="color: #6B6B6B;">Earlier confirmation and reminder emails listed the wrong start time. Here is the correct event info:</p>'
+    + '<div style="background: white; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #C4AA6A;">'
+    + '<h3 style="color: #3D3D3D; margin-top: 0;">Kizzier Classic 2026 — Correct Details</h3>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Date:</strong> Saturday, June 27, 2026</p>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Time:</strong> 9:00 AM Tee Off (Registration 8:00–9:00 AM)</p>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Location:</strong> Hidden Valley Golf Club, 10501 Pine Lake Rd, Lincoln, NE 68526</p>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Format:</strong> 18-Hole Scramble — Four flights, winning team in each flight earns a round of golf</p>'
+    + '</div>'
+    + '<p style="color: #6B6B6B;">Sorry for any confusion. See you on the course bright and early!</p>'
+    + '<p style="color: #A0A0A0; font-size: 13px; text-align: center; margin-top: 30px;">Questions? Email us at <a href="mailto:kizzierclassic@gmail.com" style="color: #7A9E8E;">kizzierclassic@gmail.com</a></p>'
+    + '</div>'
+    + '<div style="background: #4A6E5D; padding: 20px; text-align: center;">'
+    + '<p style="color: rgba(255,255,255,0.5); font-size: 12px; margin: 0;">In loving memory of Ryan Kizzier</p>'
+    + '</div>'
+    + '</div>';
+
+  GmailApp.sendEmail(email, subject, body, {
+    htmlBody: htmlBody,
+    name: 'The Kizzier Classic'
+  });
+}
