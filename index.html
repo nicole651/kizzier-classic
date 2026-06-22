@@ -542,6 +542,111 @@
             letter-spacing: 0.5px;
         }
 
+        /* ========== OUR 2026 SPONSORS ========== */
+        .our-sponsors {
+            background: var(--cream);
+            padding: 96px 0 64px;
+        }
+        .our-sponsors .section-label { color: var(--emerald-dark); }
+        .our-sponsors .section-title { color: var(--charcoal); }
+        .our-sponsors .section-subtitle { color: var(--gray-600); max-width: 640px; margin: 16px auto 0; }
+
+        .sponsor-tier-section {
+            margin-top: 56px;
+        }
+        .sponsor-tier-section + .sponsor-tier-section {
+            margin-top: 48px;
+        }
+        .tier-heading {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            text-align: center;
+            margin-bottom: 24px;
+            position: relative;
+        }
+        .tier-heading::before,
+        .tier-heading::after {
+            content: '';
+            display: inline-block;
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+            vertical-align: middle;
+            margin: 0 16px;
+        }
+        .sponsor-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            align-items: center;
+        }
+        .sponsor-logo-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            padding: 24px 32px;
+            min-height: 110px;
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .sponsor-logo-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+        .sponsor-logo-card img {
+            max-height: 70px;
+            max-width: 180px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+        .sponsor-logo-card.featured {
+            min-width: 320px;
+            min-height: 200px;
+            padding: 40px 56px;
+        }
+        .sponsor-logo-card.featured img {
+            max-height: 140px;
+            max-width: 280px;
+        }
+        .sponsor-logo-card.premier {
+            min-width: 480px;
+            min-height: 320px;
+            padding: 48px 64px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.10);
+            background: linear-gradient(180deg, #ffffff 0%, #faf8f4 100%);
+        }
+        .sponsor-logo-card.premier img {
+            max-height: 240px;
+            max-width: 360px;
+        }
+        @media (max-width: 768px) {
+            .sponsor-logo-card.premier {
+                min-width: 280px;
+                min-height: 220px;
+                padding: 28px;
+            }
+            .sponsor-logo-card.premier img {
+                max-height: 160px;
+                max-width: 220px;
+            }
+        }
+        @media (max-width: 768px) {
+            .sponsor-logos { gap: 16px; }
+            .sponsor-logo-card { min-width: 160px; min-height: 90px; padding: 16px 24px; }
+            .sponsor-logo-card img { max-height: 50px; max-width: 140px; }
+        }
+
         /* ========== SPONSORSHIP ========== */
         .sponsorship { background: #5B7D6E; }
 
@@ -1579,6 +1684,80 @@
     </section>
 
     <!-- ========== SPONSORSHIP ========== -->
+    <!-- ========== OUR 2026 SPONSORS ========== -->
+    <section class="our-sponsors" id="our-sponsors">
+        <div class="container">
+            <div style="text-align: center;">
+                <div class="section-label">Thank You</div>
+                <h2 class="section-title">Our 2026 Sponsors</h2>
+                <p class="section-subtitle">
+                    We're grateful to these incredible businesses supporting the 6th Annual Kizzier Classic and helping us honor Ryan's memory.
+                </p>
+            </div>
+
+            <!-- Lunch Sponsor -->
+            <div class="sponsor-tier-section">
+                <h3 class="tier-heading">Lunch Sponsor</h3>
+                <div class="sponsor-logos">
+                    <div class="sponsor-logo-card featured">
+                        <img src="img/sponsors/wellman-plumbing.jpg" alt="Wellman Plumbing" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beverage Cart Sponsor -->
+            <div class="sponsor-tier-section">
+                <h3 class="tier-heading">Beverage Cart Sponsor</h3>
+                <div class="sponsor-logos">
+                    <div class="sponsor-logo-card premier">
+                        <img src="img/sponsors/black-label-outdoor.png" alt="Black Label Outdoor — Built to Serve" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hole Sponsors -->
+            <div class="sponsor-tier-section">
+                <h3 class="tier-heading">Hole Sponsors</h3>
+                <div class="sponsor-logos">
+                    <div class="sponsor-logo-card">
+                        <img src="img/sponsors/berger-excavating.svg" alt="Berger Excavating Contractors" loading="lazy">
+                    </div>
+                    <div class="sponsor-logo-card">
+                        <img src="img/sponsors/nathans-custom.png" alt="Nathan's Custom Wood &amp; Steel" loading="lazy">
+                    </div>
+                    <div class="sponsor-logo-card">
+                        <img src="img/sponsors/leiter-consulting-group.png" alt="Leiter Consulting Group" loading="lazy">
+                    </div>
+                    <div class="sponsor-logo-card">
+                        <img src="img/sponsors/vision-mechanical.png" alt="Vision Mechanical" loading="lazy">
+                    </div>
+                    <div class="sponsor-logo-card">
+                        <img src="img/sponsors/black-label-outdoor.png" alt="Black Label Outdoor" loading="lazy">
+                    </div>
+                    <div class="sponsor-logo-card">
+                        <img src="img/sponsors/ep6ix.png" alt="EP6ix" loading="lazy">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prize Sponsors -->
+            <div class="sponsor-tier-section">
+                <h3 class="tier-heading">Prize Sponsors</h3>
+                <div class="sponsor-logos">
+                    <div class="sponsor-logo-card">
+                        <img src="img/sponsors/austads-golf.png" alt="Austad's Golf" loading="lazy">
+                    </div>
+                    <div class="sponsor-logo-card">
+                        <img src="img/sponsors/personal-day.png" alt="Personal Day" loading="lazy" style="background: #2d4a2a; padding: 8px; border-radius: 4px;">
+                    </div>
+                    <div class="sponsor-logo-card">
+                        <img src="img/sponsors/hidden-valley.png" alt="Hidden Valley Golf Club" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="sponsorship" id="sponsorship">
         <div class="container">
             <div style="text-align: center;">
