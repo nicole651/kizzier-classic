@@ -33,7 +33,7 @@ var TYPE_LABELS = {
   'sponsor-beverage': 'Beverage Cart Sponsor',
   'after-celebration': 'After Celebration Contribution',
   'donation': 'Donation',
-  'raffle-donation': 'Raffle Item Donation'
+  'raffle-donation': 'Goodie Bag Item Donation'
 };
 
 // ============================================================
@@ -533,19 +533,19 @@ function sendAfterCelebrationEmail(firstName, email) {
 }
 
 // ============================================================
-// RAFFLE ITEM DONATION THANK-YOU EMAIL
+// GOODIE BAG ITEM DONATION THANK-YOU EMAIL
 // ============================================================
 function sendRaffleDonationEmail(firstName, email, raffleItems) {
-  var subject = 'Kizzier Classic 2026 — Thank You for Donating Raffle Items!';
+  var subject = 'Kizzier Classic 2026 — Thank You for Donating Goodie Bag Items!';
 
   var body = 'Hi ' + firstName + ',\n\n'
-    + 'Thank you for pledging raffle items for the 6th Annual Kizzier Classic! '
-    + 'Your generosity helps make our raffle a highlight of the day.\n\n'
+    + 'Thank you for pledging items for the 6th Annual Kizzier Classic goodie bags! '
+    + 'Your generosity helps make every player feel appreciated on the course.\n\n'
     + '--- ITEMS YOU\'RE DONATING ---\n'
     + raffleItems + '\n\n'
     + '--- WHAT TO DO ---\n'
-    + 'Please bring your items to registration check-in at 11:30 AM on Saturday, June 27, 2026 '
-    + 'at Hidden Valley Golf Club, 10501 Pine Lake Rd, Lincoln, NE 68526.\n\n'
+    + 'Please drop your items off at the host hotel — Residence Inn by Marriott Lincoln Downtown — '
+    + 'on Friday afternoon, June 26, 2026, for goodie bag assembly.\n\n'
     + 'No payment is needed — your item donation is your contribution!\n\n'
     + 'If you have questions, email us at kizzierclassic@gmail.com.\n\n'
     + 'With gratitude,\n'
@@ -565,17 +565,17 @@ function sendRaffleDonationEmail(firstName, email, raffleItems) {
     + '</div>'
     + '<div style="padding: 30px; background: #FAF8F4;">'
     + '<h2 style="color: #3D3D3D; margin-top: 0;">Thank You, ' + firstName + '!</h2>'
-    + '<p style="color: #6B6B6B;">Your raffle item donation for the 6th Annual Kizzier Classic is greatly appreciated. Every item makes the raffle more fun for everyone!</p>'
+    + '<p style="color: #6B6B6B;">Your goodie bag item donation for the 6th Annual Kizzier Classic is greatly appreciated. Every item makes the player goodie bags more special!</p>'
     + '<div style="background: white; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #C4AA6A;">'
     + '<h3 style="color: #3D3D3D; margin-top: 0;">Items You\'re Donating</h3>'
     + '<ul style="list-style: none; padding: 0; margin: 0;">' + itemsHtml + '</ul>'
     + '</div>'
     + '<div style="background: white; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #7A9E8E;">'
     + '<h3 style="color: #3D3D3D; margin-top: 0;">Drop-Off Details</h3>'
-    + '<p style="margin: 4px 0; color: #6B6B6B;">Please bring your items to <strong>registration check-in</strong>:</p>'
-    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Date:</strong> Saturday, June 27, 2026</p>'
-    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Time:</strong> 11:30 AM</p>'
-    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Location:</strong> Hidden Valley Golf Club, 10501 Pine Lake Rd, Lincoln, NE 68526</p>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;">Please bring your items to the <strong>host hotel for goodie bag assembly</strong>:</p>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Date:</strong> Friday, June 26, 2026</p>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Time:</strong> Friday afternoon</p>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Location:</strong> Residence Inn by Marriott Lincoln Downtown</p>'
     + '</div>'
     + '<p style="color: #A0A0A0; font-size: 13px; text-align: center; margin-top: 30px;">Questions? Email us at <a href="mailto:kizzierclassic@gmail.com" style="color: #7A9E8E;">kizzierclassic@gmail.com</a></p>'
     + '</div>'
@@ -861,7 +861,7 @@ function sendPaymentConfirmationEmail(firstName, email, typeLabel, amount) {
     + 'Status: PAID ✓\n\n'
     + '--- EVENT DETAILS ---\n'
     + 'Date: Saturday, June 27, 2026\n'
-    + 'Time: 1:00 PM Shotgun Start (Registration at 11:30 AM)\n'
+    + 'Time: 9:00 AM Tee Off (Registration 8:00–9:00 AM)\n'
     + 'Location: Hidden Valley Golf Club, 10501 Pine Lake Rd, Lincoln, NE 68526\n'
     + 'Format: 18-Hole Scramble\n\n'
     + 'See you on the course!\n'
@@ -884,7 +884,7 @@ function sendPaymentConfirmationEmail(firstName, email, typeLabel, amount) {
     + '<div style="background: white; border-radius: 8px; padding: 20px; margin: 20px 0; border-left: 4px solid #7A9E8E;">'
     + '<h3 style="color: #3D3D3D; margin-top: 0;">Event Details</h3>'
     + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Date:</strong> Saturday, June 27, 2026</p>'
-    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Time:</strong> 1:00 PM Shotgun Start (Registration at 11:30 AM)</p>'
+    + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Time:</strong> 9:00 AM Tee Off (Registration 8:00–9:00 AM)</p>'
     + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Location:</strong> Hidden Valley Golf Club, 10501 Pine Lake Rd, Lincoln, NE 68526</p>'
     + '<p style="margin: 4px 0; color: #6B6B6B;"><strong>Format:</strong> 18-Hole Scramble</p>'
     + '</div>'
@@ -982,7 +982,7 @@ function sendPaymentReminderEmail(firstName, email, typeLabel, amount) {
     + 'Or pay on our website: https://nicole651.github.io/kizzier-classic/#register\n\n'
     + '--- EVENT DETAILS ---\n'
     + 'Date: Saturday, June 27, 2026\n'
-    + 'Time: 1:00 PM Shotgun Start (Registration at 11:30 AM)\n'
+    + 'Time: 9:00 AM Tee Off (Registration 8:00–9:00 AM)\n'
     + 'Location: Hidden Valley Golf Club, 10501 Pine Lake Rd, Lincoln, NE 68526\n\n'
     + 'If you\'ve already paid and received this by mistake, just let us know!\n\n'
     + 'See you on the course!\n'

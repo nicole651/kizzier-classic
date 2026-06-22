@@ -1668,7 +1668,7 @@
                     <div class="timeline-content">
                         <span class="timeline-time">After the Round</span>
                         <h4>Lunch & Awards</h4>
-                        <p>Lunch, drinks, prizes for top teams, closest to pin, longest drive, best dressed team, furthest traveled, and a raffle with fantastic prizes.</p>
+                        <p>Four flights of play — the winning team in each flight earns a round of golf. Plus contests for closest to pin, longest drive, best dressed team, and furthest traveled. Lunch, drinks, and a great goodie bag for every player.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -1823,12 +1823,12 @@
                     <button class="btn-sponsor" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ setDropdownMode('sponsor', 'after-celebration'); }, 600);">Become a Sponsor</button>
                 </div>
 
-                <!-- Raffle Donation -->
+                <!-- Goodie Bag Donation -->
                 <div class="sponsor-card" style="grid-column: 1 / -1; max-width: 460px; justify-self: center;">
-                    <div class="sponsor-tier">Raffle Donation</div>
+                    <div class="sponsor-tier">Goodie Bag Donation</div>
                     <div class="sponsor-price" style="font-size: 2rem;">Donate Items</div>
                     <ul class="sponsor-perks">
-                        <li>Donate raffle prizes or gift baskets</li>
+                        <li>Donate items to stuff player goodie bags</li>
                         <li>Name or logo displayed with your donated items</li>
                         <li>Social media recognition</li>
                         <li>A great way to promote your business or show support</li>
@@ -2065,7 +2065,7 @@
                         <li><span class="check">✓</span> Lunch & post-round dinner</li>
                         <li><span class="check">✓</span> Beverages on the course</li>
                         <li><span class="check">✓</span> Tournament gift bag</li>
-                        <li><span class="check">✓</span> Raffle entry</li>
+                        <li><span class="check">✓</span> Player goodie bag</li>
                         <li><span class="check">✓</span> Contest eligibility (longest drive, closest to pin)</li>
                         <li><span class="check">✓</span> Awards reception</li>
                     </ul>
@@ -2183,7 +2183,7 @@
                         <div id="raffleDonationFields" style="display: none;">
                             <div class="form-group">
                                 <label>What items will you donate?</label>
-                                <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 12px;">Select all that apply. Bring items to registration check-in on June 27.</p>
+                                <p style="font-size: 0.85rem; color: var(--gray-600); margin-bottom: 12px;">Select all that apply. Donated items are used to stuff player goodie bags. Please drop items at the host hotel — Residence Inn by Marriott Lincoln Downtown — on Friday afternoon, June 26, for goodie bag assembly.</p>
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
                                     <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--charcoal); cursor: pointer; padding: 8px 12px; background: var(--white); border-radius: 4px; border: 1px solid var(--gray-200);">
                                         <input type="checkbox" name="raffleItem" value="Sunscreen" style="width: auto; accent-color: var(--emerald);"> Sunscreen
@@ -2369,7 +2369,7 @@
         const playerInfoDefault = {
             title: "What's Included",
             desc: "Your registration covers everything you need for a fantastic day on the course — plus the satisfaction of supporting a cause that matters.",
-            items: ['18 holes of golf with cart', 'Lunch & post-round dinner', 'Beverages on the course', 'Tournament gift bag', 'Raffle entry', 'Contest eligibility (longest drive, closest to pin)', 'Awards reception']
+            items: ['18 holes of golf with cart', 'Lunch & post-round dinner', 'Beverages on the course', 'Tournament gift bag', 'Contest eligibility (longest drive, closest to pin)', 'Awards reception']
         };
         const sponsorInfo = {
             title: "Why Sponsor?",
@@ -2661,7 +2661,7 @@
                             <div style="text-align: center; padding: 20px 0;">
                                 <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--emerald); color: white; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 20px;">&#10003;</div>
                                 <h3 style="margin-bottom: 8px;">Thank You, ${payload.firstName}!</h3>
-                                <p style="color: var(--gray-600); margin-bottom: 24px;">Your raffle item donation has been recorded. A confirmation has been sent to <strong>${payload.email}</strong>.</p>
+                                <p style="color: var(--gray-600); margin-bottom: 24px;">Your goodie bag item donation has been recorded. A confirmation has been sent to <strong>${payload.email}</strong>.</p>
                                 <div style="background: var(--white); border-radius: 8px; padding: 24px; border-left: 4px solid var(--gold); text-align: left; margin-bottom: 24px;">
                                     <p style="font-weight: 600; color: var(--charcoal); margin-bottom: 8px;">Items You're Donating</p>
                                     <p style="color: var(--gray-600); font-size: 0.95rem;">${payload.raffleItems}</p>
