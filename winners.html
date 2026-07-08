@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 Champions & Winners — The Kizzier Classic</title>
+    <meta name="description" content="Congratulations to the winners of the 2026 Kizzier Classic — flight champions, pin prizes, raffle, and best-dressed team.">
+    <meta property="og:title" content="2026 Champions & Winners — The Kizzier Classic">
+    <meta property="og:description" content="Congratulations to all of our 2026 Kizzier Classic winners! Flight champions, pin prizes, raffle, and best-dressed team.">
+    <meta property="og:image" content="https://nicole651.github.io/kizzier-classic/img/2026-flight-winners.png">
+    <meta property="og:url" content="https://nicole651.github.io/kizzier-classic/winners.html">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --emerald: #7A9E8E; --emerald-light: #95B8A7; --emerald-dark: #5B7D6E;
+            --forest: #223B31;
+            --gold: #C4AA6A; --gold-light: #D9C48E; --gold-dark: #A99055;
+            --cream: #FAF8F4; --white: #FFFFFF; --charcoal: #3D3D3D;
+            --gray-600: #6B6B6B; --gray-400: #A0A0A0; --gray-200: #E8E5DE;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--charcoal); background: var(--cream); line-height: 1.6; }
+        h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
+        a { color: inherit; }
+        .container { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+        /* Top bar */
+        .topbar { background: var(--forest); padding: 14px 0; }
+        .topbar .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+        .topbar a { color: var(--gold-light); text-decoration: none; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.3px; }
+        .topbar a:hover { color: var(--white); }
+        .topbar .brand { color: var(--white); font-family: 'Playfair Display', serif; font-weight: 700; letter-spacing: 0.5px; }
+
+        /* Hero */
+        .hero { background: linear-gradient(160deg, var(--forest), var(--emerald-dark)); color: var(--white); text-align: center; padding: 64px 0 56px; }
+        .hero .kicker { color: var(--gold-light); letter-spacing: 4px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; margin-bottom: 12px; }
+        .hero h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 900; line-height: 1.05; }
+        .hero h1 span { color: var(--gold-light); }
+        .hero p { max-width: 620px; margin: 18px auto 0; color: rgba(255,255,255,0.9); font-size: 1.05rem; }
+
+        section { padding: 56px 0; }
+        .section-title { text-align: center; font-size: clamp(1.8rem, 4vw, 2.4rem); color: var(--emerald-dark); margin-bottom: 8px; }
+        .section-sub { text-align: center; color: var(--gray-600); margin-bottom: 36px; }
+
+        /* Graphics */
+        .graphics { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+        .graphics figure { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 10px 34px rgba(34,59,49,0.12); }
+        .graphics img { width: 100%; height: auto; display: block; }
+        .graphics figcaption { padding: 14px 18px; font-weight: 600; color: var(--emerald-dark); text-align: center; letter-spacing: 0.3px; }
+
+        /* Flight cards */
+        .flights { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .flight { background: var(--white); border-radius: 12px; box-shadow: 0 8px 26px rgba(34,59,49,0.08); overflow: hidden; }
+        .flight-head { background: var(--forest); color: var(--white); text-align: center; padding: 16px; font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; letter-spacing: 1px; }
+        .place { padding: 18px 20px; border-bottom: 1px solid var(--gray-200); }
+        .place:last-child { border-bottom: none; }
+        .place-label { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--emerald-dark); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .place-label .medal { font-size: 1.15rem; }
+        .place ul { list-style: none; }
+        .place li { padding: 2px 0; }
+        .place .prize { margin-top: 8px; font-size: 0.82rem; color: var(--gray-600); font-style: italic; }
+
+        /* Tables */
+        .table-wrap { overflow-x: auto; background: var(--white); border-radius: 12px; box-shadow: 0 8px 26px rgba(34,59,49,0.08); }
+        table { width: 100%; border-collapse: collapse; min-width: 640px; }
+        thead th { background: var(--forest); color: var(--white); text-align: left; padding: 14px 18px; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+        tbody td { padding: 13px 18px; border-bottom: 1px solid var(--gray-200); font-size: 0.94rem; vertical-align: top; }
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:nth-child(even) { background: #F6F3EC; }
+        .winner-name { font-weight: 600; color: var(--emerald-dark); white-space: nowrap; }
+        .cat-pill { display: inline-block; font-size: 0.72rem; font-weight: 600; color: var(--gold-dark); background: #F3ECD9; padding: 2px 8px; border-radius: 20px; margin-left: 6px; }
+
+        /* Highlight cards (raffle + best dressed) */
+        .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .card { background: var(--white); border-radius: 12px; box-shadow: 0 8px 26px rgba(34,59,49,0.08); padding: 26px 26px 28px; }
+        .card h3 { color: var(--emerald-dark); font-size: 1.3rem; margin-bottom: 6px; }
+        .card .sub { color: var(--gray-600); font-size: 0.85rem; margin-bottom: 18px; }
+        .raffle-item { padding: 12px 0; border-bottom: 1px solid var(--gray-200); }
+        .raffle-item:last-child { border-bottom: none; }
+        .raffle-item .prize { font-weight: 600; }
+        .raffle-item .winner { color: var(--emerald-dark); font-weight: 600; }
+        .team-names { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+        .team-names span { background: #F3ECD9; color: var(--gold-dark); font-weight: 600; padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; }
+
+        /* Footer */
+        footer { background: var(--forest); color: var(--white); text-align: center; padding: 48px 24px; }
+        footer .std { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold-light); margin-bottom: 8px; }
+        footer a.btn { display: inline-block; margin-top: 18px; background: var(--gold); color: var(--forest); text-decoration: none; font-weight: 600; padding: 12px 28px; border-radius: 4px; letter-spacing: 0.5px; }
+        footer a.btn:hover { background: var(--gold-light); }
+        footer .copy { margin-top: 24px; color: rgba(255,255,255,0.6); font-size: 0.82rem; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <div class="container">
+            <span class="brand">The Kizzier Classic</span>
+            <a href="index.html">← Back to Home</a>
+        </div>
+    </div>
+
+    <header class="hero">
+        <div class="container">
+            <div class="kicker">The 2026 Kizzier Classic</div>
+            <h1>Champions &amp; <span>Winners</span></h1>
+            <p>Congratulations to all of our winners — and a heartfelt thank you to everyone who played, sponsored, and supported the 6th Annual Kizzier Classic in memory of Ryan Kizzier.</p>
+        </div>
+    </header>
+
+    <!-- Facebook graphics -->
+    <section style="padding-top: 48px;">
+        <div class="container">
+            <div class="graphics">
+                <figure>
+                    <img src="img/2026-flight-winners.png" alt="2026 Kizzier Classic Champions — Flight Winners: Flight 1, 2, and 3 first, second, and third place teams">
+                    <figcaption>🏆 Flight Champions</figcaption>
+                </figure>
+                <figure>
+                    <img src="img/2026-pin-prize-winners.jpg" alt="2026 Kizzier Classic Pin Prize Winners — longest putt, longest drive, closest to pin, guessing game, raffle, and best dressed team">
+                    <figcaption>⛳ Pin Prize Winners</figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flight results -->
+    <section style="padding-top: 8px;">
+        <div class="container">
+            <h2 class="section-title">Flight Winners</h2>
+            <p class="section-sub">Each flight's top three teams</p>
+            <div class="flights">
+                <div class="flight">
+                    <div class="flight-head">Flight 1</div>
+                    <div class="place">
+                        <div class="place-label"><span class="medal">🥇</span> 1st Place</div>
+                        <ul><li>Chad Francisco</li><li>Kurt Evers</li><li>Bubba Gump</li><li>Jim Kontras</li></ul>
+                        <div class="prize">$50 cash + $15 gift card + free round + balls/tees/markers</div>
+                    </div>
+                    <div class="place">
+                        <div class="place-label"><span class="medal">🥈</span> 2nd Place</div>
+                        <ul><li>Robert Alexander</li><li>Jess Robins</li><li>Aaron Dinslage</li><li>Jeff Dewispelar</li></ul>
+                        <div class="prize">$25 cash + $10 gift card + balls/tees/markers</div>
+                    </div>
+                    <div class="place">
+                        <div class="place-label"><span class="medal">🥉</span> 3rd Place</div>
+                        <ul><li>Tim Haynes</li><li>Joy Reese</li><li>Matt Kettler</li><li>Summer Stockton</li></ul>
+                        <div class="prize">$15 cash + $5 gift card + balls/tees/markers</div>
+                    </div>
+                </div>
+                <div class="flight">
+                    <div class="flight-head">Flight 2</div>
+                    <div class="place">
+                        <div class="place-label"><span class="medal">🥇</span> 1st Place</div>
+                        <ul><li>Jason Herbolsheimer</li><li>Sarah Herbolsheimer</li><li>Sean Dudrey</li><li>Brenda Dudrey</li></ul>
+                        <div class="prize">$50 cash + $15 gift card + free round + balls/tees/markers</div>
+                    </div>
+                    <div class="place">
+                        <div class="place-label"><span class="medal">🥈</span> 2nd Place</div>
+                        <ul><li>Cayd VanAckeren</li><li>Micaela VanAckeren</li><li>Dylan DeRoin</li><li>Brady McManus</li></ul>
+                        <div class="prize">$25 cash + $10 gift card + balls/tees/markers</div>
+                    </div>
+                    <div class="place">
+                        <div class="place-label"><span class="medal">🥉</span> 3rd Place</div>
+                        <ul><li>Addison Eby</li><li>Joey Huliska</li><li>Jay Kettler</li><li>Brandt Eby</li></ul>
+                        <div class="prize">$15 cash + $5 gift card + balls/tees/markers</div>
+                    </div>
+                </div>
+                <div class="flight">
+                    <div class="flight-head">Flight 3</div>
+                    <div class="place">
+                        <div class="place-label"><span class="medal">🥇</span> 1st Place</div>
+                        <ul><li>Melissa Kudlacek</li><li>Jeff Connelly</li><li>Rylie Connelly</li><li>Carter Lee</li></ul>
+                        <div class="prize">$50 cash + $15 gift card + free round + balls/tees/markers</div>
+                    </div>
+                    <div class="place">
+                        <div class="place-label"><span class="medal">🥈</span> 2nd Place</div>
+                        <ul><li>Berkley Leiter</li><li>Ashley Prindiville</li><li>Bella Chamberlin</li><li>Brooke Prindiville</li></ul>
+                        <div class="prize">$25 cash + $10 gift card + balls/tees/markers</div>
+                    </div>
+                    <div class="place">
+                        <div class="place-label"><span class="medal">🥉</span> 3rd Place</div>
+                        <ul><li>Mollie Cox</li><li>Manizha Salomova</li><li>Alli Guiney</li><li>Drew Guiney</li></ul>
+                        <div class="prize">$15 cash + $5 gift card + balls/tees/markers</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contest / pin prizes -->
+    <section style="background: #F1EDE4;">
+        <div class="container">
+            <h2 class="section-title">Contest &amp; Pin Prize Winners</h2>
+            <p class="section-sub">Longest putt, longest drive, closest to the pin &amp; more</p>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Contest</th><th>Hole</th><th>Winner</th><th>Prize</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Longest Putt <span class="cat-pill">Men</span></td><td>Hole 2</td><td class="winner-name">Chris Fouch</td><td>Tour Edge backpack, hat, bag, balls/tees/markers + koozie</td></tr>
+                        <tr><td>Longest Putt <span class="cat-pill">Ladies</span></td><td>Hole 1</td><td class="winner-name">Alli Guiney</td><td>Srixon backpack, hat, bag, balls/tees/markers + koozie</td></tr>
+                        <tr><td>Longest Drive &lt;65 <span class="cat-pill">Men</span></td><td>Hole 7</td><td class="winner-name">Joey Huliska</td><td>Ping putter, balls/tees/markers + koozie</td></tr>
+                        <tr><td>Longest Drive &lt;65 <span class="cat-pill">Ladies</span></td><td>Hole 6</td><td class="winner-name">Micaela VanAckeren</td><td>Ping putter, balls/tees/markers + koozie</td></tr>
+                        <tr><td>Longest Drive 65+ <span class="cat-pill">Men</span></td><td>Hole 17</td><td class="winner-name">Bob Haberman</td><td>Titleist Sunday bag, alignment sticks, hat, Chrome balls, tees/markers</td></tr>
+                        <tr><td>Longest Drive 65+ <span class="cat-pill">Ladies</span></td><td>Hole 18</td><td class="winner-name">Rosi Guenther</td><td>Visor, towel, water bottle, golf pouch, Chrome balls</td></tr>
+                        <tr><td>Closest to Pin #1 <span class="cat-pill">Men</span></td><td>Hole 14</td><td class="winner-name">Jason Herbolsheimer</td><td>$100 pro shop gift card + Titleist bag + accessories + balls/tees/markers</td></tr>
+                        <tr><td>Closest to Pin #1 <span class="cat-pill">Ladies</span></td><td>Hole 11</td><td class="winner-name">Sarah Herbolsheimer</td><td>$100 pro shop gift card + Titleist bag + accessories + balls/tees/markers</td></tr>
+                        <tr><td>Closest to Pin — 2nd Shot <span class="cat-pill">All</span></td><td>Hole 12</td><td class="winner-name">Jason Schommer</td><td>Towel, mug, divot tool, hat, balls/tees/markers + koozie</td></tr>
+                        <tr><td>Closest to Pin — 3rd Shot <span class="cat-pill">All</span></td><td>Hole 3</td><td class="winner-name">Jim Kontras</td><td>Rangefinder + Chrome balls + tees/markers</td></tr>
+                        <tr><td>Guessing Game <span class="cat-pill">All</span></td><td>—</td><td class="winner-name">Rich Meranda</td><td>Husker chair + jar of tees + hat + balls/tees/markers</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Raffle + Best dressed -->
+    <section>
+        <div class="container">
+            <div class="cols">
+                <div class="card">
+                    <h3>🎟️ Raffle Winners</h3>
+                    <div class="sub">The big-ticket draws</div>
+                    <div class="raffle-item"><div class="prize">Cobra Hybrid Club with Custom Fitting</div><div class="winner">Mason Roach</div></div>
+                    <div class="raffle-item"><div class="prize">Callaway Opus Wedge</div><div class="winner">Hudson Roach</div></div>
+                    <div class="raffle-item"><div class="prize">Callaway Opus Wedge</div><div class="winner">Sarah Herbolsheimer</div></div>
+                </div>
+                <div class="card">
+                    <h3>👔 Best Dressed Team</h3>
+                    <div class="sub">2 sleeves Chrome balls + divot tool + hat (each player)</div>
+                    <div class="team-names">
+                        <span>Berkley Leiter</span><span>Ashley Prindiville</span><span>Bella Chamberlin</span><span>Brooke Prindiville</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="std">See you next year!</div>
+        <div>7th Annual Kizzier Classic — Saturday, June 26, 2027 · Hidden Valley Golf Club, Lincoln, NE</div>
+        <a class="btn" href="index.html">Back to Home</a>
+        <div class="copy">© 2026 The Kizzier Classic · In loving memory of Ryan Kizzier</div>
+    </footer>
+</body>
+</html>
