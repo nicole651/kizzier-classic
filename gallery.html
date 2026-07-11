@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 Kizzier Classic — Photo Gallery</title>
+    <meta name="description" content="Photo gallery from the 2026 Kizzier Classic golf tournament in memory of Ryan Kizzier. Photos by Leah Lund Photography.">
+    <meta property="og:title" content="2026 Kizzier Classic — Photo Gallery">
+    <meta property="og:description" content="Relive the 6th Annual Kizzier Classic — 84 photos from the day. Photos by Leah Lund Photography.">
+    <meta property="og:image" content="https://nicole651.github.io/kizzier-classic/img/2026-gallery/001.jpg">
+    <meta property="og:url" content="https://nicole651.github.io/kizzier-classic/gallery.html">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="img/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --emerald: #7A9E8E; --emerald-light: #95B8A7; --emerald-dark: #5B7D6E;
+            --forest: #223B31;
+            --gold: #C4AA6A; --gold-light: #D9C48E; --gold-dark: #A99055;
+            --cream: #FAF8F4; --white: #FFFFFF; --charcoal: #3D3D3D;
+            --gray-600: #6B6B6B; --gray-400: #A0A0A0; --gray-200: #E8E5DE;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--charcoal); background: var(--cream); line-height: 1.6; }
+        h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; }
+        a { color: inherit; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* Top bar */
+        .topbar { background: var(--forest); padding: 14px 0; }
+        .topbar .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; max-width: 1040px; }
+        .topbar a { color: var(--gold-light); text-decoration: none; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.3px; }
+        .topbar a:hover { color: var(--white); }
+        .topbar .links a { margin-left: 20px; }
+        .topbar .brand { color: var(--white); font-family: 'Playfair Display', serif; font-weight: 700; letter-spacing: 0.5px; }
+
+        /* Hero */
+        .hero { background: linear-gradient(160deg, var(--forest), var(--emerald-dark)); color: var(--white); text-align: center; padding: 60px 0 52px; }
+        .hero .kicker { color: var(--gold-light); letter-spacing: 4px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; margin-bottom: 12px; }
+        .hero h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); font-weight: 900; line-height: 1.05; }
+        .hero h1 span { color: var(--gold-light); }
+        .hero p { max-width: 640px; margin: 18px auto 0; color: rgba(255,255,255,0.9); font-size: 1.05rem; }
+        .hero .credit { margin-top: 22px; font-size: 0.82rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold-light); }
+
+        /* Gallery grid */
+        .gallery { padding: 48px 0 64px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+        .tile { border: none; padding: 0; margin: 0; cursor: pointer; background: var(--gray-200); border-radius: 10px; overflow: hidden; aspect-ratio: 1 / 1; box-shadow: 0 6px 18px rgba(34,59,49,0.08); transition: transform .18s ease, box-shadow .18s ease; display: block; }
+        .tile:hover, .tile:focus-visible { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(34,59,49,0.20); outline: none; }
+        .tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        /* Lightbox */
+        .lb { position: fixed; inset: 0; background: rgba(18,28,23,0.94); display: none; align-items: center; justify-content: center; z-index: 1000; }
+        .lb.open { display: flex; }
+        .lb img { max-width: 92vw; max-height: 84vh; border-radius: 6px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+        .lb-caption { position: absolute; bottom: 18px; left: 0; right: 0; text-align: center; color: rgba(255,255,255,0.75); font-size: 0.85rem; letter-spacing: 0.5px; }
+        .lb-btn { position: absolute; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.25); color: var(--white); width: 52px; height: 52px; border-radius: 50%; font-size: 1.6rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .15s ease; user-select: none; }
+        .lb-btn:hover { background: rgba(196,170,106,0.55); }
+        .lb-close { top: 20px; right: 22px; font-size: 1.4rem; }
+        .lb-prev { left: 18px; top: 50%; transform: translateY(-50%); }
+        .lb-next { right: 18px; top: 50%; transform: translateY(-50%); }
+        @media (max-width: 640px) {
+            .lb-prev { left: 8px; } .lb-next { right: 8px; }
+            .lb-btn { width: 44px; height: 44px; font-size: 1.3rem; }
+            .grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+        }
+
+        /* Footer */
+        footer { background: var(--forest); color: var(--white); text-align: center; padding: 48px 24px; }
+        footer .std { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold-light); margin-bottom: 8px; }
+        footer a.btn { display: inline-block; margin-top: 18px; background: var(--gold); color: var(--forest); text-decoration: none; font-weight: 600; padding: 12px 28px; border-radius: 4px; letter-spacing: 0.5px; }
+        footer a.btn:hover { background: var(--gold-light); }
+        footer .copy { margin-top: 24px; color: rgba(255,255,255,0.6); font-size: 0.82rem; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <div class="container">
+            <span class="brand">The Kizzier Classic</span>
+            <span class="links">
+                <a href="index.html">← Home</a>
+                <a href="winners.html">2026 Winners</a>
+            </span>
+        </div>
+    </div>
+
+    <header class="hero">
+        <div class="container">
+            <div class="kicker">The 2026 Kizzier Classic</div>
+            <h1>Photo <span>Gallery</span></h1>
+            <p>Relive the day — 84 moments from the 6th Annual Kizzier Classic, played in loving memory of Ryan Kizzier.</p>
+            <div class="credit">📷 Photos by Leah Lund Photography</div>
+        </div>
+    </header>
+
+    <section class="gallery">
+        <div class="container">
+            <div class="grid" id="grid">
+            <button class="tile" data-n="001" aria-label="Open photo 001">
+                <img src="img/2026-gallery/001-thumb.jpg" alt="Kizzier Classic 2026 photo 001" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="002" aria-label="Open photo 002">
+                <img src="img/2026-gallery/002-thumb.jpg" alt="Kizzier Classic 2026 photo 002" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="003" aria-label="Open photo 003">
+                <img src="img/2026-gallery/003-thumb.jpg" alt="Kizzier Classic 2026 photo 003" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="004" aria-label="Open photo 004">
+                <img src="img/2026-gallery/004-thumb.jpg" alt="Kizzier Classic 2026 photo 004" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="005" aria-label="Open photo 005">
+                <img src="img/2026-gallery/005-thumb.jpg" alt="Kizzier Classic 2026 photo 005" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="006" aria-label="Open photo 006">
+                <img src="img/2026-gallery/006-thumb.jpg" alt="Kizzier Classic 2026 photo 006" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="007" aria-label="Open photo 007">
+                <img src="img/2026-gallery/007-thumb.jpg" alt="Kizzier Classic 2026 photo 007" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="008" aria-label="Open photo 008">
+                <img src="img/2026-gallery/008-thumb.jpg" alt="Kizzier Classic 2026 photo 008" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="009" aria-label="Open photo 009">
+                <img src="img/2026-gallery/009-thumb.jpg" alt="Kizzier Classic 2026 photo 009" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="010" aria-label="Open photo 010">
+                <img src="img/2026-gallery/010-thumb.jpg" alt="Kizzier Classic 2026 photo 010" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="011" aria-label="Open photo 011">
+                <img src="img/2026-gallery/011-thumb.jpg" alt="Kizzier Classic 2026 photo 011" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="012" aria-label="Open photo 012">
+                <img src="img/2026-gallery/012-thumb.jpg" alt="Kizzier Classic 2026 photo 012" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="013" aria-label="Open photo 013">
+                <img src="img/2026-gallery/013-thumb.jpg" alt="Kizzier Classic 2026 photo 013" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="014" aria-label="Open photo 014">
+                <img src="img/2026-gallery/014-thumb.jpg" alt="Kizzier Classic 2026 photo 014" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="015" aria-label="Open photo 015">
+                <img src="img/2026-gallery/015-thumb.jpg" alt="Kizzier Classic 2026 photo 015" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="016" aria-label="Open photo 016">
+                <img src="img/2026-gallery/016-thumb.jpg" alt="Kizzier Classic 2026 photo 016" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="017" aria-label="Open photo 017">
+                <img src="img/2026-gallery/017-thumb.jpg" alt="Kizzier Classic 2026 photo 017" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="018" aria-label="Open photo 018">
+                <img src="img/2026-gallery/018-thumb.jpg" alt="Kizzier Classic 2026 photo 018" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="019" aria-label="Open photo 019">
+                <img src="img/2026-gallery/019-thumb.jpg" alt="Kizzier Classic 2026 photo 019" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="020" aria-label="Open photo 020">
+                <img src="img/2026-gallery/020-thumb.jpg" alt="Kizzier Classic 2026 photo 020" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="021" aria-label="Open photo 021">
+                <img src="img/2026-gallery/021-thumb.jpg" alt="Kizzier Classic 2026 photo 021" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="022" aria-label="Open photo 022">
+                <img src="img/2026-gallery/022-thumb.jpg" alt="Kizzier Classic 2026 photo 022" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="023" aria-label="Open photo 023">
+                <img src="img/2026-gallery/023-thumb.jpg" alt="Kizzier Classic 2026 photo 023" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="024" aria-label="Open photo 024">
+                <img src="img/2026-gallery/024-thumb.jpg" alt="Kizzier Classic 2026 photo 024" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="025" aria-label="Open photo 025">
+                <img src="img/2026-gallery/025-thumb.jpg" alt="Kizzier Classic 2026 photo 025" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="026" aria-label="Open photo 026">
+                <img src="img/2026-gallery/026-thumb.jpg" alt="Kizzier Classic 2026 photo 026" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="027" aria-label="Open photo 027">
+                <img src="img/2026-gallery/027-thumb.jpg" alt="Kizzier Classic 2026 photo 027" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="028" aria-label="Open photo 028">
+                <img src="img/2026-gallery/028-thumb.jpg" alt="Kizzier Classic 2026 photo 028" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="029" aria-label="Open photo 029">
+                <img src="img/2026-gallery/029-thumb.jpg" alt="Kizzier Classic 2026 photo 029" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="030" aria-label="Open photo 030">
+                <img src="img/2026-gallery/030-thumb.jpg" alt="Kizzier Classic 2026 photo 030" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="031" aria-label="Open photo 031">
+                <img src="img/2026-gallery/031-thumb.jpg" alt="Kizzier Classic 2026 photo 031" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="032" aria-label="Open photo 032">
+                <img src="img/2026-gallery/032-thumb.jpg" alt="Kizzier Classic 2026 photo 032" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="033" aria-label="Open photo 033">
+                <img src="img/2026-gallery/033-thumb.jpg" alt="Kizzier Classic 2026 photo 033" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="034" aria-label="Open photo 034">
+                <img src="img/2026-gallery/034-thumb.jpg" alt="Kizzier Classic 2026 photo 034" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="035" aria-label="Open photo 035">
+                <img src="img/2026-gallery/035-thumb.jpg" alt="Kizzier Classic 2026 photo 035" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="036" aria-label="Open photo 036">
+                <img src="img/2026-gallery/036-thumb.jpg" alt="Kizzier Classic 2026 photo 036" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="037" aria-label="Open photo 037">
+                <img src="img/2026-gallery/037-thumb.jpg" alt="Kizzier Classic 2026 photo 037" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="038" aria-label="Open photo 038">
+                <img src="img/2026-gallery/038-thumb.jpg" alt="Kizzier Classic 2026 photo 038" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="039" aria-label="Open photo 039">
+                <img src="img/2026-gallery/039-thumb.jpg" alt="Kizzier Classic 2026 photo 039" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="040" aria-label="Open photo 040">
+                <img src="img/2026-gallery/040-thumb.jpg" alt="Kizzier Classic 2026 photo 040" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="041" aria-label="Open photo 041">
+                <img src="img/2026-gallery/041-thumb.jpg" alt="Kizzier Classic 2026 photo 041" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="042" aria-label="Open photo 042">
+                <img src="img/2026-gallery/042-thumb.jpg" alt="Kizzier Classic 2026 photo 042" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="043" aria-label="Open photo 043">
+                <img src="img/2026-gallery/043-thumb.jpg" alt="Kizzier Classic 2026 photo 043" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="044" aria-label="Open photo 044">
+                <img src="img/2026-gallery/044-thumb.jpg" alt="Kizzier Classic 2026 photo 044" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="045" aria-label="Open photo 045">
+                <img src="img/2026-gallery/045-thumb.jpg" alt="Kizzier Classic 2026 photo 045" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="046" aria-label="Open photo 046">
+                <img src="img/2026-gallery/046-thumb.jpg" alt="Kizzier Classic 2026 photo 046" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="047" aria-label="Open photo 047">
+                <img src="img/2026-gallery/047-thumb.jpg" alt="Kizzier Classic 2026 photo 047" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="048" aria-label="Open photo 048">
+                <img src="img/2026-gallery/048-thumb.jpg" alt="Kizzier Classic 2026 photo 048" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="049" aria-label="Open photo 049">
+                <img src="img/2026-gallery/049-thumb.jpg" alt="Kizzier Classic 2026 photo 049" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="050" aria-label="Open photo 050">
+                <img src="img/2026-gallery/050-thumb.jpg" alt="Kizzier Classic 2026 photo 050" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="051" aria-label="Open photo 051">
+                <img src="img/2026-gallery/051-thumb.jpg" alt="Kizzier Classic 2026 photo 051" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="052" aria-label="Open photo 052">
+                <img src="img/2026-gallery/052-thumb.jpg" alt="Kizzier Classic 2026 photo 052" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="053" aria-label="Open photo 053">
+                <img src="img/2026-gallery/053-thumb.jpg" alt="Kizzier Classic 2026 photo 053" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="054" aria-label="Open photo 054">
+                <img src="img/2026-gallery/054-thumb.jpg" alt="Kizzier Classic 2026 photo 054" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="055" aria-label="Open photo 055">
+                <img src="img/2026-gallery/055-thumb.jpg" alt="Kizzier Classic 2026 photo 055" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="056" aria-label="Open photo 056">
+                <img src="img/2026-gallery/056-thumb.jpg" alt="Kizzier Classic 2026 photo 056" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="057" aria-label="Open photo 057">
+                <img src="img/2026-gallery/057-thumb.jpg" alt="Kizzier Classic 2026 photo 057" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="058" aria-label="Open photo 058">
+                <img src="img/2026-gallery/058-thumb.jpg" alt="Kizzier Classic 2026 photo 058" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="059" aria-label="Open photo 059">
+                <img src="img/2026-gallery/059-thumb.jpg" alt="Kizzier Classic 2026 photo 059" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="060" aria-label="Open photo 060">
+                <img src="img/2026-gallery/060-thumb.jpg" alt="Kizzier Classic 2026 photo 060" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="061" aria-label="Open photo 061">
+                <img src="img/2026-gallery/061-thumb.jpg" alt="Kizzier Classic 2026 photo 061" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="062" aria-label="Open photo 062">
+                <img src="img/2026-gallery/062-thumb.jpg" alt="Kizzier Classic 2026 photo 062" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="063" aria-label="Open photo 063">
+                <img src="img/2026-gallery/063-thumb.jpg" alt="Kizzier Classic 2026 photo 063" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="064" aria-label="Open photo 064">
+                <img src="img/2026-gallery/064-thumb.jpg" alt="Kizzier Classic 2026 photo 064" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="065" aria-label="Open photo 065">
+                <img src="img/2026-gallery/065-thumb.jpg" alt="Kizzier Classic 2026 photo 065" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="066" aria-label="Open photo 066">
+                <img src="img/2026-gallery/066-thumb.jpg" alt="Kizzier Classic 2026 photo 066" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="067" aria-label="Open photo 067">
+                <img src="img/2026-gallery/067-thumb.jpg" alt="Kizzier Classic 2026 photo 067" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="068" aria-label="Open photo 068">
+                <img src="img/2026-gallery/068-thumb.jpg" alt="Kizzier Classic 2026 photo 068" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="069" aria-label="Open photo 069">
+                <img src="img/2026-gallery/069-thumb.jpg" alt="Kizzier Classic 2026 photo 069" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="070" aria-label="Open photo 070">
+                <img src="img/2026-gallery/070-thumb.jpg" alt="Kizzier Classic 2026 photo 070" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="071" aria-label="Open photo 071">
+                <img src="img/2026-gallery/071-thumb.jpg" alt="Kizzier Classic 2026 photo 071" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="072" aria-label="Open photo 072">
+                <img src="img/2026-gallery/072-thumb.jpg" alt="Kizzier Classic 2026 photo 072" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="073" aria-label="Open photo 073">
+                <img src="img/2026-gallery/073-thumb.jpg" alt="Kizzier Classic 2026 photo 073" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="074" aria-label="Open photo 074">
+                <img src="img/2026-gallery/074-thumb.jpg" alt="Kizzier Classic 2026 photo 074" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="075" aria-label="Open photo 075">
+                <img src="img/2026-gallery/075-thumb.jpg" alt="Kizzier Classic 2026 photo 075" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="076" aria-label="Open photo 076">
+                <img src="img/2026-gallery/076-thumb.jpg" alt="Kizzier Classic 2026 photo 076" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="077" aria-label="Open photo 077">
+                <img src="img/2026-gallery/077-thumb.jpg" alt="Kizzier Classic 2026 photo 077" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="078" aria-label="Open photo 078">
+                <img src="img/2026-gallery/078-thumb.jpg" alt="Kizzier Classic 2026 photo 078" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="079" aria-label="Open photo 079">
+                <img src="img/2026-gallery/079-thumb.jpg" alt="Kizzier Classic 2026 photo 079" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="080" aria-label="Open photo 080">
+                <img src="img/2026-gallery/080-thumb.jpg" alt="Kizzier Classic 2026 photo 080" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="081" aria-label="Open photo 081">
+                <img src="img/2026-gallery/081-thumb.jpg" alt="Kizzier Classic 2026 photo 081" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="082" aria-label="Open photo 082">
+                <img src="img/2026-gallery/082-thumb.jpg" alt="Kizzier Classic 2026 photo 082" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="083" aria-label="Open photo 083">
+                <img src="img/2026-gallery/083-thumb.jpg" alt="Kizzier Classic 2026 photo 083" loading="lazy" width="500" decoding="async">
+            </button>
+            <button class="tile" data-n="084" aria-label="Open photo 084">
+                <img src="img/2026-gallery/084-thumb.jpg" alt="Kizzier Classic 2026 photo 084" loading="lazy" width="500" decoding="async">
+            </button>
+            </div>
+        </div>
+    </section>
+
+    <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+        <div class="lb-btn lb-close" id="lbClose" role="button" aria-label="Close" tabindex="0">✕</div>
+        <div class="lb-btn lb-prev" id="lbPrev" role="button" aria-label="Previous photo" tabindex="0">‹</div>
+        <div class="lb-btn lb-next" id="lbNext" role="button" aria-label="Next photo" tabindex="0">›</div>
+        <img id="lbImg" src="" alt="Kizzier Classic 2026 photo">
+        <div class="lb-caption" id="lbCaption"></div>
+    </div>
+
+    <footer>
+        <div class="std">Thank you for a great day!</div>
+        <div>7th Annual Kizzier Classic — Saturday, June 26, 2027 · Hidden Valley Golf Club, Lincoln, NE</div>
+        <a class="btn" href="index.html">Back to Home</a>
+        <div class="copy">© 2026 The Kizzier Classic · Photos by Leah Lund Photography · In loving memory of Ryan Kizzier</div>
+    </footer>
+
+    <script>
+        var PHOTOS = ["001","002","003","004","005","006","007","008","009","010","011","012","013","014","015","016","017","018","019","020","021","022","023","024","025","026","027","028","029","030","031","032","033","034","035","036","037","038","039","040","041","042","043","044","045","046","047","048","049","050","051","052","053","054","055","056","057","058","059","060","061","062","063","064","065","066","067","068","069","070","071","072","073","074","075","076","077","078","079","080","081","082","083","084"];
+        var lb = document.getElementById('lb');
+        var lbImg = document.getElementById('lbImg');
+        var lbCaption = document.getElementById('lbCaption');
+        var cur = 0;
+
+        function show(i) {
+            cur = (i + PHOTOS.length) % PHOTOS.length;
+            var n = PHOTOS[cur];
+            lbImg.src = 'img/2026-gallery/' + n + '.jpg';
+            lbCaption.textContent = 'Photo ' + (cur + 1) + ' of ' + PHOTOS.length + ' · Leah Lund Photography';
+        }
+        function open(i) { show(i); lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
+        function close() { lb.classList.remove('open'); lbImg.src = ''; document.body.style.overflow = ''; }
+
+        document.getElementById('grid').addEventListener('click', function(e) {
+            var t = e.target.closest('.tile');
+            if (!t) return;
+            var n = t.getAttribute('data-n');
+            open(PHOTOS.indexOf(n));
+        });
+        document.getElementById('lbClose').addEventListener('click', close);
+        document.getElementById('lbPrev').addEventListener('click', function(e){ e.stopPropagation(); show(cur - 1); });
+        document.getElementById('lbNext').addEventListener('click', function(e){ e.stopPropagation(); show(cur + 1); });
+        lb.addEventListener('click', function(e) { if (e.target === lb) close(); });
+        document.addEventListener('keydown', function(e) {
+            if (!lb.classList.contains('open')) return;
+            if (e.key === 'Escape') close();
+            else if (e.key === 'ArrowLeft') show(cur - 1);
+            else if (e.key === 'ArrowRight') show(cur + 1);
+        });
+    </script>
+</body>
+</html>
